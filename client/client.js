@@ -1,3 +1,6 @@
+// Code partially based on the pattern given in Frank W. Zammetti's book
+
+
 // Server address and port
 
 var addressAndPort = "http://127.0.0.1:9999";
