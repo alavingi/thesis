@@ -1,0 +1,97 @@
+/* Style for the title header (horizontally and vertically centered). */
+.cssHomeTitleHeader {
+  position : absolute;
+  top : 0;
+  bottom : 0;
+  left : 0;
+  right : 0;
+  margin : auto;
+}
+
+
+/* Style for the sections in the about flyover. */
+.cssHomeAboutSection {
+  padding-top : 20px;
+}
+
+
+/* Style to space out Home button. */
+.cssHomeButton {
+  margin-left : 10px!important;
+}
+
+
+/* Style to space out Function button. */
+.cssFunctionButton {
+  margin-right : 10px!important;
+}
+
+
+/* Style for the NavBar at the bottom. */
+.cssNavBar .ui-btn .ui-icon {
+  width : 32px!important;
+  height : 40px!important;
+  margin-left : -15px!important;
+  box-shadow : none!important;
+  -moz-box-shadow : none!important;
+  -webkit-box-shadow : none!important;
+}
+
+
+/* Style for the icons for each item on the NavBar. */
+.cssNavAccountPage .ui-icon {
+  background : url(img/ic_action_collection.png) 100% -20% no-repeat;
+}
+.cssNavContactPage .ui-icon {
+  background : url(img/ic_action_cloud.png) 100% -20% no-repeat;
+}
+.cssNavOpportunityPage .ui-icon {
+  background : url(img/ic_action_group.png) 100% -20% no-repeat;
+}
+.cssNavLeadPage .ui-icon {
+  background : url(img/ic_action_person.png) 100% -20% no-repeat;
+}
+
+.cssNavMeetingPage .ui-icon {
+  background : url(img/ic_action_share.png) 100% -20% no-repeat;
+}
+.cssNavCallPage .ui-icon {
+  background : url(img/ic_action_call.png) 100% -20% no-repeat;
+}
+
+
+
+/* Style for the function menus. */
+.cssFunctionsMenu {
+  min-width : 200px;
+}
+
+
+/* Style for the button in the info dialog. */
+.cssInfoDialogButtons {
+  margin : 0 auto;
+  text-align : center;
+}
+
+
+/* Styles for scrim seen when calling the server. */
+.ui-loader-background {
+  width : 100%;
+  height : 100%;
+  left : 0px;
+  top : 0px;
+  margin : 0px;
+  background : rgba(0, 0, 0, 0.3);
+  display : none;
+  position : fixed;
+  z-index : 100;
+}
+.ui-loading .ui-loader-background {
+  display : block;
+}
+
+
+/* Style for required fields on forms. */
+.cssRequired {
+  color : #ff0000;
+}

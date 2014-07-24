@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="jq/plugins/jqm-datebox.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
+    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.core.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.mode.datebox.min.js"></script>
+
+  </head>
+  <body>
+
+
+<div data-role="page" id="contactPage" data-dom-cache="true">
+
+  <script type="text/javascript">
+    $(document).delegate("#contactPage", "pageshow", function(inEvent) {
+      initialPageLoad("contact");
+    });
+  </script>
+
+  <!-- Menu. -->
+  <div data-role="popup" id="contactMenu">
+    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
+      data-theme="b">
+      <li><a href="javascript:showListView('contact');">List View</a></li>
+      <li id="contactNewLink">
+        <a href="javascript:newItem('contact');">New</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Header. -->
+  <div data-role="header" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <a href="index.html" class="cssHomeButton" data-icon="home"
+      data-theme="b">Home</a>
+    <h1>Contacts</h1>
+    <a href="#contactMenu" class="cssFunctionButton" data-icon="bars"
+      data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+  </div>
+
+  <!-- Page content. -->
+  <div data-role="content">
+
+    <div class="ui-loader-background"></div>
+
+    <!-- List view. -->
+    <div id="contactList">
+
+      <!-- Advanced filters. -->
+      <div data-role="collapsible">
+        <h3>Advanced Filters</h3>
+        <form name="contactFilterForm" id="contactFilterForm">
+          <label for="search_by_lastname" >Last Name</label>
+          <input type="text" name="search_by_lastname" id="search_by_lastname" >
+	      <button type="button" data-theme="b" data-icon="plus"
+	        onClick="populateList('contact', 'last_name', search_by_lastname.value);" id="contactSaveButton">Filter</button>
+        </form>
+      </div>
+
+      <div>&nbsp;</div>
+
+      <!-- List. -->
+      <div>
+        <ul data-role="listview" data-filter="true" data-inset="true"
+          data-autodividers="true" id="contactListUL"></ul>
+      </div>
+
+    </div>
+
+    <!-- Entry view. -->
+    <div id="contactEntry" style="display:none;">
+
+    <form name="contactEntryForm" id="contactEntryForm">
+	  <!-- 
+      first_name : "string", 
+  	last_name : "string",
+  	title : "string", 
+  	birth_date : "date", 
+  	account_id : "number", 
+  	department : "string", 
+  	phone : "string",
+  	email : "string", 
+  	street : "string", 
+  	city : "string"
+  	state : "string", 
+  	zip : "string", 
+  	country : "string"
+	  -->	
+      <!-- Category. -->
+      
+
+      <!-- Name. -->
+      <label for="contactFirstName" class="cssRequired">First Name</label>
+      <input type="text" name="firstName" id="contactFirstName"
+        data-clear-btn="true">
+      <label for="contactLastName" class="cssRequired">Last Name</label>
+      <input type="text" name="lastName" id="contactLastName"
+        data-clear-btn="true">
+      <label for="title" >Title</label>
+      <input type="text" name="title" id="title"
+        data-clear-btn="true">	
+      <!-- Birthdate. -->
+      <label for="birthDate" >Date</label>
+      <input name="date" id="birthDate" type="text" data-role="datebox"
+        data-options='{"mode":"datebox","enablePopup":true,"useFocus":true,"useButton":false,"useNewStyle":true}'>	
+		
+      <label for="account_id" >Account Id</label>
+      <input type="text" name="account_id" id="account_id"
+        data-clear-btn="true">
+      <label for="department" >Department</label>
+      <input type="text" name="department" id="department"
+        data-clear-btn="true">
+      <label for="phone" >Phone</label>
+      <input type="text" name="phone" id="phone"
+        data-clear-btn="true">	
+      <!-- Web Presence. -->
+      <label for="contactEMail">eMail</label>
+      <input type="text" name="eMail" id="contactEMail" data-clear-btn="true">
+	  	
+      <!-- Addresses. -->
+      <label for="street" >Street</label>
+      <input type="text" name="street" id="street"
+        data-clear-btn="true">
+      <label for="city" >City</label>
+      <input type="text" name="city" id="city"
+        data-clear-btn="true">
+      <label for="state" >State</label>
+      <input type="text" name="state" id="state"
+        data-clear-btn="true">
+      <label for="zipcode" >Zipcode</label>
+      <input type="text" name="zipcode" id="zipcode"
+        data-clear-btn="true">
+      <label for="country" >Country</label>
+      <input type="text" name="country" id="country"
+        data-clear-btn="true">	
+      
+      <!-- Buttons. -->
+      <button type="button" data-theme="e" data-icon="plus"
+        onClick="saveEntity('contact');" id="contactSaveButton">Save</button>
+      <button type="button" data-theme="e" data-icon="minus"
+        onClick="deleteEntity('contact');"
+        id="contactDeleteButton" disabled>Delete</button>
+
+    </form>
+
+    </div>
+
+  </div>
+
+  <!-- Footer. -->
+  <div data-role="footer" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <div data-role="navbar" class="cssNavBar">
+      <ul>
+        <li><a href="accountPage.html" class="cssNavAccountPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="javascript:void(0);"
+          class="cssNavContactPage ui-btn-active ui-state-persist"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="opportunityPage.html" class="cssNavOpportunityPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="leadPage.html" class="cssNavLeadPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="meetingPage.html" class="cssNavMeetingPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="callPage.html" class="cssNavCallPage"
+          data-icon="custom" data-iconpos="notext"></a></li>  
+      </ul>
+    </div>
+  </div>
+
+</div>
+  </body>
+</html>

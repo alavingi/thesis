@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="jq/plugins/jqm-datebox.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
+    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.core.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.mode.datebox.min.js"></script>
+
+  </head>
+  <body>
+
+
+<div data-role="page" id="opportunityPage" data-dom-cache="true">
+
+  <script type="text/javascript">
+    $(document).delegate("#opportunityPage", "pageshow", function(inEvent) {
+      initialPageLoad("opportunity");
+    });
+  </script>
+
+  <!-- Menu. -->
+  <div data-role="popup" id="opportunityMenu">
+    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
+      data-theme="b">
+      <li><a href="javascript:showListView('opportunity');">List View</a></li>
+      <li id="opportunityNewLink">
+        <a href="javascript:newItem('opportunity');">New</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Header. -->
+  <div data-role="header" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <a href="index.html" class="cssHomeButton" data-icon="home"
+      data-theme="b">Home</a>
+    <h1>Opportunities</h1>
+    <a href="#opportunityMenu" class="cssFunctionButton" data-icon="bars"
+      data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+  </div>
+
+  <!-- Page content. -->
+  <div data-role="content">
+
+    <div class="ui-loader-background"></div>
+
+    <!-- List view. -->
+    <div id="opportunityList">
+
+      <!-- Advanced filters. -->
+      <div data-role="collapsible">
+        <h3>Advanced Filters</h3>
+        <form name="opportunityFilterForm" id="opportunityFilterForm">
+          <label for="search_by_opportunityname" >Opportunity Name</label>
+		  <input type="text" name="search_by_opportunityname" id="search_by_opportunityname" >
+	      <button type="button" data-theme="b" data-icon="plus"
+	        onClick="populateList('opportunity', 'opportunity_name', search_by_opportunityname.value);" id="opportunitySaveButton">Filter</button>
+        </form>
+      </div>
+
+      <div>&nbsp;</div>
+
+      <!-- List. -->
+      <div>
+        <ul data-role="listview" data-filter="true" data-inset="true"
+          data-autodividers="true" id="opportunityListUL"></ul>
+      </div>
+
+    </div>
+
+    <!-- Entry view. -->
+    <div id="opportunityEntry" style="display:none;">
+
+    <form name="opportunityEntryForm" id="opportunityEntryForm">
+	  <!-- 
+  	opportunity_name : "string",
+  	account_id : "number", 
+  	assigned_to : "string",
+  	amount : "number", 
+  	sales_stage : "string",
+  	probability : "number"
+	  -->	
+      <!-- Category. -->
+      
+
+      <!-- Name. -->
+      <label for="opportunity_name" class="cssRequired">Opportunity Name</label>
+      <input type="text" name="opportunity_name" id="opportunity_name"
+        data-clear-btn="true">
+      
+	  
+      <label for="account_id" >Account Id</label>
+      <input type="text" name="account_id" id="account_id"
+        data-clear-btn="true">	
+      <label for="assigned_to" >Assigned To</label>
+      <input type="text" name="assigned_to" id="assigned_to"
+        data-clear-btn="true">	
+      <!-- Web Presence. -->
+      <label for="amount">Opportunity Amount</label>
+      <input type="text" name="amount" id="amount" data-clear-btn="true">
+      <label for="sales_stage">Sales Stage</label>
+      <input type="text" name="sales_stage" id="sales_stage" data-clear-btn="true">
+	  	
+      
+      <label for="probability" >Probability</label>
+      <input type="text" name="probability" id="probability"
+        data-clear-btn="true">
+      
+      <!-- Buttons. -->
+      <button type="button" data-theme="e" data-icon="plus"
+        onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
+      <button type="button" data-theme="e" data-icon="minus"
+        onClick="deleteEntity('opportunity');"
+        id="opportunityDeleteButton" disabled>Delete</button>
+
+    </form>
+
+    </div>
+
+  </div>
+
+  <!-- Footer. -->
+  <div data-role="footer" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <div data-role="navbar" class="cssNavBar">
+      <ul>
+        <li><a href="accountPage.html" class="cssNavAccountPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="opportunityPage.html"
+          class="cssNavContactPage ui-btn-active ui-state-persist"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="javascript:void(0);" class="cssNavNotePage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="leadPage.html" class="cssNavLeadPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="meetingPage.html" class="cssNavMeetingPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="callPage.html" class="cssNavCallPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+  </body>
+</html>

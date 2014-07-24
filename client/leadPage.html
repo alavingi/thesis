@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="jq/plugins/jqm-datebox.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
+    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.core.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.mode.datebox.min.js"></script>
+
+  </head>
+  <body>
+
+
+<div data-role="page" id="leadPage" data-dom-cache="true">
+
+  <script type="text/javascript">
+    $(document).delegate("#leadPage", "pageshow", function(inEvent) {
+      initialPageLoad("lead");
+    });
+  </script>
+
+  <!-- Menu. -->
+  <div data-role="popup" id="leadMenu">
+    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
+      data-theme="b">
+      <li><a href="javascript:showListView('lead');">List View</a></li>
+      <li id="leadNewLink">
+        <a href="javascript:newItem('lead');">New</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Header. -->
+  <div data-role="header" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <a href="index.html" class="cssHomeButton" data-icon="home"
+      data-theme="b">Home</a>
+    <h1>Leads</h1>
+    <a href="#leadMenu" class="cssFunctionButton" data-icon="bars"
+      data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+  </div>
+
+  <!-- Page content. -->
+  <div data-role="content">
+
+    <div class="ui-loader-background"></div>
+
+    <!-- List view. -->
+    <div id="leadList">
+
+      <!-- Advanced filters. -->
+      <div data-role="collapsible">
+        <h3>Advanced Filters</h3>
+        <form name="leadFilterForm" id="leadFilterForm">
+          <label for="search_by_company" >Company</label>
+          <input type="text" name="search_by_company" id="search_by_company" >
+	      <button type="button" data-theme="b" data-icon="plus"
+	        onClick="populateList('lead', 'company', search_by_company.value);" id="leadSaveButton">Filter</button>
+        </form>
+      </div>
+
+      <div>&nbsp;</div>
+
+      <!-- List. -->
+      <div>
+        <ul data-role="listview" data-filter="true" data-inset="true"
+          data-autodividers="true" id="leadListUL"></ul>
+      </div>
+
+    </div>
+
+    <!-- Entry view. -->
+    <div id="leadEntry" style="display:none;">
+
+    <form name="leadEntryForm" id="leadEntryForm">
+	  <!-- 
+      company : "string", 
+  	first_name : "string", 
+  	last_name : "string",
+      lead_status : "string", 
+  	industry : "string",
+  	revenue : "number", 
+  	employees : "number"
+	  -->	
+      <!-- Category. -->
+      
+
+      <!-- Name. -->
+      <label for="company" class="cssRequired">Company</label>
+      <input type="text" name="company" id="company"
+        data-clear-btn="true">
+      
+	  
+      <label for="first_name" >First Name</label>
+      <input type="text" name="first_name" id="first_name"
+        data-clear-btn="true">	
+      <label for="last_name" >Last Name</label>
+      <input type="text" name="last_name" id="last_name"
+        data-clear-btn="true">	
+      <!-- Web Presence. -->
+      <label for="lead_status">Lead Status</label>
+      <input type="text" name="lead_status" id="lead_status" data-clear-btn="true">
+      <label for="industry">Industry</label>
+      <input type="text" name="industry" id="industry" data-clear-btn="true">
+	  	
+      <!-- Addresses. -->
+      <label for="revenue" >Revenue</label>
+      <input type="text" name="revenue" id="revenue"
+        data-clear-btn="true">
+      <label for="employees" >Employees</label>
+      <input type="text" name="employees" id="employees"
+        data-clear-btn="true">
+            
+      <!-- Buttons. -->
+      <button type="button" data-theme="e" data-icon="plus"
+        onClick="saveEntity('lead');" id="leadSaveButton">Save</button>
+      <button type="button" data-theme="e" data-icon="minus"
+        onClick="deleteEntity('lead');"
+        id="leadDeleteButton" disabled>Delete</button>
+
+    </form>
+
+    </div>
+
+  </div>
+
+  <!-- Footer. -->
+  <div data-role="footer" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <div data-role="navbar" class="cssNavBar">
+      <ul>
+        <li><a href="accountPage.html" class="cssNavAccountPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="leadPage.html"
+          class="cssNavContactPage ui-btn-active ui-state-persist"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="opportunityPage.html" class="cssNavOpportunityPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="javascript:void(0);" class="cssNavTaskPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="meetingPage.html" class="cssNavMeetingPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="callPage.html" class="cssNavCallPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+  </body>
+</html>

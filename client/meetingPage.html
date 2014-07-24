@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="jq/plugins/jqm-datebox.min.css">
+    <link rel="stylesheet" href="styles.css">
+
+    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
+    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.core.min.js"></script>
+    <script type="text/javascript"
+      src="jq/plugins/jqm-datebox.mode.datebox.min.js"></script>
+
+  </head>
+  <body>
+
+
+<div data-role="page" id="meetingPage" data-dom-cache="true">
+
+  <script type="text/javascript">
+    $(document).delegate("#meetingPage", "pageshow", function(inEvent) {
+      initialPageLoad("meeting");
+    });
+  </script>
+
+  <!-- Menu. -->
+  <div data-role="popup" id="meetingMenu">
+    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
+      data-theme="b">
+      <li><a href="javascript:showListView('meeting');">List View</a></li>
+      <li id="meetingNewLink">
+        <a href="javascript:newItem('meeting');">New</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Header. -->
+  <div data-role="header" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <a href="index.html" class="cssHomeButton" data-icon="home"
+      data-theme="b">Home</a>
+    <h1>Meetings</h1>
+    <a href="#meetingMenu" class="cssFunctionButton" data-icon="bars"
+      data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+  </div>
+
+  <!-- Page content. -->
+  <div data-role="content">
+
+    <div class="ui-loader-background"></div>
+
+    <!-- List view. -->
+    <div id="meetingList">
+
+      <!-- Advanced filters. -->
+      <div data-role="collapsible">
+        <h3>Advanced Filters</h3>
+        <form name="meetingFilterForm" id="meetingFilterForm">
+          <label for="search_by_subject" class="select">Subject</label>
+          <input type="text" name="search_by_subject" id="search_by_subject" >
+	      <button type="button" data-theme="b" data-icon="plus"
+	        onClick="populateList('meeting', 'subject', search_by_subject.value);" id="meetingSaveButton">Filter</button>
+          
+        </form>
+      </div>
+
+      <div>&nbsp;</div>
+
+      <!-- List. -->
+      <div>
+        <ul data-role="listview" data-filter="true" data-inset="true"
+          data-autodividers="true" id="meetingListUL"></ul>
+      </div>
+
+    </div>
+
+    <!-- Entry view. -->
+    <div id="meetingEntry" style="display:none;">
+
+    <form name="meetingEntryForm" id="meetingEntryForm">
+	  <!-- 
+  	subject : "string", 
+  	start_date : "date", 
+  	end_date : "date", 
+  	duration : "number",
+      description : "string", 
+  	meeting_status : "string", 
+  	related_to : "string"
+	  -->	
+      <!-- Category. -->
+      
+
+      <!-- Name. -->
+      <label for="subject" class="cssRequired">Subject</label>
+      <input type="text" name="subject" id="subject"
+        data-clear-btn="true">
+      
+	  
+      <label for="start_date" >Start Date</label>
+      <input type="text" name="start_date" id="start_date"
+        data-clear-btn="true">	
+      <label for="end_date" >End Date</label>
+      <input type="text" name="end_date" id="end_date"
+        data-clear-btn="true">	
+      <!-- Web Presence. -->
+      <label for="duration">Duration</label>
+      <input type="text" name="duration" id="duration" data-clear-btn="true">
+      <label for="description">Description</label>
+      <input type="text" name="description" id="description" data-clear-btn="true">
+	  	
+      <!-- Addresses. -->
+      <label for="meeting_status" >Meeting Status</label>
+      <input type="text" name="meeting_status" id="meeting_status"
+        data-clear-btn="true">
+      <label for="related_to" >Related To</label>
+      <input type="text" name="related_to" id="related_to"
+        data-clear-btn="true">
+      	
+      
+      <!-- Buttons. -->
+      <button type="button" data-theme="e" data-icon="plus"
+        onClick="saveEntity('meeting');" id="meetingSaveButton">Save</button>
+      <button type="button" data-theme="e" data-icon="minus"
+        onClick="deleteEntity('meeting');"
+        id="meetingDeleteButton" disabled>Delete</button>
+
+    </form>
+
+    </div>
+
+  </div>
+
+  <!-- Footer. -->
+  <div data-role="footer" data-position="fixed">
+    <div class="ui-loader-background"></div>
+    <div data-role="navbar" class="cssNavBar">
+      <ul>
+        <li><a href="accountPage.html" class="cssNavAccountPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="meetingPage.html"
+          class="cssNavContactPage ui-btn-active ui-state-persist"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="opportunityPage.html" class="cssNavOpportunityPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="leadPage.html" class="cssNavLeadPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="javascript:void(0);" class="cssNavNotePage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+        <li><a href="callPage.html" class="cssNavCallPage"
+          data-icon="custom" data-iconpos="notext"></a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+  </body>
+</html>
