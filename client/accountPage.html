@@ -35,7 +35,7 @@
   <div data-role="popup" id="accountMenu">
     <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
       data-theme="b">
-      <li><a href="javascript:showListView('account');">List View</a></li>
+      <li><a href="javascript:displayListView('account');">List View</a></li>
       <li id="accountNewLink">
         <a href="javascript:newItem('account');">New</a>
       </li>
@@ -45,10 +45,10 @@
   <!-- Header. -->
   <div data-role="header" data-position="fixed">
     <div class="ui-loader-background"></div>
-    <a href="index.html" class="cssHomeButton" data-icon="home"
+    <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Accounts</h1>
-    <a href="#accountMenu" class="cssFunctionButton" data-icon="bars"
+    <a href="#accountMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
   </div>
 
@@ -62,13 +62,13 @@
 
       <!-- Advanced filters. -->
       <div data-role="collapsible">
-        <h3>Advanced Filters</h3>
+        <h3>Enter Search Criteria</h3>
         <form name="accountFilterForm" id="accountFilterForm">
           <label for="search_by_name" >Account Name</label>
           
 		  <input type="text" name="search_by_name" id="search_by_name" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="populateList('account', 'account_name', search_by_name.value);" id="accountSaveButton">Filter</button>
+	        onClick="updateList('account', 'account_name', search_by_name.value);" id="accountSaveButton">Search</button>
         </form>
       </div>
 
@@ -86,25 +86,8 @@
     <div id="accountEntry" style="display:none;">
 
     <form name="accountEntryForm" id="accountEntryForm">
-	  <!-- 
-      account_name : "string", 
-  	phone : "string", 
-  	fax : "string",
-      email : "string", 
-  	url : "string", 
-  	street : "string", 
-  	city : "string"
-  	state : "string", 
-  	zip : "string", 
-  	country : "string",
-      revenue : "number", 
-  	employees : "number",
-      description : "string"
-	  -->	
-      <!-- Category. -->
+	  
       
-
-      <!-- Name. -->
       <label for="account_name" class="cssRequired">Account Name</label>
       <input type="text" name="account_name" id="account_name"
         data-clear-btn="true">
@@ -116,13 +99,12 @@
       <label for="fax" >Fax</label>
       <input type="text" name="fax" id="fax"
         data-clear-btn="true">	
-      <!-- Web Presence. -->
+      
       <label for="accountEMail">eMail</label>
       <input type="text" name="eMail" id="accountEMail" data-clear-btn="true">
       <label for="url">URL</label>
       <input type="text" name="url" id="url" data-clear-btn="true">
 	  	
-      <!-- Addresses. -->
       <label for="street" >Street</label>
       <input type="text" name="street" id="street"
         data-clear-btn="true">
@@ -167,18 +149,16 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="javascript:void(0);" class="cssNavAppointmentPage"
-          data-icon="custom" data-iconpos="notext"></a></li>
         <li><a href="contactPage.html"
-          class="cssNavContactPage ui-btn-active ui-state-persist"
+          class="linkContactPage ui-btn-active ui-state-persist"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="cssNavOpportunityPage"
+        <li><a href="opportunityPage.html" class="linkOpportunityPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="cssNavLeadPage"
+        <li><a href="leadPage.html" class="linkLeadPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html" class="cssNavMeetingPage"
+        <li><a href="meetingPage.html" class="linkMeetingPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="cssNavCallPage"
+        <li><a href="callPage.html" class="linkCallPage"
           data-icon="custom" data-iconpos="notext"></a></li>
       </ul>
     </div>

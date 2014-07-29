@@ -3,7 +3,7 @@
 
 // Server address and port
 
-var addressAndPort = "http://127.0.0.1:9999";
+var addressAndPort = "http://ec2-54-187-230-68.us-west-2.compute.amazonaws.com:9999";
 
 
 // documentId is null for inserts as MongoDB will generate it
@@ -324,8 +324,8 @@ var validations = {
    * Validate contact form.
    */
   check_contact : function() {
-    if (isEmpty("contactFirstName")) { return false; }
-    if (isEmpty("contactLastName")) { return false; }
+    if (isEmpty("first_name")) { return false; }
+    if (isEmpty("last_name")) { return false; }
     return true;
   },
 
@@ -458,7 +458,7 @@ function updateList(entityType, searchField, searchValue) {
     // Otherwise add to list
     var liText = "";
     if (entityType == "contact") {
-      liText = item.lastName + ", " + item.firstName;
+      liText = item.last_name + ", " + item.first_name;
     } 
 	else if (entityType == "account"){
       liText = item.account_name;

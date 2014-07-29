@@ -18,17 +18,20 @@
 
 
 /* Style to space out Home button. */
-.cssHomeButton {
-  margin-left : 10px!important;
+.homeButton {
+  margin-left : 12px!important;
 }
 
 
 /* Style to space out Function button. */
-.cssFunctionButton {
-  margin-right : 10px!important;
+.functionButton {
+  margin-right : 12px!important;
 }
 
-
+.cssNavBar .ui-btn {
+    width: 16.66 % !important;  /* 12.5% for 8 tabs wide */
+    clear: none !important;  /* Prevent line break caused by ui-block-a */
+}
 /* Style for the NavBar at the bottom. */
 .cssNavBar .ui-btn .ui-icon {
   width : 32px!important;
@@ -39,26 +42,31 @@
   -webkit-box-shadow : none!important;
 }
 
+.navBarButton {
+    width: 16.67 % !important;  /* 12.5% for 8 tabs wide */
+    clear: none !important;  /* Prevent line break caused by ui-block-a */
+}
+
 
 /* Style for the icons for each item on the NavBar. */
-.cssNavAccountPage .ui-icon {
-  background : url(img/ic_action_collection.png) 100% -20% no-repeat;
+.linkAccountPage .ui-icon {
+  background : url(img/ic_action_collection.png) center no-repeat;
 }
-.cssNavContactPage .ui-icon {
-  background : url(img/ic_action_cloud.png) 100% -20% no-repeat;
+.linkContactPage .ui-icon {
+  background : url(img/ic_action_cloud.png) center no-repeat;
 }
-.cssNavOpportunityPage .ui-icon {
-  background : url(img/ic_action_group.png) 100% -20% no-repeat;
+.linkOpportunityPage .ui-icon {
+  background : url(img/ic_action_group.png) center no-repeat;
 }
-.cssNavLeadPage .ui-icon {
-  background : url(img/ic_action_person.png) 100% -20% no-repeat;
+.linkLeadPage .ui-icon {
+  background : url(img/ic_action_person.png) center no-repeat;
 }
 
-.cssNavMeetingPage .ui-icon {
-  background : url(img/ic_action_share.png) 100% -20% no-repeat;
+.linkMeetingPage .ui-icon {
+  background : url(img/ic_action_share.png) center no-repeat;
 }
-.cssNavCallPage .ui-icon {
-  background : url(img/ic_action_call.png) 100% -20% no-repeat;
+.linkCallPage .ui-icon {
+  background : url(img/ic_action_call.png) center no-repeat;
 }
 
 

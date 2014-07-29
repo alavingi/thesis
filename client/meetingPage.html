@@ -35,7 +35,7 @@
   <div data-role="popup" id="meetingMenu">
     <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
       data-theme="b">
-      <li><a href="javascript:showListView('meeting');">List View</a></li>
+      <li><a href="javascript:displayListView('meeting');">List View</a></li>
       <li id="meetingNewLink">
         <a href="javascript:newItem('meeting');">New</a>
       </li>
@@ -45,10 +45,10 @@
   <!-- Header. -->
   <div data-role="header" data-position="fixed">
     <div class="ui-loader-background"></div>
-    <a href="index.html" class="cssHomeButton" data-icon="home"
+    <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Meetings</h1>
-    <a href="#meetingMenu" class="cssFunctionButton" data-icon="bars"
+    <a href="#meetingMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
   </div>
 
@@ -62,12 +62,12 @@
 
       <!-- Advanced filters. -->
       <div data-role="collapsible">
-        <h3>Advanced Filters</h3>
+        <h3>Enter Search Criteria</h3>
         <form name="meetingFilterForm" id="meetingFilterForm">
           <label for="search_by_subject" class="select">Subject</label>
           <input type="text" name="search_by_subject" id="search_by_subject" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="populateList('meeting', 'subject', search_by_subject.value);" id="meetingSaveButton">Filter</button>
+	        onClick="updateList('meeting', 'subject', search_by_subject.value);" id="meetingSaveButton">Search</button>
           
         </form>
       </div>
@@ -86,19 +86,7 @@
     <div id="meetingEntry" style="display:none;">
 
     <form name="meetingEntryForm" id="meetingEntryForm">
-	  <!-- 
-  	subject : "string", 
-  	start_date : "date", 
-  	end_date : "date", 
-  	duration : "number",
-      description : "string", 
-  	meeting_status : "string", 
-  	related_to : "string"
-	  -->	
-      <!-- Category. -->
-      
-
-      <!-- Name. -->
+	  
       <label for="subject" class="cssRequired">Subject</label>
       <input type="text" name="subject" id="subject"
         data-clear-btn="true">
@@ -110,13 +98,12 @@
       <label for="end_date" >End Date</label>
       <input type="text" name="end_date" id="end_date"
         data-clear-btn="true">	
-      <!-- Web Presence. -->
+      
       <label for="duration">Duration</label>
       <input type="text" name="duration" id="duration" data-clear-btn="true">
       <label for="description">Description</label>
       <input type="text" name="description" id="description" data-clear-btn="true">
 	  	
-      <!-- Addresses. -->
       <label for="meeting_status" >Meeting Status</label>
       <input type="text" name="meeting_status" id="meeting_status"
         data-clear-btn="true">
@@ -143,18 +130,16 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="accountPage.html" class="cssNavAccountPage"
+        <li><a href="accountPage.html" class="linkAccountPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html"
-          class="cssNavContactPage ui-btn-active ui-state-persist"
+        <li><a href="contactPage.html"
+          class="linkContactPage ui-btn-active ui-state-persist"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="cssNavOpportunityPage"
+        <li><a href="opportunityPage.html" class="linkOpportunityPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="cssNavLeadPage"
+        <li><a href="leadPage.html" class="linkLeadPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="javascript:void(0);" class="cssNavNotePage"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="cssNavCallPage"
+        <li><a href="callPage.html" class="linkCallPage"
           data-icon="custom" data-iconpos="notext"></a></li>
       </ul>
     </div>

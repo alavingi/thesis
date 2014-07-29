@@ -35,7 +35,7 @@
   <div data-role="popup" id="opportunityMenu">
     <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
       data-theme="b">
-      <li><a href="javascript:showListView('opportunity');">List View</a></li>
+      <li><a href="javascript:displayListView('opportunity');">List View</a></li>
       <li id="opportunityNewLink">
         <a href="javascript:newItem('opportunity');">New</a>
       </li>
@@ -45,10 +45,10 @@
   <!-- Header. -->
   <div data-role="header" data-position="fixed">
     <div class="ui-loader-background"></div>
-    <a href="index.html" class="cssHomeButton" data-icon="home"
+    <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Opportunities</h1>
-    <a href="#opportunityMenu" class="cssFunctionButton" data-icon="bars"
+    <a href="#opportunityMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
   </div>
 
@@ -62,12 +62,12 @@
 
       <!-- Advanced filters. -->
       <div data-role="collapsible">
-        <h3>Advanced Filters</h3>
+        <h3>Enter Search Criteria</h3>
         <form name="opportunityFilterForm" id="opportunityFilterForm">
           <label for="search_by_opportunityname" >Opportunity Name</label>
 		  <input type="text" name="search_by_opportunityname" id="search_by_opportunityname" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="populateList('opportunity', 'opportunity_name', search_by_opportunityname.value);" id="opportunitySaveButton">Filter</button>
+	        onClick="updateList('opportunity', 'opportunity_name', search_by_opportunityname.value);" id="opportunitySaveButton">Search</button>
         </form>
       </div>
 
@@ -85,18 +85,7 @@
     <div id="opportunityEntry" style="display:none;">
 
     <form name="opportunityEntryForm" id="opportunityEntryForm">
-	  <!-- 
-  	opportunity_name : "string",
-  	account_id : "number", 
-  	assigned_to : "string",
-  	amount : "number", 
-  	sales_stage : "string",
-  	probability : "number"
-	  -->	
-      <!-- Category. -->
-      
-
-      <!-- Name. -->
+	  
       <label for="opportunity_name" class="cssRequired">Opportunity Name</label>
       <input type="text" name="opportunity_name" id="opportunity_name"
         data-clear-btn="true">
@@ -108,7 +97,7 @@
       <label for="assigned_to" >Assigned To</label>
       <input type="text" name="assigned_to" id="assigned_to"
         data-clear-btn="true">	
-      <!-- Web Presence. -->
+      
       <label for="amount">Opportunity Amount</label>
       <input type="text" name="amount" id="amount" data-clear-btn="true">
       <label for="sales_stage">Sales Stage</label>
@@ -137,18 +126,16 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="accountPage.html" class="cssNavAccountPage"
+        <li><a href="accountPage.html" class="linkAccountPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html"
-          class="cssNavContactPage ui-btn-active ui-state-persist"
+        <li><a href="contactPage.html"
+          class="linkContactPage ui-btn-active ui-state-persist"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="javascript:void(0);" class="cssNavNotePage"
+        <li><a href="leadPage.html" class="linkLeadPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="cssNavLeadPage"
+        <li><a href="meetingPage.html" class="linkMeetingPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html" class="cssNavMeetingPage"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="cssNavCallPage"
+        <li><a href="callPage.html" class="linkCallPage"
           data-icon="custom" data-iconpos="notext"></a></li>
       </ul>
     </div>

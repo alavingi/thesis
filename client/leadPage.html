@@ -35,7 +35,7 @@
   <div data-role="popup" id="leadMenu">
     <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
       data-theme="b">
-      <li><a href="javascript:showListView('lead');">List View</a></li>
+      <li><a href="javascript:displayListView('lead');">List View</a></li>
       <li id="leadNewLink">
         <a href="javascript:newItem('lead');">New</a>
       </li>
@@ -45,10 +45,10 @@
   <!-- Header. -->
   <div data-role="header" data-position="fixed">
     <div class="ui-loader-background"></div>
-    <a href="index.html" class="cssHomeButton" data-icon="home"
+    <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Leads</h1>
-    <a href="#leadMenu" class="cssFunctionButton" data-icon="bars"
+    <a href="#leadMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
   </div>
 
@@ -62,12 +62,12 @@
 
       <!-- Advanced filters. -->
       <div data-role="collapsible">
-        <h3>Advanced Filters</h3>
+        <h3>Enter Search Criteria</h3>
         <form name="leadFilterForm" id="leadFilterForm">
           <label for="search_by_company" >Company</label>
           <input type="text" name="search_by_company" id="search_by_company" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="populateList('lead', 'company', search_by_company.value);" id="leadSaveButton">Filter</button>
+	        onClick="updateList('lead', 'company', search_by_company.value);" id="leadSaveButton">Search</button>
         </form>
       </div>
 
@@ -85,19 +85,7 @@
     <div id="leadEntry" style="display:none;">
 
     <form name="leadEntryForm" id="leadEntryForm">
-	  <!-- 
-      company : "string", 
-  	first_name : "string", 
-  	last_name : "string",
-      lead_status : "string", 
-  	industry : "string",
-  	revenue : "number", 
-  	employees : "number"
-	  -->	
-      <!-- Category. -->
-      
-
-      <!-- Name. -->
+	  
       <label for="company" class="cssRequired">Company</label>
       <input type="text" name="company" id="company"
         data-clear-btn="true">
@@ -109,13 +97,12 @@
       <label for="last_name" >Last Name</label>
       <input type="text" name="last_name" id="last_name"
         data-clear-btn="true">	
-      <!-- Web Presence. -->
+      
       <label for="lead_status">Lead Status</label>
       <input type="text" name="lead_status" id="lead_status" data-clear-btn="true">
       <label for="industry">Industry</label>
       <input type="text" name="industry" id="industry" data-clear-btn="true">
 	  	
-      <!-- Addresses. -->
       <label for="revenue" >Revenue</label>
       <input type="text" name="revenue" id="revenue"
         data-clear-btn="true">
@@ -141,18 +128,17 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="accountPage.html" class="cssNavAccountPage"
+        <li><a href="accountPage.html" class="linkAccountPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html"
-          class="cssNavContactPage ui-btn-active ui-state-persist"
+        <li><a href="contactPage.html"
+          class="linkContactPage ui-btn-active ui-state-persist"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="cssNavOpportunityPage"
+        <li><a href="opportunityPage.html" class="linkOpportunityPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="javascript:void(0);" class="cssNavTaskPage"
+        
+        <li><a href="meetingPage.html" class="linkMeetingPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html" class="cssNavMeetingPage"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="cssNavCallPage"
+        <li><a href="callPage.html" class="linkCallPage"
           data-icon="custom" data-iconpos="notext"></a></li>
       </ul>
     </div>

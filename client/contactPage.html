@@ -35,7 +35,7 @@
   <div data-role="popup" id="contactMenu">
     <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
       data-theme="b">
-      <li><a href="javascript:showListView('contact');">List View</a></li>
+      <li><a href="javascript:displayListView('contact');">List View</a></li>
       <li id="contactNewLink">
         <a href="javascript:newItem('contact');">New</a>
       </li>
@@ -45,10 +45,10 @@
   <!-- Header. -->
   <div data-role="header" data-position="fixed">
     <div class="ui-loader-background"></div>
-    <a href="index.html" class="cssHomeButton" data-icon="home"
+    <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Contacts</h1>
-    <a href="#contactMenu" class="cssFunctionButton" data-icon="bars"
+    <a href="#contactMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
   </div>
 
@@ -62,12 +62,12 @@
 
       <!-- Advanced filters. -->
       <div data-role="collapsible">
-        <h3>Advanced Filters</h3>
+        <h3>Enter Search Criteria</h3>
         <form name="contactFilterForm" id="contactFilterForm">
           <label for="search_by_lastname" >Last Name</label>
           <input type="text" name="search_by_lastname" id="search_by_lastname" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="populateList('contact', 'last_name', search_by_lastname.value);" id="contactSaveButton">Filter</button>
+	        onClick="updateList('contact', 'last_name', search_by_lastname.value);" id="contactSaveButton">Search</button>
         </form>
       </div>
 
@@ -85,30 +85,13 @@
     <div id="contactEntry" style="display:none;">
 
     <form name="contactEntryForm" id="contactEntryForm">
-	  <!-- 
-      first_name : "string", 
-  	last_name : "string",
-  	title : "string", 
-  	birth_date : "date", 
-  	account_id : "number", 
-  	department : "string", 
-  	phone : "string",
-  	email : "string", 
-  	street : "string", 
-  	city : "string"
-  	state : "string", 
-  	zip : "string", 
-  	country : "string"
-	  -->	
-      <!-- Category. -->
-      
-
+	
       <!-- Name. -->
-      <label for="contactFirstName" class="cssRequired">First Name</label>
-      <input type="text" name="firstName" id="contactFirstName"
+      <label for="first_name" class="cssRequired">First Name</label>
+      <input type="text" name="first_name" id="first_name"
         data-clear-btn="true">
-      <label for="contactLastName" class="cssRequired">Last Name</label>
-      <input type="text" name="lastName" id="contactLastName"
+      <label for="last_name" class="cssRequired">Last Name</label>
+      <input type="text" name="last_name" id="last_name"
         data-clear-btn="true">
       <label for="title" >Title</label>
       <input type="text" name="title" id="title"
@@ -131,7 +114,7 @@
       <label for="contactEMail">eMail</label>
       <input type="text" name="eMail" id="contactEMail" data-clear-btn="true">
 	  	
-      <!-- Addresses. -->
+      <!-- Address. -->
       <label for="street" >Street</label>
       <input type="text" name="street" id="street"
         data-clear-btn="true">
@@ -166,18 +149,15 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="accountPage.html" class="cssNavAccountPage"
+        <li><a href="accountPage.html" class="linkAccountPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="javascript:void(0);"
-          class="cssNavContactPage ui-btn-active ui-state-persist"
+        <li><a href="opportunityPage.html" class="linkOpportunityPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="cssNavOpportunityPage"
+        <li><a href="leadPage.html" class="linkLeadPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="cssNavLeadPage"
+        <li><a href="meetingPage.html" class="linkMeetingPage"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html" class="cssNavMeetingPage"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="cssNavCallPage"
+        <li><a href="callPage.html" class="linkCallPage"
           data-icon="custom" data-iconpos="notext"></a></li>  
       </ul>
     </div>
