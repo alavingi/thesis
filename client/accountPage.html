@@ -60,7 +60,7 @@
     <!-- List view. -->
     <div id="accountList">
 
-      <!-- Advanced filters. -->
+      <!-- Search filters. -->
       <div data-role="collapsible">
         <h3>Enter Search Criteria</h3>
         <form name="accountFilterForm" id="accountFilterForm">
@@ -94,16 +94,16 @@
       
 	  
       <label for="phone" >Phone</label>
-      <input type="text" name="phone" id="phone"
+      <input type="phone" name="phone" id="phone"
         data-clear-btn="true">	
       <label for="fax" >Fax</label>
-      <input type="text" name="fax" id="fax"
+      <input type="phone" name="fax" id="fax"
         data-clear-btn="true">	
       
       <label for="accountEMail">eMail</label>
-      <input type="text" name="eMail" id="accountEMail" data-clear-btn="true">
+      <input type="email" name="eMail" id="accountEMail" data-clear-btn="true">
       <label for="url">URL</label>
-      <input type="text" name="url" id="url" data-clear-btn="true">
+      <input type="url" name="url" id="url" data-clear-btn="true">
 	  	
       <label for="street" >Street</label>
       <input type="text" name="street" id="street"
@@ -122,19 +122,19 @@
         data-clear-btn="true">	
 		
       <label for="revenue" >Revenue</label>
-      <input type="text" name="revenue" id="revenue"
+      <input type="number" name="revenue" id="revenue"
         data-clear-btn="true">
       <label for="employees" >No. of employees</label>
-      <input type="text" name="employees" id="employees"
+      <input type="number" name="employees" id="employees"
         data-clear-btn="true">
       <label for="description" >Description</label>
       <input type="text" name="description" id="description"
         data-clear-btn="true">	
       
       <!-- Buttons. -->
-      <button type="button" data-theme="e" data-icon="plus"
+      <button type="button" data-theme="b" data-icon="plus"
         onClick="saveEntity('account');" id="accountSaveButton">Save</button>
-      <button type="button" data-theme="e" data-icon="minus"
+      <button type="button" data-theme="b" data-icon="minus"
         onClick="deleteEntity('account');"
         id="accountDeleteButton" disabled>Delete</button>
 

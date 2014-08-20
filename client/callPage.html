@@ -60,7 +60,7 @@
     <!-- List view. -->
     <div id="callList">
 
-      <!-- Advanced filters. -->
+      <!-- Search filters. -->
       <div data-role="collapsible">
         <h3>Enter Search Criteria</h3>
         <form name="callFilterForm" id="callFilterForm">
@@ -93,14 +93,14 @@
       
 	  
       <label for="call_date" >Call Date</label>
-      <input type="text" name="call_date" id="call_date"
+      <input type="date" name="call_date" id="call_date"
         data-clear-btn="true">	
       <label for="call_time" >Call Time</label>
-      <input type="text" name="call_time" id="call_time"
+      <input type="time" name="call_time" id="call_time"
         data-clear-btn="true">	
       
       <label for="duration">Duration</label>
-      <input type="text" name="duration" id="duration" data-clear-btn="true">
+      <input type="number" name="duration" id="duration" data-clear-btn="true">
       <label for="description">Description</label>
       <input type="text" name="description" id="description" data-clear-btn="true">
 	  	
@@ -113,9 +113,9 @@
       	
       
       <!-- Buttons. -->
-      <button type="button" data-theme="e" data-icon="plus"
+      <button type="button" data-theme="b" data-icon="plus"
         onClick="saveEntity('call');" id="callSaveButton">Save</button>
-      <button type="button" data-theme="e" data-icon="minus"
+      <button type="button" data-theme="b" data-icon="minus"
         onClick="deleteEntity('call');"
         id="callDeleteButton" disabled>Delete</button>
 

@@ -60,14 +60,16 @@
     <!-- List view. -->
     <div id="contactList">
 
-      <!-- Advanced filters. -->
+      <!-- Search filters. -->
       <div data-role="collapsible">
         <h3>Enter Search Criteria</h3>
         <form name="contactFilterForm" id="contactFilterForm">
           <label for="search_by_lastname" >Last Name</label>
           <input type="text" name="search_by_lastname" id="search_by_lastname" >
+          <label for="search_by_firstname" >First Name</label>
+          <input type="text" name="search_by_firstname" id="search_by_firstname" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateList('contact', 'last_name', search_by_lastname.value);" id="contactSaveButton">Search</button>
+	        onClick="updateList('contact', 'last_name', search_by_lastname.value, 'first_name', search_by_firstname.value);" id="contactSaveButton">Search</button>
         </form>
       </div>
 
@@ -97,10 +99,9 @@
       <input type="text" name="title" id="title"
         data-clear-btn="true">	
       <!-- Birthdate. -->
-      <label for="birthDate" >Date</label>
-      <input name="date" id="birthDate" type="text" data-role="datebox"
-        data-options='{"mode":"datebox","enablePopup":true,"useFocus":true,"useButton":false,"useNewStyle":true}'>	
-		
+      <label for="birthDate" >Birth Date</label>
+      <input name="date" id="birthDate" type="date">
+	  
       <label for="account_id" >Account Id</label>
       <input type="text" name="account_id" id="account_id"
         data-clear-btn="true">
@@ -108,11 +109,11 @@
       <input type="text" name="department" id="department"
         data-clear-btn="true">
       <label for="phone" >Phone</label>
-      <input type="text" name="phone" id="phone"
+      <input type="phone" name="phone" id="phone"
         data-clear-btn="true">	
       <!-- Web Presence. -->
       <label for="contactEMail">eMail</label>
-      <input type="text" name="eMail" id="contactEMail" data-clear-btn="true">
+      <input type="email" name="eMail" id="contactEMail" data-clear-btn="true">
 	  	
       <!-- Address. -->
       <label for="street" >Street</label>
@@ -124,7 +125,7 @@
       <label for="state" >State</label>
       <input type="text" name="state" id="state"
         data-clear-btn="true">
-      <label for="zipcode" >Zipcode</label>
+	  <label for="zipcode" >Zipcode</label>
       <input type="text" name="zipcode" id="zipcode"
         data-clear-btn="true">
       <label for="country" >Country</label>
@@ -132,9 +133,9 @@
         data-clear-btn="true">	
       
       <!-- Buttons. -->
-      <button type="button" data-theme="e" data-icon="plus"
+      <button type="button" data-theme="b" data-icon="plus"
         onClick="saveEntity('contact');" id="contactSaveButton">Save</button>
-      <button type="button" data-theme="e" data-icon="minus"
+      <button type="button" data-theme="b" data-icon="minus"
         onClick="deleteEntity('contact');"
         id="contactDeleteButton" disabled>Delete</button>
 

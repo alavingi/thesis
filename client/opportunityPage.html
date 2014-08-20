@@ -60,7 +60,7 @@
     <!-- List view. -->
     <div id="opportunityList">
 
-      <!-- Advanced filters. -->
+      <!-- Search filters. -->
       <div data-role="collapsible">
         <h3>Enter Search Criteria</h3>
         <form name="opportunityFilterForm" id="opportunityFilterForm">
@@ -99,19 +99,27 @@
         data-clear-btn="true">	
       
       <label for="amount">Opportunity Amount</label>
-      <input type="text" name="amount" id="amount" data-clear-btn="true">
+      <input type="number" name="amount" id="amount" data-clear-btn="true">
       <label for="sales_stage">Sales Stage</label>
       <input type="text" name="sales_stage" id="sales_stage" data-clear-btn="true">
 	  	
       
       <label for="probability" >Probability</label>
-      <input type="text" name="probability" id="probability"
+      <input type="number" name="probability" id="probability"
         data-clear-btn="true">
+		
+      <label for="priority" >Priority</label>
+      <input type="text" name="priority" id="priority"
+        data-clear-btn="true">	
       
+            
       <!-- Buttons. -->
-      <button type="button" data-theme="e" data-icon="plus"
+      <button type="button" data-theme="b" data-icon="plus"
         onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
-      <button type="button" data-theme="e" data-icon="minus"
+      <button type="button" data-theme="b" data-icon="alert"
+        onClick="scoreOpportunity();"
+        id="opportunityScoreButton">Score Opportunity</button>	
+      <button type="button" data-theme="b" data-icon="minus"
         onClick="deleteEntity('opportunity');"
         id="opportunityDeleteButton" disabled>Delete</button>
 

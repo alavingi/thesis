@@ -4,7 +4,7 @@
 // Server address and port
 
 var addressAndPort = "http://ec2-54-187-230-68.us-west-2.compute.amazonaws.com:9999";
-
+// var addressAndPort = "http://localhost:9999"
 
 // documentId is null for inserts as MongoDB will generate it
 
@@ -435,7 +435,7 @@ function initialPageLoad(entityType) {
 
 
 // Update unnumbered list based on search criterion
-function updateList(entityType, searchField, searchValue) {
+function updateList(entityType, searchField1, searchValue1, searchField2, searchValue2) {
 
   // Get reference to listview's UL element and remove existing children.
   var ul = $("#" + entityType + "ListUL");
@@ -450,11 +450,17 @@ function updateList(entityType, searchField, searchValue) {
   for (var i = 0; i < len; i++) {
     var item = items[i];
     // If search criterion is not met, do not add to list
-    if (searchField && searchValue &&
-      item[searchField] != searchValue
+	if (searchField1 && searchValue1 &&
+	      item[searchField1] != searchValue1 
+	    ) {
+	    continue;
+	}
+    else if (searchField1 && searchValue1 && searchField2 && searchValue2 &&
+      (item[searchField1] != searchValue1 || item[searchField2] != searchValue2)
     ) {
       continue;
     }
+	 
     // Otherwise add to list
     var liText = "";
     if (entityType == "contact") {
@@ -575,3 +581,105 @@ function isEmpty(htmlId) {
   return false;
 
 } // End isEmpty().
+
+// Score a lead
+function scoreLead() {
+	var distances = [];
+	var form = JSON.parse(convertFormToJSONString("lead"));
+    // Copy from localStorage to memory.
+    var items = copyToMemory("lead");
+    
+	// calculate distances
+    var len = items.length;
+    for (var i = 0; i < len; i++) {
+      var item = items[i];
+	  var distance = Math.sqrt(Math.pow((form.revenue - item.revenue), 2) / form.revenue + Math.pow((form.employees - item.employees), 2) / form.employees);
+	  var priority = 0;
+	  if (item.priority)
+	  	priority = item.priority;
+	  var itemdistance = {dist:distance, prior:priority}
+	  distances.push(itemdistance);
+	  
+    }
+	
+	// sort by distance
+	var sorted = distances.sort(function(a, b) {
+	   return a.value - b.value;
+	});
+
+	var keys = Object.keys(sorted);
+	//for (var i = 0, len = sorted.length; i < len; ++i) {
+	//    keys[i] = sorted[i].key;
+	// }
+	
+	// take the first three keys or neighbors
+	var priority1 = 0, priority2 = 0, priority3 = 0;
+	for (var i = 0; i < sorted.length; i++) {
+		var prior = Object.keys( sorted[i] )[ 1 ];
+		var priority = sorted[i][prior];
+		if (priority == 1){
+			priority1++;
+		}
+		else if (priority == 2){
+			priority2++;
+		}
+		else if (priority == 3){
+			priority3++;
+		}
+	}
+	
+	 var maxpriority =  Math.max(priority1, priority2, priority3);
+	 $("#leadEntryForm priority").val(maxpriority);
+	
+}
+
+// Score an opportunity
+function scoreOpportunity() {
+	var distances = [];
+	var form = JSON.parse(convertFormToJSONString("opportunity"));
+    // Copy from localStorage to memory.
+    var items = copyToMemory("opportunity");
+    
+	// calculate distances
+    var len = items.length;
+    for (var i = 0; i < len; i++) {
+      var item = items[i];
+	  var distance = Math.sqrt(Math.pow((form.amount - item.amount), 2) / form.amount + Math.pow((form.probability - item.probability), 2) / form.probability);
+	  var priority = 0;
+	  if (item.priority)
+	  	priority = item.priority;
+	  var itemdistance = {dist:distance, prior:priority}
+	  distances.push(itemdistance);
+	  
+    }
+	
+	// sort by distance
+	var sorted = distances.sort(function(a, b) {
+	   return a.value - b.value;
+	});
+
+	var keys = Object.keys(sorted);
+	//for (var i = 0, len = sorted.length; i < len; ++i) {
+	//    keys[i] = sorted[i].key;
+	// }
+	
+	// take the first three keys or neighbors
+	var priority1 = 0, priority2 = 0, priority3 = 0;
+	for (var i = 0; i < sorted.length; i++) {
+		var prior = Object.keys( sorted[i] )[ 1 ];
+		var priority = sorted[i][prior];
+		if (priority == 1){
+			priority1++;
+		}
+		else if (priority == 2){
+			priority2++;
+		}
+		else if (priority == 3){
+			priority3++;
+		}
+	}
+	
+	 var maxpriority =  Math.max(priority1, priority2, priority3);
+	 $("#opportunityEntryForm priority").val(maxpriority);
+	 	
+}

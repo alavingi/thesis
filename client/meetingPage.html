@@ -60,7 +60,7 @@
     <!-- List view. -->
     <div id="meetingList">
 
-      <!-- Advanced filters. -->
+      <!-- Search filters. -->
       <div data-role="collapsible">
         <h3>Enter Search Criteria</h3>
         <form name="meetingFilterForm" id="meetingFilterForm">
@@ -93,14 +93,14 @@
       
 	  
       <label for="start_date" >Start Date</label>
-      <input type="text" name="start_date" id="start_date"
+      <input type="date" name="start_date" id="start_date"
         data-clear-btn="true">	
       <label for="end_date" >End Date</label>
-      <input type="text" name="end_date" id="end_date"
+      <input type="date" name="end_date" id="end_date"
         data-clear-btn="true">	
       
       <label for="duration">Duration</label>
-      <input type="text" name="duration" id="duration" data-clear-btn="true">
+      <input type="number" name="duration" id="duration" data-clear-btn="true">
       <label for="description">Description</label>
       <input type="text" name="description" id="description" data-clear-btn="true">
 	  	
@@ -113,9 +113,9 @@
       	
       
       <!-- Buttons. -->
-      <button type="button" data-theme="e" data-icon="plus"
+      <button type="button" data-theme="b" data-icon="plus"
         onClick="saveEntity('meeting');" id="meetingSaveButton">Save</button>
-      <button type="button" data-theme="e" data-icon="minus"
+      <button type="button" data-theme="b" data-icon="minus"
         onClick="deleteEntity('meeting');"
         id="meetingDeleteButton" disabled>Delete</button>
 
