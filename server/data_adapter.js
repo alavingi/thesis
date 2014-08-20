@@ -12,7 +12,7 @@ var schemas = {
     email : "string", 
 	url : "string", 
 	street : "string", 
-	city : "string"
+	city : "string",
 	state : "string", 
 	zip : "string", 
 	country : "string",
@@ -30,7 +30,7 @@ var schemas = {
 	phone : "string",
 	email : "string", 
 	street : "string", 
-	city : "string"
+	city : "string",
 	state : "string", 
 	zip : "string", 
 	country : "string"
@@ -41,7 +41,8 @@ var schemas = {
 	assigned_to : "string",
 	amount : "number", 
 	sales_stage : "string",
-	probability : "number"
+	probability : "number",
+	priority : "number"
   }),
   lead : mongoose.Schema({
     company : "string", 
@@ -50,7 +51,8 @@ var schemas = {
     lead_status : "string", 
 	industry : "string",
 	revenue : "number", 
-	employees : "number"
+	employees : "number",
+	priority : "number"
   }),
   meeting : mongoose.Schema({
 	subject : "string", 
@@ -77,7 +79,7 @@ var schemas = {
 var models = {
   account : mongoose.model("account", schemas.account),
   contact : mongoose.model("contact", schemas.contact),
-  opportunty : mongoose.model("opportunty", schemas.opportunty),
+  opportunity : mongoose.model("opportunity", schemas.opportunity),
   lead : mongoose.model("lead", schemas.lead),
   meeting : mongoose.model("meeting", schemas.meeting),
   call : mongoose.model("call", schemas.call)
@@ -97,7 +99,7 @@ function insert(entityType, input) {
   console.log(input.requestIdentifier + ": data_adapter.insert() : " + entityType);
 
   var model = new models[entityType](input.data);
-  console.log(input.requestIdentifier + ": obj: " + JSON.stringify(obj));
+  // console.log(input.requestIdentifier + ": obj: " + JSON.stringify(input));
   model.save(function (error, returnData) {
     if (error) {
 	  // exception will be caught in the server	
@@ -150,7 +152,7 @@ function select_all(entityType, input) {
 
   console.log(input.requestIdentifier + ": data_adapter.select_all(): " + entityType);
 
-  models[entityType].find(null, null, opts, function (error, returnData) {
+  models[entityType].find(null, null, null, function (error, returnData) {
     if (error) {
 	  // exception will be caught in the server 	
       throw "Error: " + JSON.stringify(error);
@@ -194,9 +196,9 @@ function update(entityType, input) {
 // input - wrapper object
 function delete_one(entityType, input) {
 
-  console.log(input.requestIdentifier + ": data_adapter.delete() : " + entityType);
+  console.log(input.requestIdentifier + ": data_adapter.delete_one() : " + entityType);
 
-  models[input].findByIdAndRemove(input.documentId,
+  models[entityType].findByIdAndRemove(input.documentId,
     function (error, returnData) {
       if (error) {
         throw "Error: " + JSON.stringify(error);
@@ -225,7 +227,7 @@ function delete_all(input) {
   models.call.remove({}).exec()
   // send HTTP OK
   // this is to convert numeric data into a string
-  completeResponse(input, 200, "text", "");
+  sendResponse(input, 200, "text", "");
 }
 
 // Export functions so that the server can access them
@@ -235,3 +237,4 @@ exports.update = update;
 exports.delete = delete_one;
 exports.select_all = select_all;
 exports.delete_all = delete_all;
+exports.delete_one = delete_one;
