@@ -28,6 +28,9 @@ var pageAlreadyVisited = {
   call : false
 };
 
+var count = {account : 0, contact : 0, lead : 0,
+	opportunity : 0, meeting : 0, call : 0};
+
 
 // ----------------------------------------------------------------------------
 // EVENT HANDLERS.
@@ -44,6 +47,8 @@ $(document).on("mobileinit", function() {
   $.mobile.phonegapNavigationEnabled = true;
   $.mobile.loader.prototype.options.text = "...Please Wait...";
   $.mobile.loader.prototype.options.textVisible = true;
+  
+  $.mobile.ajaxEnabled = false;
 
 });
 
@@ -199,6 +204,8 @@ function copyToMemory(entityType) {
     if (itemKey.indexOf(entityType) == 0) {
       var sObj = lst.getItem(itemKey);
       items.push(JSON.parse(sObj));
+	  // update counts
+	  count[entityType]++
     }
   }
 
@@ -220,6 +227,7 @@ function displayListView(entityType) {
   $("#" + entityType + "Menu" ).popup("close");
 
   documentId = null;
+  $.mobile.changePage( entityType +"Page.html", { transition: "none"} );
   document.getElementById(entityType + "EntryForm").reset();
 
 } // End displayListView().
@@ -233,7 +241,7 @@ function saveEntity(entityType) {
   if (!validations["check_" + entityType](entityType)) {
     $("#infoDialogHeader").html("Error");
     $("#infoDialogContent").html(
-      "Please provide values for all required fields"
+      "Please provide valid values for fields"
     );
     $.mobile.changePage($("#infoDialog"), { role : "dialog" });
     return;
@@ -315,7 +323,22 @@ var validations = {
    * Validate account form.
    */
   check_account : function() {
-    if (isEmpty("account_name")) { return false; }
+	var phoneregex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+	var emailregex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	var urlregex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi; 
+	var zipregex = /^\d{5}$/;
+	
+	var phone = $("#phone").val();
+	var email = $("#accountEMail").val();
+	var url = $("#url").val();
+	var zipcode = $("#zipcode").val();
+	
+	if (isEmpty("account_name")) { return false; }
+	
+	if ((!isEmpty("phone")) && (!(phoneregex.test(phone)))) { return false; }
+	if (!isEmpty("accountEMail") && !emailregex.test(email)) { return false; }
+	if (!isEmpty("url") && !urlregex.test(url)) { return false; }
+	if ((!isEmpty("zipcode")) && (!(zipregex.test(zipcode)))) { return false; }
     
     return true;
   },
@@ -324,8 +347,24 @@ var validations = {
    * Validate contact form.
    */
   check_contact : function() {
+  	var phoneregex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
+  	var emailregex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  	var birthdateregex = /^(((0[13578]|1[02])/(0[1-9]|[12]\d|3[01])/((19|[2-9]\d)\d{2}))|((0[13456789]|1[012])/(0[1-9]|[12]\d|30)/((19|[2-9]\d)\d{2}))|(02/(0[1-9]|1\d|2[0-8])/((19|[2-9]\d)\d{2}))|(02/29/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;  
+  	var zipregex = /^\d{5}$/;
+	
+	var phone = $("#phone").val();
+	var email = $("#email").val();
+	var birthDate = $("#birthDate").val();
+	var zipcode = $("#zipcode").val();
+	  
     if (isEmpty("first_name")) { return false; }
     if (isEmpty("last_name")) { return false; }
+	
+	if (!isEmpty("phone") && !phoneregex.test(phone)) { return false; }
+	if (!isEmpty("email") && !emailregex.test(email)) { return false; }
+	if (!isEmpty("birthDate") && !birthdateregex.test(birthDate)) { return false; }
+	if (!isEmpty("zipcode") && !zipregex.test(zipcode)) { return false; }
+	
     return true;
   },
 
@@ -333,7 +372,13 @@ var validations = {
    * Validate opportunity form.
    */
   check_opportunity : function() {
+	var amountregex = /[0-9 -()+]+$/;  
+	
+	var amount = $("#amount").val(); 
+	  
     if (isEmpty("opportunity_name")) { return false; }
+	
+	if (!isEmpty("amount") && !amountregex.test(amount)) { return false; }
     
     return true;
   },
@@ -342,7 +387,16 @@ var validations = {
    * Validate lead form.
    */
   check_lead : function() {
+  	var revenueregex = /[0-9 -()+]+$/; 
+	var employeesregex = /[0-9 -()+]+$/; 
+	
+  	var revenue = $("#revenue").val();
+	var employees = $("#employees").val();    
+	  
     if (isEmpty("company")) { return false; }
+	
+	if (!isEmpty("revenue") && !revenueregex.test(revenue)) { return false; }
+	if (!isEmpty("employees") && !employeesregex.test(employees)) { return false; }
     return true;
   },
   
@@ -350,7 +404,18 @@ var validations = {
    * Validate meeting form.
    */
   check_meeting : function() {
+	var dateregex = /^(((0[13578]|1[02])/(0[1-9]|[12]\d|3[01])/((19|[2-9]\d)\d{2}))|((0[13456789]|1[012])/(0[1-9]|[12]\d|30)/((19|[2-9]\d)\d{2}))|(02/(0[1-9]|1\d|2[0-8])/((19|[2-9]\d)\d{2}))|(02/29/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g; 
+	var durationregex = /[0-9 -()+]+$/; 
+	
+	var startDate = $("#start_date").val();
+	var endDate = $("#end_date").val();
+	var duration = $("#duration").val();
+	  
     if (isEmpty("subject")) { return false; }
+	
+	if (!isEmpty("start_date") && !dateregex.test(startDate)) { return false; }
+	if (!isEmpty("end_date") && !dateregex.test(endDate)) { return false; }
+	if (!isEmpty("duration") && !durationregex.test(duration)) { return false; }
     
     return true;
   },
@@ -359,7 +424,17 @@ var validations = {
    * Validate call form.
    */
   check_call : function() {
+  	var dateregex = /^(((0[13578]|1[02])/(0[1-9]|[12]\d|3[01])/((19|[2-9]\d)\d{2}))|((0[13456789]|1[012])/(0[1-9]|[12]\d|30)/((19|[2-9]\d)\d{2}))|(02/(0[1-9]|1\d|2[0-8])/((19|[2-9]\d)\d{2}))|(02/29/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g; 
+  	var durationregex = /[0-9 -()+]+$/; 
+	
+  	var callDate = $("#call_date").val();
+  	var duration = $("#duration").val();
+	  
     if (isEmpty("subject")) { return false; }
+	
+  	if (!isEmpty("call_date") && !dateregex.test(callDate)) { return false; }
+  	if (!isEmpty("duration") && !durationregex.test(duration)) { return false; }
+	
     return true;
   }
 
@@ -500,6 +575,7 @@ function newItem(entityType) {
 
   // Clear entry form and reset documentId.
   documentId = null;
+  $.mobile.changePage( entityType + "Page.html", { transition: "none"} );
   document.getElementById(entityType + "EntryForm").reset();
 
   // Close list view and display data entry form

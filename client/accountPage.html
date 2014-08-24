@@ -7,17 +7,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
-    <link rel="stylesheet" href="jq/plugins/jqm-datebox.min.css">
     <link rel="stylesheet" href="styles.css">
 
     <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
     <!-- Note: main.js must come before JQM to set defaults properly. -->
     <script type="text/javascript" src="client.js"></script>
     <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
-    <script type="text/javascript"
-      src="jq/plugins/jqm-datebox.core.min.js"></script>
-    <script type="text/javascript"
-      src="jq/plugins/jqm-datebox.mode.datebox.min.js"></script>
+    <script type="text/javascript">
+		$(document).on('pagebeforeshow', function() {
+    		displayDate();
+		});
+		function displayDate() {
+			var d = new Date();
+			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
+		}
+     </script>
 
   </head>
   <body>
@@ -28,6 +32,7 @@
   <script type="text/javascript">
     $(document).delegate("#accountPage", "pageshow", function(inEvent) {
       initialPageLoad("account");
+	  displayDate();
     });
   </script>
 
@@ -50,6 +55,8 @@
     <h1>Accounts</h1>
     <a href="#accountMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+	<br>
+	<div id="dateAndTimeA" align="center"></div>  
   </div>
 
   <!-- Page content. -->
@@ -89,7 +96,7 @@
 	  
       
       <label for="account_name" class="cssRequired">Account Name</label>
-      <input type="text" name="account_name" id="account_name"
+      <input type="text" name="account_name" id="account_name" data-mini="true"
         data-clear-btn="true">
       
 	  
@@ -101,34 +108,34 @@
         data-clear-btn="true">	
       
       <label for="accountEMail">eMail</label>
-      <input type="email" name="eMail" id="accountEMail" data-clear-btn="true">
+      <input type="email" name="eMail" id="accountEMail" data-mini="true" data-clear-btn="true">
       <label for="url">URL</label>
-      <input type="url" name="url" id="url" data-clear-btn="true">
+      <input type="url" name="url" id="url" data-mini="true" data-clear-btn="true">
 	  	
       <label for="street" >Street</label>
-      <input type="text" name="street" id="street"
+      <input type="text" name="street" id="street" data-mini="true" 
         data-clear-btn="true">
       <label for="city" >City</label>
-      <input type="text" name="city" id="city"
+      <input type="text" name="city" id="city" data-mini="true" 
         data-clear-btn="true">
       <label for="state" >State</label>
-      <input type="text" name="state" id="state"
+      <input type="text" name="state" id="state" data-mini="true" 
         data-clear-btn="true">
       <label for="zipcode" >Zipcode</label>
-      <input type="text" name="zipcode" id="zipcode"
+      <input type="text" name="zipcode" id="zipcode" data-mini="true" 
         data-clear-btn="true">
       <label for="country" >Country</label>
-      <input type="text" name="country" id="country"
+      <input type="text" name="country" id="country" data-mini="true" 
         data-clear-btn="true">	
 		
       <label for="revenue" >Revenue</label>
-      <input type="number" name="revenue" id="revenue"
+      <input type="number" name="revenue" id="revenue" data-mini="true" 
         data-clear-btn="true">
       <label for="employees" >No. of employees</label>
-      <input type="number" name="employees" id="employees"
+      <input type="number" name="employees" id="employees" data-mini="true" 
         data-clear-btn="true">
       <label for="description" >Description</label>
-      <input type="text" name="description" id="description"
+      <input type="text" name="description" id="description" data-mini="true" 
         data-clear-btn="true">	
       
       <!-- Buttons. -->
@@ -145,7 +152,7 @@
   </div>
 
   <!-- Footer. -->
-  <div data-role="footer" data-position="fixed">
+  <div data-role="footer" data-position="fixed" data-theme="b">
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
