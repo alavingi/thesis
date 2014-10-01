@@ -48,15 +48,16 @@
   </div>
 
   <!-- Header. -->
-  <div data-role="header" data-position="fixed">
+  <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
+	<img border="0" src="img/logo.png" alt="Logo" height="140" width="140" style="float:left;display:inline;text-align:right;margin-left:100px"/>
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Leads</h1>
     <a href="#leadMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
 	<br>
-	<div id="dateAndTimeL" align="center"></div>  
+	<div id="dateAndTimeL" style="text-align:center"></div>  
   </div>
 
   <!-- Page content. -->
@@ -82,7 +83,7 @@
 
       <!-- List. -->
       <div>
-        <ul data-role="listview" data-filter="true" data-inset="true"
+        <ul data-role="listview" data-inset="true"
           data-autodividers="true" id="leadListUL"></ul>
       </div>
 
@@ -106,7 +107,13 @@
         data-clear-btn="true">	
       
       <label for="lead_status">Lead Status</label>
-      <input type="text" name="lead_status" id="lead_status" data-clear-btn="true">
+      <!-- <input type="text" name="lead_status" id="lead_status" data-clear-btn="true"> -->
+	  <select name="lead_status" id="lead_status">
+	    <option value="New">New</option>
+	    <option value="In-process">In-process</option>
+	    <option value="Converted">Converted</option>
+	    <option value="Closed">Closed</option>
+	  </select>
       <label for="industry">Industry</label>
       <input type="text" name="industry" id="industry" data-clear-btn="true">
 	  	
@@ -121,15 +128,14 @@
         data-clear-btn="true">	
             
       <!-- Buttons. -->
-      <button type="button" data-theme="b" data-icon="plus"
-        onClick="saveEntity('lead');" id="leadSaveButton">Save</button>
-      <button type="button" data-theme="b" data-icon="alert"
-        onClick="scoreLead();"
-        id="leadScoreButton">Score Lead</button>	
-      <button type="button" data-theme="b" data-icon="minus"
-        onClick="deleteEntity('lead');"
-        id="leadDeleteButton" disabled>Delete</button>
-      
+	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+        <button type="button" data-theme="b" data-icon="plus"
+          onClick="saveEntity('lead');" id="leadSaveButton">Save</button>
+        <button type="button" data-theme="b" data-icon="alert"
+          onClick="scoreLead();" id="leadScoreButton">Score Lead</button>	
+        <button type="button" data-theme="b" data-icon="minus"
+          onClick="deleteEntity('lead');" id="leadDeleteButton" disabled>Delete</button>
+      </div>
 
     </form>
 

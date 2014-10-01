@@ -48,15 +48,16 @@
   </div>
 
   <!-- Header. -->
-  <div data-role="header" data-position="fixed">
+  <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
+	<img border="0" src="img/logo.png" alt="Logo" height="140" width="140" style="float:left;display:inline;text-align:right;margin-left:100px"/>
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Meetings</h1>
     <a href="#meetingMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
 	<br>
-	<div id="dateAndTimeM" align="center"></div>  
+	<div id="dateAndTimeM" style="text-align:center"></div>  
   </div>
 
   <!-- Page content. -->
@@ -83,7 +84,7 @@
 
       <!-- List. -->
       <div>
-        <ul data-role="listview" data-filter="true" data-inset="true"
+        <ul data-role="listview" data-inset="true"
           data-autodividers="true" id="meetingListUL"></ul>
       </div>
 
@@ -112,19 +113,35 @@
       <input type="text" name="description" id="description" data-clear-btn="true">
 	  	
       <label for="meeting_status" >Meeting Status</label>
-      <input type="text" name="meeting_status" id="meeting_status"
-        data-clear-btn="true">
+      <!-- <input type="text" name="meeting_status" id="meeting_status"
+        data-clear-btn="true"> -->
+	  <select name="meeting_status" id="meeting_status">
+	    <option value="Planned">Planned</option>
+	    <option value="Completed">Completed</option>
+	    <option value="Not-held">Not-held</option>
+	  </select>	
       <label for="related_to" >Related To</label>
-      <input type="text" name="related_to" id="related_to"
+      <!-- <input type="text" name="related_to" id="related_to"
+        data-clear-btn="true"> -->
+	  <select name="related_to" id="related_to">
+	    <option value="Lead">Lead</option>
+	    <option value="Contact">Contact</option>
+	  </select>	
+      <label for="first_name">First Name</label>
+      <input type="text" name="first_name" id="first_name"
+        data-clear-btn="true">
+      <label for="last_name">Last Name</label>
+      <input type="text" name="last_name" id="last_name"
         data-clear-btn="true">
       	
       
       <!-- Buttons. -->
-      <button type="button" data-theme="b" data-icon="plus"
-        onClick="saveEntity('meeting');" id="meetingSaveButton">Save</button>
-      <button type="button" data-theme="b" data-icon="minus"
-        onClick="deleteEntity('meeting');"
-        id="meetingDeleteButton" disabled>Delete</button>
+	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+        <button type="button" data-theme="b" data-icon="plus"
+          onClick="saveEntity('meeting');" id="meetingSaveButton">Save</button>
+        <button type="button" data-theme="b" data-icon="minus"
+          onClick="deleteEntity('meeting');" id="meetingDeleteButton" disabled>Delete</button>
+	   </div>	
 
     </form>
 

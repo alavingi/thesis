@@ -17,6 +17,7 @@
 		$(document).on('pagebeforeshow', function() {
     		displayDate();
 		});
+  	    
 		function displayDate() {
 			var d = new Date();
 			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
@@ -48,15 +49,16 @@
   </div>
 
   <!-- Header. -->
-  <div data-role="header" data-position="fixed">
+  <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
+	<img border="0" src="img/logo.png" alt="Logo" height="140" width="140" style="float:left;display:inline;text-align:right;margin-left:100px"/>
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Contacts</h1>
     <a href="#contactMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
 	<br>
-	<div id="dateAndTimeC" align="center"></div>  
+	<div id="dateAndTimeC" style="text-align:center"></div>  
   </div>
 
   <!-- Page content. -->
@@ -84,7 +86,7 @@
 
       <!-- List. -->
       <div>
-        <ul data-role="listview" data-filter="true" data-inset="true"
+        <ul data-role="listview" data-inset="true"
           data-autodividers="true" id="contactListUL"></ul>
       </div>
 
@@ -140,11 +142,12 @@
         data-clear-btn="true">	
       
       <!-- Buttons. -->
-      <button type="button" data-theme="b" data-icon="plus"
-        onClick="saveEntity('contact');" id="contactSaveButton">Save</button>
-      <button type="button" data-theme="b" data-icon="minus"
-        onClick="deleteEntity('contact');"
-        id="contactDeleteButton" disabled>Delete</button>
+	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+        <button type="button" data-theme="b" data-icon="plus"
+          onClick="saveEntity('contact');" id="contactSaveButton">Save</button>
+        <button type="button" data-theme="b" data-icon="minus"
+          onClick="deleteEntity('contact');" id="contactDeleteButton" disabled>Delete</button>
+	  </div>	
 
     </form>
 

@@ -3,8 +3,8 @@
 
 // Server address and port
 
-var addressAndPort = "http://ec2-54-187-230-68.us-west-2.compute.amazonaws.com:9999";
-// var addressAndPort = "http://localhost:9999"
+// var addressAndPort = "http://ec2-54-187-230-68.us-west-2.compute.amazonaws.com:9999";
+var addressAndPort = "http://localhost:9999"
 
 // documentId is null for inserts as MongoDB will generate it
 
@@ -349,11 +349,11 @@ var validations = {
   check_contact : function() {
   	var phoneregex = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
   	var emailregex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  	var birthdateregex = /^(((0[13578]|1[02])/(0[1-9]|[12]\d|3[01])/((19|[2-9]\d)\d{2}))|((0[13456789]|1[012])/(0[1-9]|[12]\d|30)/((19|[2-9]\d)\d{2}))|(02/(0[1-9]|1\d|2[0-8])/((19|[2-9]\d)\d{2}))|(02/29/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;  
-  	var zipregex = /^\d{5}$/;
+  	var birthdateregex = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
+	var zipregex = /^\d{5}$/;
 	
 	var phone = $("#phone").val();
-	var email = $("#email").val();
+	var email = $("#contactEMail").val();
 	var birthDate = $("#birthDate").val();
 	var zipcode = $("#zipcode").val();
 	  
@@ -361,7 +361,7 @@ var validations = {
     if (isEmpty("last_name")) { return false; }
 	
 	if (!isEmpty("phone") && !phoneregex.test(phone)) { return false; }
-	if (!isEmpty("email") && !emailregex.test(email)) { return false; }
+	if (!isEmpty("contactEMail") && !emailregex.test(email)) { return false; }
 	if (!isEmpty("birthDate") && !birthdateregex.test(birthDate)) { return false; }
 	if (!isEmpty("zipcode") && !zipregex.test(zipcode)) { return false; }
 	
@@ -404,7 +404,7 @@ var validations = {
    * Validate meeting form.
    */
   check_meeting : function() {
-	var dateregex = /^(((0[13578]|1[02])/(0[1-9]|[12]\d|3[01])/((19|[2-9]\d)\d{2}))|((0[13456789]|1[012])/(0[1-9]|[12]\d|30)/((19|[2-9]\d)\d{2}))|(02/(0[1-9]|1\d|2[0-8])/((19|[2-9]\d)\d{2}))|(02/29/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g; 
+	var dateregex = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
 	var durationregex = /[0-9 -()+]+$/; 
 	
 	var startDate = $("#start_date").val();
@@ -424,8 +424,8 @@ var validations = {
    * Validate call form.
    */
   check_call : function() {
-  	var dateregex = /^(((0[13578]|1[02])/(0[1-9]|[12]\d|3[01])/((19|[2-9]\d)\d{2}))|((0[13456789]|1[012])/(0[1-9]|[12]\d|30)/((19|[2-9]\d)\d{2}))|(02/(0[1-9]|1\d|2[0-8])/((19|[2-9]\d)\d{2}))|(02/29/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g; 
-  	var durationregex = /[0-9 -()+]+$/; 
+  	var dateregex = /^((0?[1-9]|1[012])[- /.](0?[1-9]|[12][0-9]|3[01])[- /.](19|20)?[0-9]{2})*$/;
+	var durationregex = /[0-9 -()+]+$/; 
 	
   	var callDate = $("#call_date").val();
   	var duration = $("#duration").val();
@@ -559,7 +559,7 @@ function updateList(entityType, searchField1, searchValue1, searchField2, search
 	// Clicking on a list item displays the edit screen
     ul.append(
       "<li onClick=\"editEntity('" + entityType + "', '" + item._id + "');\"" +
-      "id=\"" + item._id + "\">" + liText + "</li>"
+      "id=\"" + item._id + "\"><a href='#'>" + liText + "</a></li>"
     );
   }
 
@@ -601,7 +601,7 @@ function editEntity(entityType, entityId) {
   // Loop through the object and populate the form except for the _v and _id fields
   for (field in entity) {
     if (field != "_id" && field != "__v") {
-      $("#" + entityType + "EntryForm [name=" + field + "]").val(entity[field]);
+      $("#" + entityType + "EntryForm [name=" + field + "]").val(entity[field]).trigger("change");
     }
   }
 
@@ -705,7 +705,8 @@ function scoreLead() {
 	}
 	
 	 var maxpriority =  Math.max(priority1, priority2, priority3);
-	 $("#leadEntryForm priority").val(maxpriority);
+	 console.log("priority is : " + $("#priority").val());
+	 $("#priority").val(maxpriority);
 	
 }
 
@@ -756,6 +757,7 @@ function scoreOpportunity() {
 	}
 	
 	 var maxpriority =  Math.max(priority1, priority2, priority3);
-	 $("#opportunityEntryForm priority").val(maxpriority);
+	 console.log("priority is : " + $("#priority").val());
+	 $("#priority").val(maxpriority);
 	 	
 }

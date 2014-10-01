@@ -48,15 +48,16 @@
   </div>
 
   <!-- Header. -->
-  <div data-role="header" data-position="fixed">
+  <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
+	<img border="0" src="img/logo.png" alt="Logo" height="140" width="140" style="float:left;display:inline;text-align:right;margin-left:100px"/>
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Opportunities</h1>
     <a href="#opportunityMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
 	<br>
-	<div id="dateAndTimeO" align="center"></div>  
+	<div id="dateAndTimeO" style="text-align:center"></div>  
   </div>
 
   <!-- Page content. -->
@@ -82,7 +83,7 @@
 
       <!-- List. -->
       <div>
-        <ul data-role="listview" data-filter="true" data-inset="true"
+        <ul data-role="listview" data-inset="true"
           data-autodividers="true" id="opportunityListUL"></ul>
       </div>
 
@@ -108,8 +109,15 @@
       <label for="amount">Opportunity Amount</label>
       <input type="number" name="amount" id="amount" data-clear-btn="true">
       <label for="sales_stage">Sales Stage</label>
-      <input type="text" name="sales_stage" id="sales_stage" data-clear-btn="true">
-	  	
+      <!-- <input type="text" name="sales_stage" id="sales_stage" data-clear-btn="true"> -->
+	  <select name="sales_stage" id="sales_stage">
+	    <option value="Prospect">Prospect</option>
+	    <option value="Qualified">Qualified</option>
+	    <option value="Proposal">Proposal</option>
+	    <option value="Review">Review</option>
+	    <option value="Closed-won">Closed-won</option>
+	    <option value="Closed-lost">Closed-lost</option>
+	  </select>	
       
       <label for="probability" >Probability</label>
       <input type="number" name="probability" id="probability"
@@ -121,15 +129,14 @@
       
             
       <!-- Buttons. -->
-      <button type="button" data-theme="b" data-icon="plus"
-        onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
-      <button type="button" data-theme="b" data-icon="alert"
-        onClick="scoreOpportunity();"
-        id="opportunityScoreButton">Score Opportunity</button>	
-      <button type="button" data-theme="b" data-icon="minus"
-        onClick="deleteEntity('opportunity');"
-        id="opportunityDeleteButton" disabled>Delete</button>
-
+	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+        <button type="button" data-theme="b" data-icon="plus"
+          onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
+        <button type="button" data-theme="b" data-icon="alert"
+          onClick="scoreOpportunity();" id="opportunityScoreButton">Score Opportunity</button>	
+        <button type="button" data-theme="b" data-icon="minus"
+          onClick="deleteEntity('opportunity');" id="opportunityDeleteButton" disabled>Delete</button>
+	   </div>	
     </form>
 
     </div>

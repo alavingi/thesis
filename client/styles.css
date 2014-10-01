@@ -1,19 +1,36 @@
 /* Code partially based on the pattern given in Frank W. Zammetti's book */
 
 /* Style for the title header (horizontally and vertically centered). */
-.cssHomeTitleHeader {
-  position : absolute;
-  top : 0;
-  bottom : 0;
-  left : 0;
-  right : 0;
-  margin : auto;
+.cssImageHeader {
+	width: 100px;
+	    height: 100px;
+    margin-left : 0;
+ /* margin : auto;
+  
+  display : block;
+  text-align: center; */
 }
 
+.cssHomeTitleHeader {
+    !position : absolute;
+    top : 0;
+    bottom : 0;
+    left : 50%;
+    right : 0;
+  margin : auto;
+  margin-top : 10%;
+  display : block;
+  text-align: center;
+}
 
 /* Style for the sections in the about flyover. */
 .cssHomeAboutSection {
   padding-top : 20px;
+}
+
+.cssHomeMenuButtons {
+	top : 200;
+	text-align: center;
 }
 
 
@@ -50,26 +67,35 @@
 
 /* Style for the icons for each item on the NavBar. */
 .linkAccountPage .ui-icon {
-  background : url(img/ic_action_collection.png) center no-repeat;
+  background : url(img/112-group.png) center no-repeat;
 }
 .linkContactPage .ui-icon {
-  background : url(img/ic_action_cloud.png) center no-repeat;
+  background : url(img/40-inbox.png) center no-repeat;
 }
 .linkOpportunityPage .ui-icon {
-  background : url(img/ic_action_group.png) center no-repeat;
+  background : url(img/37-suitcase.png) center no-repeat;
 }
 .linkLeadPage .ui-icon {
-  background : url(img/ic_action_person.png) center no-repeat;
+  background : url(img/33-cabinet.png) center no-repeat;
 }
 
 .linkMeetingPage .ui-icon {
-  background : url(img/ic_action_share.png) center no-repeat;
+  background : url(img/83-calendar.png) center no-repeat;
 }
 .linkCallPage .ui-icon {
-  background : url(img/ic_action_call.png) center no-repeat;
+  background : url(img/32-iphone.png) center no-repeat;
 }
 
-
+.ui-icon-account:after {
+	background : url(img/ic_action_collection.png) center no-repeat;
+	background-size: 38px 38px;
+	  width: 30px;
+	  height: 30px;
+	  box-shadow: none;
+	  -webkit-box-shadow: none;
+	  margin: -2px !important;
+	  margin-left:-15px!important;
+}
 
 /* Style for the function menus. */
 .cssFunctionsMenu {
@@ -104,4 +130,8 @@
 /* Style for required fields on forms. */
 .cssRequired {
   color : #ff0000;
+}
+
+.header {
+	position: fixed;
 }
