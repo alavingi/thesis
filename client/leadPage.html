@@ -13,16 +13,7 @@
     <!-- Note: main.js must come before JQM to set defaults properly. -->
     <script type="text/javascript" src="client.js"></script>
     <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
-    <script type="text/javascript">
-		$(document).on('pagebeforeshow', function() {
-    		displayDate();
-		});
-		function displayDate() {
-			var d = new Date();
-			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
-		}
-     </script>
-
+    
   </head>
   <body>
 
@@ -30,10 +21,34 @@
 <div data-role="page" id="leadPage" data-dom-cache="true">
 
   <script type="text/javascript">
+    var deviceType = "";
+	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+	if (width <= 640) {
+		deviceType = "phone";
+	}
+	else {
+		deviceType = "tablet";
+	}
+	/*
+	if(window.styleMedia.matchMedium("screen and (max-width: 480px)")){
+	    deviceType = "phone";
+	}
+	else {
+		deviceType = "tablet"
+	}
+	*/
     $(document).delegate("#leadPage", "pageshow", function(inEvent) {
-      initialPageLoad("lead");
+      initialPageLoad("lead", deviceType);
 	  displayDate();
+	  
     });
+	function displayDate() {
+		var d = new Date();
+		document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
+	}
+	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
+		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
+	}
   </script>
 
   <!-- Menu. -->
@@ -75,7 +90,7 @@
           <label for="search_by_company" >Company</label>
           <input type="text" name="search_by_company" id="search_by_company" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateList('lead', 'company', search_by_company.value);" id="leadSaveButton">Search</button>
+	        onClick="updateListLocal('leadListUL', 'lead', 'company', search_by_company.value);" id="leadSaveButton">Search</button>
         </form>
       </div>
 
@@ -91,7 +106,8 @@
 
     <!-- Entry view. -->
     <div id="leadEntry" style="display:none;">
-
+	<div class="ui-grid-a leadGrid">	
+	<div class="ui-block-a">
     <form name="leadEntryForm" id="leadEntryForm">
 	  
       <label for="company" class="cssRequired">Company</label>
@@ -136,7 +152,12 @@
         <button type="button" data-theme="b" data-icon="minus"
           onClick="deleteEntity('lead');" id="leadDeleteButton" disabled>Delete</button>
       </div>
-
+      </div> <!--   block a-->
+	  <div class="ui-block-b">
+          <ul data-role="listview" data-inset="true"
+            data-autodividers="true" id="callListULLead"></ul>
+	  </div>
+      </div> <!--  grid a-->
     </form>
 
     </div>

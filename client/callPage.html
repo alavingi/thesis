@@ -13,16 +13,7 @@
     <!-- Note: main.js must come before JQM to set defaults properly. -->
     <script type="text/javascript" src="client.js"></script>
     <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
-    <script type="text/javascript">
-		$(document).on('pagebeforeshow', function() {
-    		displayDate();
-		});
-		function displayDate() {
-			var d = new Date();
-			document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toString();
-		}
-     </script>
-
+    
   </head>
   <body>
 
@@ -30,10 +21,33 @@
 <div data-role="page" id="callPage" data-dom-cache="true">
 
   <script type="text/javascript">
+    var deviceType = "";
+	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+	if (width <= 640) {
+		deviceType = "phone";
+	}
+	else {
+		deviceType = "tablet";
+	}
+	/*
+	if(window.styleMedia.matchMedium("screen and (max-width: 480px)")){
+	    deviceType = "phone";
+	}
+	else {
+		deviceType = "tablet"
+	}
+	*/
     $(document).delegate("#callPage", "pageshow", function(inEvent) {
-      initialPageLoad("call");
+      initialPageLoad("call", deviceType);
 	  displayDate();
     });
+	function displayDate() {
+		var d = new Date();
+		document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toString();
+	}
+	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
+		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
+	}
   </script>
 
   <!-- Menu. -->
@@ -75,7 +89,7 @@
           <label for="search_by_subject" class="select">Subject</label>
           <input type="text" name="search_by_subject" id="search_by_subject" onChange="populateList('call', 'subject', search_by_subject.value);">
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateList('call', 'subject', search_by_subject.value);" id="callSaveButton">Search</button>
+	        onClick="updateListLocal('callListUL', 'call', 'subject', search_by_subject.value);" id="callSaveButton">Search</button>
           
         </form>
       </div>

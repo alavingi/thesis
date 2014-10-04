@@ -61,7 +61,9 @@ var schemas = {
 	duration : "number",
     description : "string", 
 	meeting_status : "string", 
-	related_to : "string"
+	related_to : "string",
+	first_name : "string",
+	last_name : "string"
   }),
   call : mongoose.Schema({
 	subject : "string", 
@@ -70,7 +72,9 @@ var schemas = {
 	duration : "number", 
     description : "string", 
 	call_status : "string", 
-	related_to : "string"
+	related_to : "string",
+	first_name : "string",
+        last_name : "string"
   })
 };
 

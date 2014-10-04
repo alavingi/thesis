@@ -18,28 +18,41 @@
     <!-- Note: main.js must come before JQM to set defaults properly. -->
     
     <!-- <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script> -->
-	<script type="text/javascript">
-	  $(document).on('pagebeforeshow', function() {
-		displayDate();
-	  });
-	  function displayDate() {
-		var d = new Date();
-		document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
-	  }
-	  function displayData() {
-		var leads = copyToMemory("lead");
-		var opportunities = copyToMemory("opportunity");
-		document.getElementById("counts").innerHTML="Total no. of leads is : " + count.lead + " Total no. of opportunities is : " + count.opportunity;
-	  }</script>
+  	
   </head>
-  <body onload="displayData()">
+  <body>
 
 
     <!-- ================================================================== -->
     <!-- HOME PAGE                                                          -->
     <!-- ================================================================== -->
     <div data-role="page" id="homePage">
-
+  	
+	<script type="text/javascript">
+      
+      $(document).on("pageshow", "#homePage", function(e) { 
+		  
+	    displayDate();
+		displayData();
+		updateList('topLeadsUL', 'lead', 'tablet');
+		updateList('upcomingMeetingsUL', 'meeting', 'tablet');
+      });
+	  
+  	  function displayDate() {
+		  
+  		var d = new Date();
+  		document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
+  	  }
+  	  function displayData() {
+		  
+  		var leads = copyToMemory("lead");
+  		var opportunities = copyToMemory("opportunity");
+		
+		document.getElementById("counts").innerHTML="Total no. of \<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads\</a> is " + count.lead
+		 + " Total no. of \<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities\</a> is " + count.opportunity;
+		         
+  	  }
+  	</script>	
       <!-- About panel. -->
       <div data-role="panel" data-position="right" data-display="overlay"
         id="aboutPanel">
@@ -70,13 +83,31 @@
       <div data-role="content" data-theme="b">
         <div>
         <img src="img/logo.png" class="cssHomeTitleHeader"></div>
-		<div id="counts" data-theme="b" align="center"></div><br><br>
-		<div data-role="controlgroup" data-type="horizontal" class="cssHomeMenuButtons">
+		<div id="counts" data-theme="e" class="cssHomeCounts"></div><br><br>
+		<div data-role="controlgroup" data-type="horizontal" class="cssHomeMenu">
 		   
-		       <a href="javascript:displayListView('contact');displayDate();" data-role='button'>List Contacts</a>
-		       <a href="javascript:newItem('contact');displayDate();" data-role='button'>New Contact</a>
-		       <a href="javascript:displayListView('account');displayDate();" data-role='button'>List Accounts</a>
-		       <a href="javascript:newItem('account');displayDate();" data-role='button'>New Account</a>
+		       <a href="javascript:displayListView('contact');" data-role='button' data-mini="true">List Contacts</a>
+		       <a href="javascript:newItem('contact');" data-role='button' data-mini="true">New Contact</a>
+		       <a href="javascript:displayListView('account');" data-role='button' data-mini="true">List Accounts</a>
+		       <a href="javascript:newItem('account');" data-role='button' data-mini="true">New Account</a>
+		   
+		</div>
+		<div data-role="controlgroup" data-type="horizontal" class="cssHomeMenuTablet">
+		   
+		       <a href="javascript:displayListView('contact');" data-role='button'>List Contacts</a>
+		       <a href="javascript:newItem('contact');" data-role='button'>New Contact</a>
+		       <a href="javascript:displayListView('account');" data-role='button'>List Accounts</a>
+		       <a href="javascript:newItem('account');" data-role='button'>New Account</a>
+			   <br>
+			   <br>
+			   <br>
+			   <br>
+			   <ul data-role="listview" data-inset="true"
+	             id="topLeadsUL"></ul>
+			   <br>
+			   <br>	 
+	           <ul data-role="listview" data-inset="true"
+	             id="upcomingMeetingsUL"></ul>
 		   
 		</div>
       </div>

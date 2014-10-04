@@ -28,11 +28,6 @@
   padding-top : 20px;
 }
 
-.cssHomeMenuButtons {
-	top : 200;
-	text-align: center;
-}
-
 
 /* Style to space out Home button. */
 .homeButton {
@@ -134,4 +129,92 @@
 
 .header {
 	position: fixed;
+}
+
+.listHeader {
+	
+}
+
+/* Responsive web design */
+
+@media all and (max-width: 640px) {
+	
+	.listHeader {
+		
+		font-size : 8px;
+		font-weight : bold;
+		color : blue;
+	}
+	
+	.cssHomeCounts {
+		text-align : center;
+		font-size : 8px;
+		font-weight : bold;
+		color : blue;
+	}
+	
+	.cssHomeMenu {
+		top : 200;
+		text-align: center;
+	}
+	
+	.cssHomeMenuTablet {
+		display : none;
+	}
+	
+	.contactGrid .ui-block-a { 
+		width: 100%; 
+		float:none; 
+	}
+	.leadGrid .ui-block-a { 
+		width: 100%; 
+		float:none; 
+	}
+}
+
+@media all and (min-width: 800px) {
+	
+	.listHeader {
+		font-size : 18px;
+		font-weight : bold;
+		color : blue;
+	}
+	
+	.cssHomeCounts {
+		text-align : center;
+		font-size : 18px;
+		font-weight : bold;
+		color : blue;
+	}
+	
+	
+	.cssHomeMenu {
+		display : none;
+	}
+	
+	.cssHomeMenuTablet {
+		top : 200;
+		text-align: center;
+	}
+	
+	.contactGrid .ui-block-a { 
+		width: 50%; 
+		float:left; 
+	}
+	.contactGrid .ui-block-b { 
+		width: 40%; 
+		margin-left : 10px;
+		
+		float:right; 
+	}
+	.leadGrid .ui-block-a { 
+		width: 50%; 
+		float:left; 
+	}
+	.leadGrid .ui-block-b { 
+		width: 40%; 
+		margin-left : 10px;
+		
+		float:right; 
+	}
 }

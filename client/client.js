@@ -489,11 +489,11 @@ function deleteEntity(entityType) {
 function initialPageLoad(entityType) {
 
   if (!pageAlreadyVisited[entityType]) {
-
+    var listName = entityType + "ListUL";
     $.mobile.loading("show");
 
     // Populate the list.
-    updateList(entityType);
+    updateList(listName, entityType, deviceType);
 
     // If the network is not available, disable any write ability
     if (!phoneConnected) {
@@ -510,15 +510,97 @@ function initialPageLoad(entityType) {
 
 
 // Update unnumbered list based on search criterion
-function updateList(entityType, searchField1, searchValue1, searchField2, searchValue2) {
+function updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2, searchField3, searchValue3) {
 
   // Get reference to listview's UL element and remove existing children.
+  /*
   var ul = $("#" + entityType + "ListUL");
+  if (searchField3) {
+	  ul = $("#" + entityType + "ListUL" + searchValue3);
+  }
+  
+  if (listName) {
+	  ul = listName;
+  }
+  */
   // First clear the list
+  var ul = $("#" + listName);
   ul.children().remove();
+  if (listName == "topLeadsUL") {
+	ul.append("<span class='listHeader'> Company  First Name  Last Name  Priority</span>");
+  }
+  else if (listName == "upcomingMeetingsUL") {
+	ul.append("<span class='listHeader'> Subject  Start Date  Status</span>");
+  }
+  else if (listName == "accountListUL") {
+	ul.append("<span class='listHeader'> Account Name  Phone  Email</span>");
+  }
+  else if (listName == "contactListUL") {
+	ul.append("<span class='listHeader'> First Name  Last Name  Phone  Email</span>");
+  }
+  else if (listName == "leadListUL") {
+	ul.append("<span class='listHeader'> Company  First Name  Last Name  Priority</span>");
+  }
+  else if (listName == "opportunityListUL") {
+	ul.append("<span class='listHeader'> Name  Amount  Probability  Priority</span>");
+  }
+  else if (listName == "meetingListUL") {
+	ul.append("<span class='listHeader'> Subject  Start Date  Status</span>");
+  }
+  else if (listName == "callListUL" || listName == "callListULContact" || listName == "callListULLead") {
+	ul.append("<span class='listHeader'> Subject  Call Date  Status</span>");
+  }
   
   // Copy from localStorage to memory.
   var items = copyToMemory(entityType);
+  if (entityType == "contact") {
+	  items.sort(function(a,b){
+	    if(a.last_name < b.last_name) return -1;
+	    if(a.last_name > b.last_name) return 1;
+	    if(a.first_name < b.first_name) return -1;
+	    if(a.first_name > b.first_name) return 1;
+	    return 0;
+	  });
+  } 
+  else if (entityType == "account"){
+	  items.sort(function(a,b){
+	    if(a.account_name < b.account_name) return -1;
+	    if(a.account_name > b.account_name) return 1;
+	    return 0;
+	  });
+  }
+  else if (entityType == "opportunity"){
+	  items.sort(function(a,b){
+	    if(a.opportunity_name < b.opportunity_name) return -1;
+	    if(a.opportunity_name > b.opportunity_name) return 1;
+	    return 0;
+	  });
+  }
+  // Sort leads by priority and revenue
+  else if (entityType == "lead"){
+	  items.sort(function(a,b){
+	    if(a.priority > b.priority) return -1;
+	    if(a.priority < b.priority) return 1;
+	    if(a.revenue > b.revenue) return -1;
+	    if(a.revenue < b.revenue) return 1;
+	    return 0;
+	  });
+  }
+  else if (entityType == "meeting"){
+	  items.sort(function(a,b){
+	    if(a.subject < b.subject) return -1;
+	    if(a.subject > b.subject) return 1;
+	    return 0;
+	  });
+  }
+  else if (entityType == "call"){
+	  items.sort(function(a,b){
+	    if(a.subject < b.subject) return -1;
+	    if(a.subject > b.subject) return 1;
+	    return 0;
+	  });
+  }
+  
   
   // apply search criterion, if specified.
   var len = items.length;
@@ -535,26 +617,68 @@ function updateList(entityType, searchField1, searchValue1, searchField2, search
     ) {
       continue;
     }
+    else if (searchField1 && searchValue1 && searchField2 && searchValue2 && searchField3 && searchValue3 &&
+      (item[searchField1] != searchValue1 || item[searchField2] != searchValue2 || item[searchField3] != searchValue3)
+    ) {
+      continue;
+    }
+	
+	// Display only top 4 entries for home page list
+	
+	if ((ul == "topLeadsUL" || ul == "upcomingMeetingsUL") && (i > 3)) {
+		continue;
+	}
+	
 	 
     // Otherwise add to list
     var liText = "";
     if (entityType == "contact") {
-      liText = item.last_name + ", " + item.first_name;
+	  if (deviceType == "tablet") {
+	  	liText = item.first_name + "  " + item.last_name + " " + item.phone + " " + item.contactEMail;
+	  }	
+	  else {
+	  	liText = item.first_name + "  " + item.last_name;
+	  }      
     } 
 	else if (entityType == "account"){
-      liText = item.account_name;
+	  if (deviceType == "tablet") {	
+        liText = item.account_name + " " + item.phone + " " + item.accountEMail;
+	  }
+	  else {
+	  	liText = item.account_name;
+	  }	
     }
 	else if (entityType == "opportunity"){
-      liText = item.opportunity_name;
+	  if (deviceType == "tablet") {	
+        liText = item.opportunity_name + "  " + item.amount + " " + item.probability + " " + item.priority;
+      }
+	  else {
+	  	liText = item.opportunity_name;
+	  }
     }
 	else if (entityType == "lead"){
-      liText = item.company;
+	  if (deviceType == "tablet") {	
+        liText = item.company + " " + item.first_name + "  " + item.last_name + " " + item.priority;
+      }
+      else {
+  	    liText = item.first_name + "  " + item.last_name;
+      }
     }
 	else if (entityType == "meeting"){
-      liText = item.subject;
+	  if (deviceType == "tablet") {		
+        liText = item.subject + "  " + item.start_date + "  " + item.meeting_status;
+	  }
+	  else {
+	  	liText = item.subject;
+	  }
     }
 	else if (entityType == "call"){
-      liText = item.subject;
+  	  if (deviceType == "tablet") {		
+          liText = item.subject + "  " + item.call_date + "  " + item.call_status;
+  	  }
+  	  else {
+  	  	liText = item.subject;
+  	  }
     }
 	// Clicking on a list item displays the edit screen
     ul.append(
@@ -605,15 +729,133 @@ function editEntity(entityType, entityId) {
     }
   }
 
+  // When a user clicks on acal from the lead entry or contact entry view  
+  if (entityType == "call" && $("#contactEntry").is(':visible')) {
+  	$("#contactEntry").hide();
+	$.mobile.changePage( "callPage.html", { transition: "none"});
+	
+	setTimeout(function(){editCall(entityId);}, 500);
+	return;
+	
+	
+  }
+  if (entityType == "call" && $("#leadEntry").is(':visible')) {
+  	$("#leadEntry").hide();
+	$.mobile.changePage( "callPage.html", { transition: "none"});
+	
+	setTimeout(function(){editCall(entityId);}, 500);
+	
+	return;
+	
+  }
+  
+  if (entityType == "lead" && $("#homePage").is(':visible')) {
+  	// $("#leadEntry").hide();
+	$.mobile.changePage( "leadPage.html", { transition: "none"});
+	
+	setTimeout(function(){editHomePageEntity(entityType, entityId);}, 500);
+	
+	return;
+	
+  }
+  
+  if (entityType == "meeting" && $("#homePage").is(':visible')) {
+  	// $("#leadEntry").hide();
+	$.mobile.changePage( "meetingPage.html", { transition: "none"});
+	
+	setTimeout(function(){editHomePageEntity(entityType, entityId);}, 500);
+	
+	return;
+	
+  }
+  
   // Close the list view and display entry form
-  $("#" + entityType + "Entry").show();
-  $("#" + entityType + "List").hide();
-  $("#" + entityType + "Menu" ).popup("close");
+  if(!$("#" + entityType + "Entry").is(':visible')){
+    $("#" + entityType + "Entry").show();
+  }
+  if($("#" + entityType + "List").is(':visible')){
+      $("#" + entityType + "List").hide();
+  }
+  
+  if($("#" + entityType + "Menu" ).hasClass('ui-popup-active')){
+      $("#" + entityType + "Menu" ).popup("close");
+  }
+  
+  
+  // List related calls for contacts and leads
+  
+  if (entityType =='contact') {
+	  
+	  var first_name = entity["first_name"];
+	  var last_name = entity["last_name"];
+	  var related_to = "Contact";
+	  updateList('callListULContact', 'call', 'tablet', 'last_name', last_name, 'first_name', first_name, 'related_to', related_to);
+  }
+  else if (entityType =='lead') {
+	  var first_name = entity["first_name"];
+	  var last_name = entity["last_name"];
+	  var related_to = "Lead"; 
+	  updateList('callListULLead', 'call', 'tablet', 'last_name', last_name, 'first_name', first_name, 'related_to', related_to);
+  }
 
   // Reenable delete button 
   $("#" + entityType + "DeleteButton").button("enable");
 
 } // End editEntity().
+
+
+// Edit a call from within the lead and contact detail forms
+
+function editCall(entityId) {
+
+  // Save the entity Id
+  documentId = entityId;
+
+  // Fetch the entity from local storage
+  var entity = JSON.parse(window.localStorage.getItem("call_" + entityId));
+  // Loop through the object and populate the form except for the _v and _id fields
+  for (field in entity) {
+    if (field != "_id" && field != "__v") {
+      $("#callEntryForm [name=" + field + "]").val(entity[field]).trigger("change");
+    }
+  }
+  
+  $("#callEntry").show();
+  $("#callList").hide();
+  $("#callMenu" ).popup("close");
+  
+  
+  // Reenable delete button 
+  $("#callDeleteButton").button("enable");
+
+} // End editCall().
+
+// Edit a lead or meeting from the home page
+
+function editHomePageEntity(entityType, entityId) {
+
+  // Save the entity Id
+  documentId = entityId;
+
+  // Fetch the entity from local storage
+  var entity = JSON.parse(window.localStorage.getItem(entityType + "_" + entityId));
+  // Loop through the object and populate the form except for the _v and _id fields
+  for (field in entity) {
+    if (field != "_id" && field != "__v") {
+      $("#" + entityType + "EntryForm [name=" + field + "]").val(entity[field]).trigger("change");
+    }
+  }
+  
+  $("#" + entityType + "Entry").show();
+  $("#" + entityType + "List").hide();
+  $("#" + entityType + "Menu" ).popup("close");
+  
+  
+  // Reenable delete button 
+  $("#" + entityType + "DeleteButton").button("enable");
+
+} // End editHomePageEntity().
+
 
 
 // Clears all data from the server as well as local storage 

@@ -18,16 +18,7 @@
     <!-- Note: main.js must come before JQM to set defaults properly. -->
     
     <!-- <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script> -->
-    <script type="text/javascript">
-		$(document).on('pagebeforeshow', function() {
-    		displayDate();
-		});
-  	    
-		function displayDate() {
-			var d = new Date();
-			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
-		}
-     </script>
+    
 
   </head>
   <body>
@@ -36,13 +27,32 @@
 <div data-role="page" id="accountPage" data-dom-cache="true">
 
   <script type="text/javascript">
+    var deviceType = "";
+	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+	if (width <= 640) {
+		deviceType = "phone";
+	}
+	else {
+		deviceType = "tablet";
+	}
+	/*
+	if(window.styleMedia.matchMedium("screen and (max-width: 480px)")){
+	    deviceType = "phone";
+	}
+	else {
+		deviceType = "tablet"
+	}
+	*/
     $(document).delegate("#accountPage", "pageshow", function(inEvent) {
-      initialPageLoad("account");
+      initialPageLoad("account", deviceType);
 	  displayDate();
     });
 	function displayDate() {
 		var d = new Date();
 		document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
+	}
+	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
+		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2);
 	}
   </script>
 
@@ -86,7 +96,7 @@
           
 		  <input type="text" name="search_by_name" id="search_by_name" >
 	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateList('account', 'account_name', search_by_name.value);" id="accountSaveButton">Search</button>
+	        onClick="updateListLocal('accountListUL', 'account', 'account_name', search_by_name.value);" id="accountSaveButton">Search</button>
         </form>
       </div>
 
