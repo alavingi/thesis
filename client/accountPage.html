@@ -57,6 +57,7 @@
   </script>
 
   <!-- Menu. -->
+  
   <div data-role="popup" id="accountMenu">
     <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
       data-theme="b">
@@ -66,16 +67,29 @@
       </li>
     </ul>
   </div>
-
+  
+  	  
+	  
   <!-- Header. -->
   <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
+	
 	<img border="0" src="img/logo.png" alt="Logo" height="140" width="140" style="float:left;display:inline;text-align:right;margin-left:100px"/>
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Customer Accounts</h1>
+	
+	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
+	       
+	  <a id="accountListButton" href="javascript:displayListView('account');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Accounts</a>
+	  <a id="accountNewButton" href="javascript:newItem('account');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Account</a>
+	 </div>
+	
+	<!-- 
     <a href="#accountMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+	-->
+	
 	<br>
 	<div id="dateAndTimeA" style="text-align:center"></div>  
   </div>

@@ -68,8 +68,17 @@
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Opportunities</h1>
+	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
+	       
+	 <a id="opportunityListButton" href="javascript:displayListView('opportunity');" data-role='button' data-inline="true" data-mini="true"  
+	   data-theme="b">List Opportunities</a>
+	  <a id="opportunityNewButton" href="javascript:newItem('opportunity');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Opportunity</a>
+	 </div>
+	
+	<!--
     <a href="#opportunityMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+	-->	
 	<br>
 	<div id="dateAndTimeO" style="text-align:center"></div>  
   </div>
@@ -147,7 +156,7 @@
 	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
         <button type="button" data-theme="b" data-icon="plus"
           onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
-        <button type="button" data-theme="b" data-icon="alert"
+        <button type="button" data-theme="b" data-icon="gear"
           onClick="scoreOpportunity();" id="opportunityScoreButton">Score Opportunity</button>	
         <button type="button" data-theme="b" data-icon="minus"
           onClick="deleteEntity('opportunity');" id="opportunityDeleteButton" disabled>Delete</button>

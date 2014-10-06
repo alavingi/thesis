@@ -26,7 +26,7 @@
     <!-- ================================================================== -->
     <!-- HOME PAGE                                                          -->
     <!-- ================================================================== -->
-    <div data-role="page" id="homePage">
+    <div data-role="page" id="homePage" >
   	
 	<script type="text/javascript">
       
@@ -54,14 +54,28 @@
   	  }
   	</script>	
       <!-- About panel. -->
-      <div data-role="panel" data-position="right" data-display="overlay"
+      <div data-role="panel" data-position="right" data-display="overlay" data-theme="b"
         id="aboutPanel">
         <h2>Contact Manager</h2>
         <br>
 	    <div class="cssHomeAboutSection">Navbar icons from</div>
 	    <a href="http://www.glyphish.com">Glyphish</a><br>
-        <button data-icon="alert" data-theme="b"
-          onClick="$.mobile.changePage('#confirmClear');">Clear Data</button>
+	   <ul data-role="listview" data-inset="true"  data-theme="b"
+          id="settingsUL">
+	   <li>Settings
+	       <ul data-display="overlay">
+	         <li>Options
+	            <ul>
+	               <!-- <li><a href="index.html">Canary</a></li> -->
+			        <li><button data-icon="alert" data-theme="b"
+			          onClick="$.mobile.changePage('#confirmClear');">Clear Data</button> </li>                      
+	            </ul>
+			</ul>
+	    </li>	  
+        
+       <!--  <button data-icon="edit" data-theme="b"
+          onClick="setGlobalTheme('e')">Change Theme</button> -->
+	  </ul>	   
       </div>
 
       <!-- Header. -->
@@ -119,7 +133,7 @@
           <ul>
             <li><a href="accountPage.html" class="linkAccountPage"
               data-icon="custom" data-prefetch="true"
-              data-iconpos="left"></a></li>
+              data-iconpos="notext"></a></li>
             <li><a href="contactPage.html" class="linkContactPage"
               data-icon="custom" data-prefetch="true"
               data-iconpos="notext"></a></li>

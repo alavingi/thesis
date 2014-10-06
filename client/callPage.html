@@ -68,8 +68,17 @@
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Calls</h1>
+	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
+	       
+	 <a id="callListButton" href="javascript:displayListView('call');" data-role='button' data-inline="true" data-mini="true"  
+	   data-theme="b">List Calls</a>
+	  <a id="callNewButton" href="javascript:newItem('call');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Call</a>
+	 </div>
+	
+	<!--
     <a href="#callMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+    -->		
 	<br>
 	<div id="dateAndTimeCa" style="text-align:center"></div>  
   </div>

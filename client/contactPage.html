@@ -70,8 +70,16 @@
     <a href="index.html" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Contacts</h1>
+	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
+	       
+	  <a id="contactListButton" href="javascript:displayListView('contact');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Contacts</a>
+	  <a id="contactNewButton" href="javascript:newItem('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Contact</a>
+	 </div>
+	
+	<!--
     <a href="#contactMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
+	-->	
 	<br>
 	<div id="dateAndTimeC" style="text-align:center"></div>  
   </div>
