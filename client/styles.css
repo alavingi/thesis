@@ -137,6 +137,15 @@
 
 @media all and (max-width: 640px) {
 	
+	.headerLogo {
+		width : 40px;
+		height : 40px;  
+		float:left;
+		display:inline;
+		text-align:right;
+		margin-left:100px;
+	}
+	
 	.listHeader {
 		
 		font-size : 8px;
@@ -171,7 +180,16 @@
 	}
 }
 
-@media all and (min-width: 800px) {
+@media all and (min-width: 700px) {
+	
+	.headerLogo {
+		width : 120px;
+		height : 120px;  
+		float:left;
+		display:inline;
+		text-align:right;
+		margin-left:100px;
+	}
 	
 	.accountEntry,
 	.opportunityEntry,
@@ -189,10 +207,11 @@
 	        table-layout : fixed;
 	    }
 
-
+		/*
 	    td {
 	        width : 300px
 	    }
+		*/
 	select {
 		font-size : 16px;
 		font-weight : bold;

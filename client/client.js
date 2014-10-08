@@ -423,7 +423,7 @@ var validations = {
     if (!last_name) { return false; }
 	
 	if (phone && !phoneregex.test(phone)) { return false; }
-	if (eMail && !emailregex.test(email)) { return false; }
+	if (email && !emailregex.test(email)) { return false; }
 	if (birthDate && !birthdateregex.test(birthDate)) { return false; }
 	if (zipcode && !zipregex.test(zipcode)) { return false; }
 	
@@ -660,33 +660,33 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
 	    return 0;
 	  });
   }
-  
-  if (listName == "topLeadsUL") {
-	ul.append("<table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
-  }
-  else if (listName == "upcomingMeetingsUL") {
-	ul.append("<table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
-  }
-  else if (listName == "accountListUL") {
-	// ul.append("<span class='listHeader'> Account Name  Phone  Email</span>");
-	ul.append("<table class='listHeader'><tr><td>Account Name</td><td>Phone</td><td>Email</td></tr></table>");
-  }
-  else if (listName == "contactListUL") {
-	ul.append("<table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Phone</td><td>Email</td></tr></table>");
-  }
-  else if (listName == "leadListUL") {
-	ul.append("<table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
-  }
-  else if (listName == "opportunityListUL") {
-	ul.append("<table class='listHeader'><tr><td>Name</td><td>Amount</td><td>Probability</td><td>Priority</td></tr></table>");
-  }
-  else if (listName == "meetingListUL") {
-	ul.append("<table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
-  }
-  else if (listName == "callListUL" || listName == "callListULContact" || listName == "callListULLead") {
-	ul.append("<table class='listHeader'><tr><td>Subject</td><td>Call Date</td><td>First Name</td><td>Last Name</td></tr></table>");
-  }
-  
+  if (deviceType == "tablet") {
+    if (listName == "topLeadsUL") {
+	  ul.append("<table><tr><td colspan='3'><div style='font-weight:bold;text-decoration: underline;'><h4>TOP LEADS</h4><br></div></td></tr></table><table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
+    }
+    else if (listName == "upcomingMeetingsUL") {
+	  ul.append("<table><tr><td colspan='3'><div style='font-weight:bold;text-decoration: underline;'><h4>UPCOMING MEETINGS</h4><br></div></td></tr></table><table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
+    }
+    else if (listName == "accountListUL") {
+	  // ul.append("<span class='listHeader'> Account Name  Phone  Email</span>");
+	  ul.append("<table class='listHeader'><tr><td>Account Name</td><td>Phone</td><td>Email</td></tr></table>");
+    }
+    else if (listName == "contactListUL") {
+	  ul.append("<table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Phone</td><td>Email</td></tr></table>");
+    }
+    else if (listName == "leadListUL") {
+	  ul.append("<table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
+    }
+    else if (listName == "opportunityListUL") {
+	  ul.append("<table class='listHeader'><tr><td>Name</td><td>Amount</td><td>Probability</td><td>Priority</td></tr></table>");
+    }
+    else if (listName == "meetingListUL") {
+	  ul.append("<table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
+    }
+    else if (listName == "callListUL" || listName == "callListULContact" || listName == "callListULLead") {
+	  ul.append("<table class='listHeader'><tr><td>Subject</td><td>Call Date</td><td>First Name</td><td>Last Name</td></tr></table>");
+    }
+  } 
   
   // apply search criterion, if specified.
   var len = items.length;
@@ -710,17 +710,17 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     }
 	
 	// Only display future meetings
-	if ((ul == "upcomingMeetingsUL") && (item.start_date < now)) {
+	if ((listName == "upcomingMeetingsUL") && (item.start_date < now)) {
 		continue;
 	}
 	
 	// Display only top 4 entries for home page list
-	if ((ul == "topLeadsUL" || ul == "upcomingMeetingsUL") && (i > 3)) {
+	if ((listName == "topLeadsUL" || ul == "upcomingMeetingsUL") && (i > 3)) {
 		continue;
 	}
 	
 	// Do not display closed leads on home page
-	if ((ul == "topLeadsUL") && (item.lead_status == "Closed")) {
+	if ((listName == "topLeadsUL") && (item.lead_status == "Closed")) {
 		continue;
 	}
 	

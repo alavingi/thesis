@@ -31,11 +31,22 @@
 	<script type="text/javascript">
       
       $(document).on("pageshow", "#homePage", function(e) { 
-		  
+	      var deviceType = "";
+		  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+		  if (width <= 640) {
+			  deviceType = "phone";
+		  }
+		  else {
+			  deviceType = "tablet";
+		  }
+		  alert(width);  
 	    displayDate();
 		displayData();
-		updateList('topLeadsUL', 'lead', 'tablet');
-		updateList('upcomingMeetingsUL', 'meeting', 'tablet');
+		if (deviceType == "tablet") {
+			updateList('topLeadsUL', 'lead', deviceType);
+			updateList('upcomingMeetingsUL', 'meeting', deviceType);
+		}
+		
       });
 	  
   	  function displayDate() {
@@ -83,7 +94,7 @@
         <div class="ui-loader-background"></div>
 		
         
-		<img border="0" src="img/logo.png" alt="Logo" height="140" width="140" style="float:left;display:inline;text-align:right;margin-left:100px"/>  
+		<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>  
         <button class="cssHomeButton" data-icon="home"
           disabled="disabled">Home</button>
 		<h1>Contact Manager!</h1>
@@ -106,12 +117,13 @@
 		       <a href="javascript:newItem('account');" data-role='button' data-mini="true">New Account</a>
 		   
 		</div>
-		<div data-role="controlgroup" data-type="horizontal" class="cssHomeMenuTablet">
-		   
+		<div class="cssHomeMenuTablet" style="width:80%;margin-left:auto;margin-right:auto;">
+		    <div data-role="controlgroup" data-type="horizontal" style="marging-left:auto;margin-right:auto;">
 		       <a href="javascript:displayListView('contact');" data-role='button'>List Contacts</a>
 		       <a href="javascript:newItem('contact');" data-role='button'>New Contact</a>
 		       <a href="javascript:displayListView('account');" data-role='button'>List Accounts</a>
 		       <a href="javascript:newItem('account');" data-role='button'>New Account</a>
+		    </div>
 			   <br>
 			   <br>
 			   <br>
@@ -122,8 +134,8 @@
 			   <br>	 
 	           <ul data-role="listview" data-inset="true"
 	             id="upcomingMeetingsUL"></ul>
-		   
-		</div>
+		  </div> 
+		
       </div>
 
       <!-- Footer. -->
@@ -131,22 +143,22 @@
         <div class="ui-loader-background"></div>
         <div data-role="navbar" class="cssNavBar">
           <ul>
-            <li><a href="accountPage.html" class="linkAccountPage"
+            <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
               data-icon="custom" data-prefetch="true"
               data-iconpos="notext"></a></li>
-            <li><a href="contactPage.html" class="linkContactPage"
+            <li><a href="contactPage.html" class="linkContactPage" title="Contact Page"
               data-icon="custom" data-prefetch="true"
               data-iconpos="notext"></a></li>
-            <li><a href="opportunityPage.html" class="linkOpportunityPage"
+            <li><a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page"
               data-icon="custom" data-prefetch="true"
               data-iconpos="notext"></a></li>
-            <li><a href="leadPage.html" class="linkLeadPage"
+            <li><a href="leadPage.html" class="linkLeadPage" title="Lead Page"
               data-icon="custom" data-prefetch="true"
               data-iconpos="notext"></a></li>
-            <li><a href="meetingPage.html" class="linkMeetingPage"
+            <li><a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page"
               data-icon="custom" data-prefetch="true"
               data-iconpos="notext"></a></li>
-            <li><a href="callPage.html" class="linkCallPage"
+            <li><a href="callPage.html" class="linkCallPage" title="Call Page"
               data-icon="custom" data-prefetch="true"
               data-iconpos="notext"></a></li>  
           </ul>
