@@ -116,31 +116,31 @@
     </div>
 
     <!-- Entry view. -->
-    <div id="meetingEntry" style="display:none;">
+    <div id="meetingEntry" class="meetingEntry" style="display:none;">
 
     <form name="meetingEntryForm" id="meetingEntryForm">
 	  
       <label for="subject" class="cssRequired">Subject</label>
-      <input type="text" name="subject" id="subject"
+      <input type="text" name="subject" id="subject" title="Subject of the Meeting"
         data-clear-btn="true">
       
 	  
       <label for="start_date" >Start Date</label>
-      <input type="date" name="start_date" id="start_date"
+      <input type="date" name="start_date" id="start_date" title="Meeting Start Date MM/DD/YYYY"
         data-clear-btn="true">	
       <label for="end_date" >End Date</label>
-      <input type="date" name="end_date" id="end_date"
+      <input type="date" name="end_date" id="end_date" title="Meeting End Date MM/DD/YYYY"
         data-clear-btn="true">	
       
       <label for="duration">Duration</label>
-      <input type="number" name="duration" id="duration" data-clear-btn="true">
+      <input type="number" name="duration" id="duration"  title="Meeting Duration" data-clear-btn="true">
       <label for="description">Description</label>
-      <input type="text" name="description" id="description" data-clear-btn="true">
+      <input type="text" name="description" id="description" title="Meeting Description" data-clear-btn="true">
 	  	
       <label for="meeting_status" >Meeting Status</label>
       <!-- <input type="text" name="meeting_status" id="meeting_status"
         data-clear-btn="true"> -->
-	  <select name="meeting_status" id="meeting_status">
+	  <select name="meeting_status" id="meeting_status" title="Meeting Status">
 	    <option value="Planned">Planned</option>
 	    <option value="Completed">Completed</option>
 	    <option value="Not-held">Not-held</option>
@@ -148,15 +148,15 @@
       <label for="related_to" >Related To</label>
       <!-- <input type="text" name="related_to" id="related_to"
         data-clear-btn="true"> -->
-	  <select name="related_to" id="related_to">
+	  <select name="related_to" id="related_to" title="Related To">
 	    <option value="Lead">Lead</option>
 	    <option value="Contact">Contact</option>
 	  </select>	
       <label for="first_name">First Name</label>
-      <input type="text" name="first_name" id="first_name"
+      <input type="text" name="first_name" id="first_name" title="First Name"
         data-clear-btn="true">
       <label for="last_name">Last Name</label>
-      <input type="text" name="last_name" id="last_name"
+      <input type="text" name="last_name" id="last_name" title="Last Name"
         data-clear-btn="true">
       	
       
@@ -179,16 +179,16 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="accountPage.html" class="linkAccountPage"
+        <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
           data-icon="custom" data-iconpos="notext"></a></li>
         <li><a href="contactPage.html"
-          class="linkContactPage ui-btn-active ui-state-persist"
+          class="linkContactPage ui-btn-active ui-state-persist" title="Contact Page"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="linkOpportunityPage"
+        <li><a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="linkLeadPage"
+        <li><a href="leadPage.html" class="linkLeadPage" title="Lead Page"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="linkCallPage"
+        <li><a href="callPage.html" class="linkCallPage" title="Call Page"
           data-icon="custom" data-iconpos="notext"></a></li>
       </ul>
     </div>

@@ -25,7 +25,7 @@ var schemas = {
 	last_name : "string",
 	title : "string", 
 	birth_date : "date", 
-	account_id : "number", 
+	account_name : "string", 
 	department : "string", 
 	phone : "string",
 	contactEMail : "string", 
@@ -37,12 +37,11 @@ var schemas = {
   }),
   opportunity : mongoose.Schema({
 	opportunity_name : "string",
-	account_id : "number", 
-	assigned_to : "string",
+	account_name : "string", 
 	amount : "number", 
 	sales_stage : "string",
 	probability : "number",
-	priority : "number"
+	priority : "string"
   }),
   lead : mongoose.Schema({
     company : "string", 
@@ -52,7 +51,7 @@ var schemas = {
 	industry : "string",
 	revenue : "number", 
 	employees : "number",
-	priority : "number"
+	priority : "string"
   }),
   meeting : mongoose.Schema({
 	subject : "string", 

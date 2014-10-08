@@ -69,6 +69,7 @@
 }
 .linkOpportunityPage .ui-icon {
   background : url(img/37-suitcase.png) center no-repeat;
+ 
 }
 .linkLeadPage .ui-icon {
   background : url(img/33-cabinet.png) center no-repeat;
@@ -131,9 +132,6 @@
 	position: fixed;
 }
 
-.listHeader {
-	
-}
 
 /* Responsive web design */
 
@@ -144,6 +142,7 @@
 		font-size : 8px;
 		font-weight : bold;
 		color : blue;
+		
 	}
 	
 	.cssHomeCounts {
@@ -174,10 +173,35 @@
 
 @media all and (min-width: 800px) {
 	
+	.accountEntry,
+	.opportunityEntry,
+	.callEntry,
+	.meetingEntry {
+		width : 50%;
+		margin-left: auto; 
+		margin-right: auto;
+		text-align : left;
+	}
+	
+	
+	table {
+	        width : 100%;
+	        table-layout : fixed;
+	    }
+
+
+	    td {
+	        width : 300px
+	    }
+	select {
+		font-size : 16px;
+		font-weight : bold;
+	}	
+	
 	.listHeader {
 		font-size : 18px;
 		font-weight : bold;
-		/* color : blue; */
+		color : blue;
 	}
 	
 	.cssHomeCounts {

@@ -119,36 +119,37 @@
     <form name="leadEntryForm" id="leadEntryForm">
 	  
       <label for="company" class="cssRequired">Company</label>
-      <input type="text" name="company" id="company"
+      <input type="text" name="company" id="company" title="Company"
         data-clear-btn="true">
       
 	  
       <label for="first_name" >First Name</label>
-      <input type="text" name="first_name" id="first_name"
+      <input type="text" name="first_name" id="first_name" title="Lead First Name"
         data-clear-btn="true">	
       <label for="last_name" >Last Name</label>
-      <input type="text" name="last_name" id="last_name"
+      <input type="text" name="last_name" id="last_name" title="Lead Last Name"
         data-clear-btn="true">	
       
       <label for="lead_status">Lead Status</label>
-      <!-- <input type="text" name="lead_status" id="lead_status" data-clear-btn="true"> -->
-	  <select name="lead_status" id="lead_status">
+      
+	  <select name="lead_status" id="lead_status" title="Lead Status"> 
 	    <option value="New">New</option>
 	    <option value="In-process">In-process</option>
 	    <option value="Converted">Converted</option>
 	    <option value="Closed">Closed</option>
-	  </select>
+	  </select> 
+      
       <label for="industry">Industry</label>
-      <input type="text" name="industry" id="industry" data-clear-btn="true">
+      <input type="text" name="industry" id="industry"  title="Lead's Industry" data-clear-btn="true">
 	  	
       <label for="revenue" >Revenue</label>
-      <input type="number" name="revenue" id="revenue"
+      <input type="number" name="revenue" title="Lead Company Total Revenue" id="revenue"
         data-clear-btn="true">
       <label for="employees" >Employees</label>
-      <input type="number" name="employees" id="employees"
+      <input type="number" name="employees" id="employees" title="Lead Company Total Employees"
         data-clear-btn="true">
       <label for="priority" >Priority</label>
-      <input type="text" name="priority" id="priority"
+      <input type="text" name="priority" id="priority" title="Lead Priority"
         data-clear-btn="true">	
             
       <!-- Buttons. -->
@@ -179,17 +180,17 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="accountPage.html" class="linkAccountPage"
+        <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
           data-icon="custom" data-iconpos="notext"></a></li>
         <li><a href="contactPage.html"
-          class="linkContactPage ui-btn-active ui-state-persist"
+          class="linkContactPage""  title="Contact Page" ui-btn-active ui-state-persist"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="linkOpportunityPage"
+        <li><a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page"
           data-icon="custom" data-iconpos="notext"></a></li>
         
-        <li><a href="meetingPage.html" class="linkMeetingPage"
+        <li><a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="linkCallPage"
+        <li><a href="callPage.html" class="linkCallPage" title="Call Page"
           data-icon="custom" data-iconpos="notext"></a></li>
       </ul>
     </div>

@@ -114,27 +114,23 @@
     </div>
 
     <!-- Entry view. -->
-    <div id="opportunityEntry" style="display:none;">
+    <div id="opportunityEntry" class="opportunityEntry" style="display:none;">
 
     <form name="opportunityEntryForm" id="opportunityEntryForm">
 	  
       <label for="opportunity_name" class="cssRequired">Opportunity Name</label>
-      <input type="text" name="opportunity_name" id="opportunity_name"
+      <input type="text" name="opportunity_name" id="opportunity_name" title="Name of the Opportunity"
         data-clear-btn="true">
       
 	  
-      <label for="account_id" >Account Id</label>
-      <input type="text" name="account_id" id="account_id"
+      <label for="account_name" >Customer Account Name</label>
+      <input type="text" name="account_name" id="account_name" title="Customer Account Name"
         data-clear-btn="true">	
-      <label for="assigned_to" >Assigned To</label>
-      <input type="text" name="assigned_to" id="assigned_to"
-        data-clear-btn="true">	
-      
       <label for="amount">Opportunity Amount</label>
-      <input type="number" name="amount" id="amount" data-clear-btn="true">
+      <input type="number" name="amount" id="amount" title="Opportunity Amount" data-clear-btn="true">
       <label for="sales_stage">Sales Stage</label>
       <!-- <input type="text" name="sales_stage" id="sales_stage" data-clear-btn="true"> -->
-	  <select name="sales_stage" id="sales_stage">
+	  <select name="sales_stage" id="sales_stage" title="Sales Stage">
 	    <option value="Prospect">Prospect</option>
 	    <option value="Qualified">Qualified</option>
 	    <option value="Proposal">Proposal</option>
@@ -144,11 +140,11 @@
 	  </select>	
       
       <label for="probability" >Probability</label>
-      <input type="number" name="probability" id="probability"
+      <input type="number" name="probability" id="probability" title="Probability of Closing"
         data-clear-btn="true">
 		
       <label for="priority" >Priority</label>
-      <input type="text" name="priority" id="priority"
+      <input type="text" name="priority" id="priority" title="Opportunity Priority"
         data-clear-btn="true">	
       
             
@@ -172,16 +168,16 @@
     <div class="ui-loader-background"></div>
     <div data-role="navbar" class="cssNavBar">
       <ul>
-        <li><a href="accountPage.html" class="linkAccountPage"
+        <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
           data-icon="custom" data-iconpos="notext"></a></li>
         <li><a href="contactPage.html"
-          class="linkContactPage ui-btn-active ui-state-persist"
+          class="linkContactPage ui-btn-active ui-state-persist" title="Contact Page"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="linkLeadPage"
+        <li><a href="leadPage.html" class="linkLeadPage" title="Lead Page"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html" class="linkMeetingPage"
+        <li><a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page"
           data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="linkCallPage"
+        <li><a href="callPage.html" class="linkCallPage" title="Call Page"
           data-icon="custom" data-iconpos="notext"></a></li>
       </ul>
     </div>

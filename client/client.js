@@ -390,7 +390,7 @@ var validations = {
 	var phone = $("#phone").val();
 	var email = $("#accountEMail").val();
 	var url = $("#url").val();
-	var zipcode = $("#zipcode").val();
+	var zipcode = $("#zip").val();
 	var accountName = $("#account_name").val();;
 	
 	if (!accountName) { return false; }
@@ -415,15 +415,17 @@ var validations = {
 	var phone = $("#phone").val();
 	var email = $("#contactEMail").val();
 	var birthDate = $("#birthDate").val();
-	var zipcode = $("#zipcode").val();
+	var zipcode = $("#zip").val();
+	var first_name = $("#first_name");
+	var last_name = $("#last_name");
 	  
-    if (isEmpty("first_name")) { return false; }
-    if (isEmpty("last_name")) { return false; }
+    if (!first_name) { return false; }
+    if (!last_name) { return false; }
 	
-	if (!isEmpty("phone") && !phoneregex.test(phone)) { return false; }
-	if (!isEmpty("contactEMail") && !emailregex.test(email)) { return false; }
-	if (!isEmpty("birthDate") && !birthdateregex.test(birthDate)) { return false; }
-	if (!isEmpty("zipcode") && !zipregex.test(zipcode)) { return false; }
+	if (phone && !phoneregex.test(phone)) { return false; }
+	if (eMail && !emailregex.test(email)) { return false; }
+	if (birthDate && !birthdateregex.test(birthDate)) { return false; }
+	if (zipcode && !zipregex.test(zipcode)) { return false; }
 	
     return true;
   },
@@ -433,12 +435,12 @@ var validations = {
    */
   check_opportunity : function() {
 	var amountregex = /[0-9 -()+]+$/;  
-	
+	var opportunity_name = $("#opportunity_name");
 	var amount = $("#amount").val(); 
 	  
-    if (isEmpty("opportunity_name")) { return false; }
+    if (!opportunity_name) { return false; }
 	
-	if (!isEmpty("amount") && !amountregex.test(amount)) { return false; }
+	if (amount && !amountregex.test(amount)) { return false; }
     
     return true;
   },
@@ -451,12 +453,14 @@ var validations = {
 	var employeesregex = /[0-9 -()+]+$/; 
 	
   	var revenue = $("#revenue").val();
-	var employees = $("#employees").val();    
+	var employees = $("#employees").val();  
+	var company = $("#company").val();  
 	  
-    if (isEmpty("company")) { return false; }
+    if (!company) { return false; }
 	
-	if (!isEmpty("revenue") && !revenueregex.test(revenue)) { return false; }
-	if (!isEmpty("employees") && !employeesregex.test(employees)) { return false; }
+	if (revenue && !revenueregex.test(revenue)) { return false; }
+	if (employees && !employeesregex.test(employees)) { return false; }
+	
     return true;
   },
   
@@ -470,12 +474,13 @@ var validations = {
 	var startDate = $("#start_date").val();
 	var endDate = $("#end_date").val();
 	var duration = $("#duration").val();
+	var subject = $("#subject").val();
 	  
-    if (isEmpty("subject")) { return false; }
+    if (!subject) { return false; }
 	
-	if (!isEmpty("start_date") && !dateregex.test(startDate)) { return false; }
-	if (!isEmpty("end_date") && !dateregex.test(endDate)) { return false; }
-	if (!isEmpty("duration") && !durationregex.test(duration)) { return false; }
+	if (start_date && !dateregex.test(startDate)) { return false; }
+	if (end_date && !dateregex.test(endDate)) { return false; }
+	if (duration && !durationregex.test(duration)) { return false; }
     
     return true;
   },
@@ -489,11 +494,12 @@ var validations = {
 	
   	var callDate = $("#call_date").val();
   	var duration = $("#duration").val();
+	var subject = $("#subject").val();
 	  
-    if (isEmpty("subject")) { return false; }
+    if (!subject) { return false; }
 	
-  	if (!isEmpty("call_date") && !dateregex.test(callDate)) { return false; }
-  	if (!isEmpty("duration") && !durationregex.test(duration)) { return false; }
+  	if (call_date && !dateregex.test(callDate)) { return false; }
+  	if (duration && !durationregex.test(duration)) { return false; }
 	
     return true;
   }
@@ -596,34 +602,13 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
   // First clear the list
   var ul = $("#" + listName);
   ul.children().remove();
-  if (listName == "topLeadsUL") {
-	ul.append("<span class='listHeader'> Company  First Name  Last Name  Priority</span>");
-  }
-  else if (listName == "upcomingMeetingsUL") {
-	ul.append("<span class='listHeader'> Subject  Start Date  Status</span>");
-  }
-  else if (listName == "accountListUL") {
-	// ul.append("<span class='listHeader'> Account Name  Phone  Email</span>");
-	ul.append("<table><tr><td>Account Name</td><td>Phone</td><td>Email</td></tr></table>");
-  }
-  else if (listName == "contactListUL") {
-	ul.append("<span class='listHeader'> First Name  Last Name  Phone  Email</span>");
-  }
-  else if (listName == "leadListUL") {
-	ul.append("<span class='listHeader'> Company  First Name  Last Name  Priority</span>");
-  }
-  else if (listName == "opportunityListUL") {
-	ul.append("<span class='listHeader'> Name  Amount  Probability  Priority</span>");
-  }
-  else if (listName == "meetingListUL") {
-	ul.append("<span class='listHeader'> Subject  Start Date  Status</span>");
-  }
-  else if (listName == "callListUL" || listName == "callListULContact" || listName == "callListULLead") {
-	ul.append("<span class='listHeader'> Subject  Call Date  Status</span>");
-  }
   
   // Copy from localStorage to memory.
   var items = copyToMemory(entityType);
+  if (items.length == 0){
+	  return;
+  }
+  
   if (entityType == "contact") {
 	  items.sort(function(a,b){
 	    if(a.last_name < b.last_name) return -1;
@@ -650,8 +635,12 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
   // Sort leads by priority and revenue
   else if (entityType == "lead"){
 	  items.sort(function(a,b){
-	    if(a.priority > b.priority) return -1;
-	    if(a.priority < b.priority) return 1;
+	    // if(a.priority > b.priority) return -1;
+	    // if(a.priority < b.priority) return 1;
+		if (a.priority == "HIGH" && (b.priority == "MEDIUM" || b.priority == "LOW")) return -1;
+		if (a.priority == "MEDIUM" && (b.priority == "LOW")) return -1;
+		if (a.priority == "LOW" && (b.priority == "MEDIUM" || b.priority == "HIGH")) return 1;
+		if (a.priority == "MEDIUM" && (b.priority == "HIGH")) return 1;
 	    if(a.revenue > b.revenue) return -1;
 	    if(a.revenue < b.revenue) return 1;
 	    return 0;
@@ -659,8 +648,8 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
   }
   else if (entityType == "meeting"){
 	  items.sort(function(a,b){
-	    if(a.subject < b.subject) return -1;
-	    if(a.subject > b.subject) return 1;
+	    if(a.start_date < b.start_date) return -1;
+	    if(a.start_date > b.start_date) return 1;
 	    return 0;
 	  });
   }
@@ -670,6 +659,32 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
 	    if(a.subject > b.subject) return 1;
 	    return 0;
 	  });
+  }
+  
+  if (listName == "topLeadsUL") {
+	ul.append("<table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
+  }
+  else if (listName == "upcomingMeetingsUL") {
+	ul.append("<table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
+  }
+  else if (listName == "accountListUL") {
+	// ul.append("<span class='listHeader'> Account Name  Phone  Email</span>");
+	ul.append("<table class='listHeader'><tr><td>Account Name</td><td>Phone</td><td>Email</td></tr></table>");
+  }
+  else if (listName == "contactListUL") {
+	ul.append("<table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Phone</td><td>Email</td></tr></table>");
+  }
+  else if (listName == "leadListUL") {
+	ul.append("<table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
+  }
+  else if (listName == "opportunityListUL") {
+	ul.append("<table class='listHeader'><tr><td>Name</td><td>Amount</td><td>Probability</td><td>Priority</td></tr></table>");
+  }
+  else if (listName == "meetingListUL") {
+	ul.append("<table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
+  }
+  else if (listName == "callListUL" || listName == "callListULContact" || listName == "callListULLead") {
+	ul.append("<table class='listHeader'><tr><td>Subject</td><td>Call Date</td><td>First Name</td><td>Last Name</td></tr></table>");
   }
   
   
@@ -700,8 +715,12 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
 	}
 	
 	// Display only top 4 entries for home page list
-	
 	if ((ul == "topLeadsUL" || ul == "upcomingMeetingsUL") && (i > 3)) {
+		continue;
+	}
+	
+	// Do not display closed leads on home page
+	if ((ul == "topLeadsUL") && (item.lead_status == "Closed")) {
 		continue;
 	}
 	
@@ -710,7 +729,7 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     var liText = "";
     if (entityType == "contact") {
 	  if (deviceType == "tablet") {
-	  	liText = item.first_name + "  " + item.last_name + " " + item.phone + " " + item.contactEMail;
+	  	liText = "<table><tr><td>" + item.first_name + "</td><td>" + item.last_name + "</td><td>" + item.phone + "</td><td>" + item.contactEMail + "</td></tr></table>";
 	  }	
 	  else {
 	  	liText = item.first_name + "  " + item.last_name;
@@ -719,7 +738,7 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
 	else if (entityType == "account"){
 	  if (deviceType == "tablet") {	
         // liText = item.account_name + " " + item.phone + " " + item.accountEMail;
-		liText = "<table><tr><td>" + item.account_name + "</td><td>" + item.phone + "</td><td>" + item.accountEmail + "</td></tr></table>";
+		liText = "<table><tr><td>" + item.account_name + "</td><td>" + item.phone + "</td><td>" + item.accountEMail + "</td></tr></table>";
 	  }
 	  else {
 	  	liText = item.account_name;
@@ -727,7 +746,7 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     }
 	else if (entityType == "opportunity"){
 	  if (deviceType == "tablet") {	
-        liText = item.opportunity_name + "  " + item.amount + " " + item.probability + " " + item.priority;
+        liText = "<table><tr><td>" + item.opportunity_name + "</td><td>" + item.amount + "</td><td>" + item.probability + "</td><td>" + item.priority + "</td></tr></table>";
       }
 	  else {
 	  	liText = item.opportunity_name;
@@ -735,7 +754,7 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     }
 	else if (entityType == "lead"){
 	  if (deviceType == "tablet") {	
-        liText = item.company + " " + item.first_name + "  " + item.last_name + " " + item.priority;
+        liText = "<table><tr><td>" + item.company + "</td><td>" + item.first_name + "</td><td>" + item.last_name + "</td><td>" + item.priority + "</td></tr></table>";
       }
       else {
   	    liText = item.first_name + "  " + item.last_name;
@@ -743,7 +762,7 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     }
 	else if (entityType == "meeting"){
 	  if (deviceType == "tablet") {		
-        liText = item.subject + "  " + item.start_date + "  " + item.meeting_status;
+        liText = "<table><tr><td>" + item.subject + "</td><td>" + item.start_date + "</td><td>" + item.meeting_status + "</td></tr></table>";
 	  }
 	  else {
 	  	liText = item.subject;
@@ -751,7 +770,7 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     }
 	else if (entityType == "call"){
   	  if (deviceType == "tablet") {		
-          liText = item.subject + "  " + item.call_date + "  " + item.call_status;
+          liText = "<table><tr><td>" + item.subject + "</td><td>" + item.call_date + "</td><td>" + item.first_name + "</td><td>" + item.last_name + "</td></tr></table>";
   	  }
   	  else {
   	  	liText = item.subject;
@@ -1027,6 +1046,8 @@ function isEmpty(htmlId) {
 // Score a lead
 function scoreLead() {
 	var distances = [];
+	var priorityMap = {LOW : 1, MEDIUM : 2, HIGH : 3};
+	var priorityReverseMap = {1 : "LOW", 2 : "MEDIUM", 3: "HIGH"};
 	var form = JSON.parse(convertFormToJSONString("lead"));
     // Copy from localStorage to memory.
     var items = copyToMemory("lead");
@@ -1038,7 +1059,7 @@ function scoreLead() {
 	  var distance = Math.sqrt(Math.pow((form.revenue - item.revenue), 2) / form.revenue + Math.pow((form.employees - item.employees), 2) / form.employees);
 	  var priority = 0;
 	  if (item.priority)
-	  	priority = item.priority;
+	  	priority = priorityMap[item.priority];
 	  var itemdistance = {dist:distance, prior:priority}
 	  distances.push(itemdistance);
 	  
@@ -1046,10 +1067,12 @@ function scoreLead() {
 	
 	// sort by distance
 	var sorted = distances.sort(function(a, b) {
-	   return a.value - b.value;
+	    if(a.dist < b.dist) return -1;
+	    if(a.dist > b.dist) return 1;
+	    return 0;
 	});
 
-	var keys = Object.keys(sorted);
+	// var keys = Object.keys(sorted);
 	//for (var i = 0, len = sorted.length; i < len; ++i) {
 	//    keys[i] = sorted[i].key;
 	// }
@@ -1057,8 +1080,13 @@ function scoreLead() {
 	// take the first three keys or neighbors
 	var priority1 = 0, priority2 = 0, priority3 = 0;
 	for (var i = 0; i < sorted.length; i++) {
-		var prior = Object.keys( sorted[i] )[ 1 ];
-		var priority = sorted[i][prior];
+		// Only consider 3 nearest neighbors
+		if (i > 2) {
+			break;
+		}
+		var item = sorted[i];
+		// var prior = Object.keys( sorted[i] )[ 1 ];
+		var priority = item["prior"];
 		if (priority == 1){
 			priority1++;
 		}
@@ -1071,14 +1099,18 @@ function scoreLead() {
 	}
 	
 	 var maxpriority =  Math.max(priority1, priority2, priority3);
-	 console.log("priority is : " + $("#priority").val());
-	 $("#priority").val(maxpriority);
+	 var priorityString = priorityReverseMap[maxpriority];
+	 
+	 // console.log("priority is : " + $("#priority").val());
+	 $("#priority").val(priorityString);
 	
 }
 
 // Score an opportunity
 function scoreOpportunity() {
 	var distances = [];
+	var priorityMap = {LOW : 1, MEDIUM : 2, HIGH : 3};
+	var priorityReverseMap = {1 : "LOW", 2 : "MEDIUM", 3: "HIGH"};
 	var form = JSON.parse(convertFormToJSONString("opportunity"));
     // Copy from localStorage to memory.
     var items = copyToMemory("opportunity");
@@ -1090,7 +1122,7 @@ function scoreOpportunity() {
 	  var distance = Math.sqrt(Math.pow((form.amount - item.amount), 2) / form.amount + Math.pow((form.probability - item.probability), 2) / form.probability);
 	  var priority = 0;
 	  if (item.priority)
-	  	priority = item.priority;
+	  	priority = priorityMap[item.priority];
 	  var itemdistance = {dist:distance, prior:priority}
 	  distances.push(itemdistance);
 	  
@@ -1098,10 +1130,12 @@ function scoreOpportunity() {
 	
 	// sort by distance
 	var sorted = distances.sort(function(a, b) {
-	   return a.value - b.value;
+	    if(a.dist < b.dist) return -1;
+	    if(a.dist > b.dist) return 1;
+	    return 0;
 	});
 
-	var keys = Object.keys(sorted);
+	// var keys = Object.keys(sorted);
 	//for (var i = 0, len = sorted.length; i < len; ++i) {
 	//    keys[i] = sorted[i].key;
 	// }
@@ -1109,8 +1143,13 @@ function scoreOpportunity() {
 	// take the first three keys or neighbors
 	var priority1 = 0, priority2 = 0, priority3 = 0;
 	for (var i = 0; i < sorted.length; i++) {
-		var prior = Object.keys( sorted[i] )[ 1 ];
-		var priority = sorted[i][prior];
+		// Only consider 3 nearest neighbors
+		if (i > 2) {
+			break;
+		}
+		var item = sorted[i];
+		// var prior = Object.keys( sorted[i] )[ 1 ];
+		var priority = item["prior"];
 		if (priority == 1){
 			priority1++;
 		}
@@ -1123,7 +1162,9 @@ function scoreOpportunity() {
 	}
 	
 	 var maxpriority =  Math.max(priority1, priority2, priority3);
-	 console.log("priority is : " + $("#priority").val());
-	 $("#priority").val(maxpriority);
-	 	
+	 var priorityString = priorityReverseMap[maxpriority];
+	 
+	 // console.log("priority is : " + $("#priority").val());
+	 $("#priority").val(priorityString);
+		 	
 }
