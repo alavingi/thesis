@@ -260,7 +260,7 @@ function copyToMemory(entityType) {
  * @param entityType The type of list to show.
  */
 function displayListView(entityType) {
-
+  $.mobile.changePage( entityType +"Page.html", { transition: "none"} );
   // Flip to list view and ensure menu is closed.
   $("#" + entityType + "Entry").hide("fast");
   $("#" + entityType + "List").show("fast");
@@ -272,7 +272,7 @@ function displayListView(entityType) {
   });
 
   documentId = null;
-  $.mobile.changePage( entityType +"Page.html", { transition: "none"} );
+  // $.mobile.changePage( entityType +"Page.html", { transition: "none"} );
   document.getElementById(entityType + "EntryForm").reset();
 
 } // End displayListView().
@@ -281,11 +281,14 @@ function displayListView(entityType) {
 // Insert or update an entity of a given type
 
 function saveEntity(entityType) {
-
+    var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
     var deviceType = "";
 	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
 	if (width <= 640) {
 		deviceType = "phone";
+	}
+	else if (width > 1040) {
+		deviceType = "desktop";
 	}
 	else {
 		deviceType = "tablet";
@@ -511,15 +514,17 @@ var validations = {
 // Delete an entity of a given type
  
 function deleteEntity(entityType) {
-	
-    var deviceType = "";
 	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+    var deviceType = "";
 	if (width <= 640) {
 		deviceType = "phone";
 	}
+	else if (width > 1040) {
+		deviceType = "desktop";
+	}
 	else {
 		deviceType = "tablet";
-	}	
+	}
 
   // Display waiting message
   $.mobile.loading("show");
@@ -569,7 +574,20 @@ function deleteEntity(entityType) {
 
 function initialPageLoad(entityType) {
 
+    
+
   if (!pageAlreadyVisited[entityType]) {
+	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;  
+    var deviceType = "";
+  	if (width <= 640) {
+  		deviceType = "phone";
+  	}
+  	else if (width > 1040) {
+  		deviceType = "desktop";
+  	}
+  	else {
+  		deviceType = "tablet";
+  	}  
     var listName = entityType + "ListUL";
     $.mobile.loading("show");
 
@@ -660,31 +678,66 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
 	    return 0;
 	  });
   }
-  if (deviceType == "tablet") {
-    if (listName == "topLeadsUL") {
+  if (deviceType == "tablet" || deviceType == "desktop") {
+    if (listName == "topLeadsUL" && deviceType == "desktop") {
 	  ul.append("<table><tr><td colspan='3'><div style='font-weight:bold;text-decoration: underline;'><h4>TOP LEADS</h4><br></div></td></tr></table><table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
     }
-    else if (listName == "upcomingMeetingsUL") {
-	  ul.append("<table><tr><td colspan='3'><div style='font-weight:bold;text-decoration: underline;'><h4>UPCOMING MEETINGS</h4><br></div></td></tr></table><table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
+    else if (listName == "topLeadsUL" && deviceType == "tablet") {
+	  ul.append("<table><tr><td colspan='3'><div style='font-weight:bold;text-decoration: underline;'><h4>TOP LEADS</h4><br></div></td></tr></table><table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
     }
+    else if (listName == "upcomingMeetingsUL") {
+	  if (deviceType == "tablet") {	
+	    ul.append("<table><tr><td colspan='3'><div style='font-weight:bold;text-decoration: underline;'><h4>UPCOMING MEETINGS</h4><br></div></td></tr></table><table class='listHeader'><tr><td>Subject</td><td>Start Date</td></tr></table>");
+	  }
+	  else if (deviceType == "desktop") {	
+	    ul.append("<table><tr><td colspan='3'><div style='font-weight:bold;text-decoration: underline;'><h4>UPCOMING MEETINGS</h4><br></div></td></tr></table><table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
+	  }
+	}
     else if (listName == "accountListUL") {
 	  // ul.append("<span class='listHeader'> Account Name  Phone  Email</span>");
-	  ul.append("<table class='listHeader'><tr><td>Account Name</td><td>Phone</td><td>Email</td></tr></table>");
-    }
+	  if (deviceType == "tablet") {	
+		  ul.append("<table class='listHeader'><tr><td>Account Name</td><td>Phone</td></tr></table>");
+      }
+	  else if (deviceType == "desktop") {	
+		  ul.append("<table class='listHeader'><tr><td>Account Name</td><td>Phone</td><td>Email</td></tr></table>");
+      }
+	}
     else if (listName == "contactListUL") {
-	  ul.append("<table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Phone</td><td>Email</td></tr></table>");
-    }
-    else if (listName == "leadListUL") {
+  	  if (deviceType == "tablet") {	
+		  ul.append("<table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Phone</td></tr></table>");
+   
+      }
+  	  else if (deviceType == "desktop") {	
+		  ul.append("<table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Phone</td><td>Email</td></tr></table>");
+   
+      }	
+	}
+    else if (listName == "leadListUL" && deviceType == "desktop") {
 	  ul.append("<table class='listHeader'><tr><td>Company</td><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
     }
-    else if (listName == "opportunityListUL") {
+    else if (listName == "leadListUL" && deviceType == "tablet") {
+	  ul.append("<table class='listHeader'><tr><td>First Name</td><td>Last Name</td><td>Priority</td></tr></table>");
+    }
+    else if (listName == "opportunityListUL" && deviceType == "desktop") {
 	  ul.append("<table class='listHeader'><tr><td>Name</td><td>Amount</td><td>Probability</td><td>Priority</td></tr></table>");
+    }
+    else if (listName == "opportunityListUL" && deviceType == "tablet") {
+	  ul.append("<table class='listHeader'><tr><td>Name</td><td>Amount</td><td>Priority</td></tr></table>");
     }
     else if (listName == "meetingListUL") {
 	  ul.append("<table class='listHeader'><tr><td>Subject</td><td>Start Date</td><td>Status</td></tr></table>");
     }
-    else if (listName == "callListUL" || listName == "callListULContact" || listName == "callListULLead") {
+    else if (listName == "callListUL" && deviceType == "tablet") {
+	  ul.append("<table class='listHeader'><tr><td>Subject</td><td>First Name</td><td>Last Name</td></tr></table>");
+    }
+    else if ((listName == "callListULContact" || listName == "callListULLead") && deviceType == "tablet") {
+	  ul.append("<table class='listHeader'><tr><td>Call Subject</td></tr></table>");
+    }
+    else if (listName == "callListUL" && deviceType == "desktop") {
 	  ul.append("<table class='listHeader'><tr><td>Subject</td><td>Call Date</td><td>First Name</td><td>Last Name</td></tr></table>");
+    }
+    else if ((listName == "callListULContact" || listName == "callListULLead") && deviceType == "desktop") {
+	  ul.append("<table class='listHeader'><tr><td>Subject</td><td>Call Date</td></tr></table>");
     }
   } 
   
@@ -728,25 +781,37 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     // Otherwise add to list
     var liText = "";
     if (entityType == "contact") {
-	  if (deviceType == "tablet") {
-	  	liText = "<table><tr><td>" + item.first_name + "</td><td>" + item.last_name + "</td><td>" + item.phone + "</td><td>" + item.contactEMail + "</td></tr></table>";
+  	  if (deviceType == "desktop") {	
+          // liText = item.account_name + " " + item.phone + " " + item.accountEMail;
+  	  	liText = "<table><tr><td>" + item.first_name + "</td><td>" + item.last_name + "</td><td>" + item.phone + "</td><td>" + item.contactEMail + "</td></tr></table>";
+	  }
+  	  else if (deviceType == "tablet") {	
+          // liText = item.account_name + " " + item.phone + " " + item.accountEMail;
+  	  	liText = "<table><tr><td>" + item.first_name + "</td><td>" + item.last_name + "</td><td>" + item.phone + "</td></tr></table>";
 	  }	
 	  else {
 	  	liText = item.first_name + "  " + item.last_name;
 	  }      
     } 
 	else if (entityType == "account"){
-	  if (deviceType == "tablet") {	
+	  if (deviceType == "desktop") {	
         // liText = item.account_name + " " + item.phone + " " + item.accountEMail;
 		liText = "<table><tr><td>" + item.account_name + "</td><td>" + item.phone + "</td><td>" + item.accountEMail + "</td></tr></table>";
+	  }
+	  else if (deviceType == "tablet") {	
+        // liText = item.account_name + " " + item.phone + " " + item.accountEMail;
+		liText = "<table><tr><td>" + item.account_name + "</td><td>" + item.phone + "</td></tr></table>";
 	  }
 	  else {
 	  	liText = item.account_name;
 	  }	
     }
 	else if (entityType == "opportunity"){
-	  if (deviceType == "tablet") {	
+	  if (deviceType == "desktop") {	
         liText = "<table><tr><td>" + item.opportunity_name + "</td><td>" + item.amount + "</td><td>" + item.probability + "</td><td>" + item.priority + "</td></tr></table>";
+      }
+	  else if (deviceType == "tablet") {	
+        liText = "<table><tr><td>" + item.opportunity_name + "</td><td>" + item.amount + "</td><td>"  + item.priority + "</td></tr></table>";
       }
 	  else {
 	  	liText = item.opportunity_name;
@@ -754,22 +819,50 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
     }
 	else if (entityType == "lead"){
 	  if (deviceType == "tablet") {	
+        liText = "<table><tr><td>" + item.first_name + "</td><td>" + item.last_name + "</td><td>" + item.priority + "</td></tr></table>";
+      }
+	  else if (deviceType == "desktop") {	
         liText = "<table><tr><td>" + item.company + "</td><td>" + item.first_name + "</td><td>" + item.last_name + "</td><td>" + item.priority + "</td></tr></table>";
       }
       else {
   	    liText = item.first_name + "  " + item.last_name;
       }
     }
-	else if (entityType == "meeting"){
-	  if (deviceType == "tablet") {		
+	else if (entityType == "meeting" && listName == "meetingListUL"){
+	  if (deviceType == "tablet" || deviceType == "desktop") {		
         liText = "<table><tr><td>" + item.subject + "</td><td>" + item.start_date + "</td><td>" + item.meeting_status + "</td></tr></table>";
 	  }
 	  else {
 	  	liText = item.subject;
 	  }
     }
+	else if (entityType == "meeting" && listName == "upcomingMeetingsUL"){
+	  if (deviceType == "desktop") {		
+        liText = "<table><tr><td>" + item.subject + "</td><td>" + item.start_date + "</td><td>" + item.meeting_status + "</td></tr></table>";
+	  }
+	  else if (deviceType == "tablet") {		
+        liText = "<table><tr><td>" + item.subject + "</td><td>" + item.start_date + "</td></tr></table>";
+	  }
+	  else {
+	  	liText = item.subject;
+	  }
+    }
+	else if (entityType == "call" && (listName == "callListULContact" || listName == "callListULLead")){
+  	  if (deviceType == "tablet") {		
+          liText = "<table><tr><td>" + item.subject + "</td></tr></table>";
+  	  }
+  	  else if (deviceType == "desktop") {		
+          liText = "<table><tr><td>" + item.subject + "</td><td>" + item.call_date   + "</td></tr></table>";
+  	  }
+  	  else {
+  	  	liText = item.subject;
+  	  }
+    }
 	else if (entityType == "call"){
   	  if (deviceType == "tablet") {		
+          liText = "<table><tr><td width='40%'>" + item.subject + "</td><td>" + item.first_name + "</td><td>" + item.last_name + "</td></tr></table>";
+  	  }
+  	  else if (deviceType == "desktop") {		
           liText = "<table><tr><td>" + item.subject + "</td><td>" + item.call_date + "</td><td>" + item.first_name + "</td><td>" + item.last_name + "</td></tr></table>";
   	  }
   	  else {
@@ -814,10 +907,10 @@ function createOpportunity() {
 // Add an entity
 
 function newItem(entityType) {
-
+  $.mobile.pushStateEnabled = false;
   // Clear entry form and reset documentId.
   documentId = null;
-  $.mobile.changePage( entityType + "Page.html", {transition: "none"} );
+  $.mobile.changePage( entityType + "Page.html", {reload: true, transition: "none"} );
   // $.mobile.pageContainer.pagecontainer("change", entityType + "Page.html", { reload: true, transition: "none"});
   // $.mobile.navigate( entityType + "Page.html", { transition : "none", info: "info about the #bar hash" });
   setTimeout(function(){}, 500);
@@ -835,13 +928,25 @@ function newItem(entityType) {
 
   // Disable delete button 
   $("#" + entityType + "DeleteButton").button("disable");
+  setTimeout(function(){}, 5000);
 
 } // End newItem().
 
 // View or edit an entity
 
 function editEntity(entityType, entityId) {
-
+  $.mobile.pushStateEnabled = false;
+  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;  
+  var deviceType = "";
+	if (width <= 640) {
+		deviceType = "phone";
+	}
+	else if (width > 1040) {
+		deviceType = "desktop";
+	}
+	else {
+		deviceType = "tablet";
+	}  
   // Save the entity Id
   documentId = entityId;
 
@@ -854,7 +959,7 @@ function editEntity(entityType, entityId) {
     }
   }
 
-  // When a user clicks on acal from the lead entry or contact entry view  
+  // When a user clicks on a call from the lead entry or contact entry view  
   if (entityType == "call" && $("#contactEntry").is(':visible')) {
   	$("#contactEntry").hide();
 	$.mobile.changePage( "callPage.html", { transition: "none"});
@@ -873,6 +978,8 @@ function editEntity(entityType, entityId) {
 	return;
 	
   }
+  
+  
   
   if (entityType == "lead" && $("#homePage").is(':visible')) {
   	// $("#leadEntry").hide();
@@ -893,6 +1000,8 @@ function editEntity(entityType, entityId) {
 	return;
 	
   }
+  
+  
   
   // Close the list view and display entry form
   if(!$("#" + entityType + "Entry").is(':visible')){
@@ -916,14 +1025,14 @@ function editEntity(entityType, entityId) {
   
   // List related calls for contacts and leads
   
-  if (entityType =='contact') {
+  if (entityType =='contact' && deviceType != 'phone') {
 	  
 	  var first_name = entity["first_name"];
 	  var last_name = entity["last_name"];
 	  var related_to = "Contact";
 	  updateList('callListULContact', 'call', 'tablet', 'last_name', last_name, 'first_name', first_name, 'related_to', related_to);
   }
-  else if (entityType =='lead') {
+  else if (entityType =='lead' && deviceType != 'phone') {
 	  var first_name = entity["first_name"];
 	  var last_name = entity["last_name"];
 	  var related_to = "Lead"; 
@@ -932,6 +1041,7 @@ function editEntity(entityType, entityId) {
 
   // Reenable delete button 
   $("#" + entityType + "DeleteButton").button("enable");
+  setTimeout(function(){}, 5000);
 
 } // End editEntity().
 
@@ -996,6 +1106,7 @@ function editHomePageEntity(entityType, entityId) {
   
   // Reenable delete button 
   $("#" + entityType + "DeleteButton").button("enable");
+  setTimeout(function(){}, 5000);
 
 } // End editHomePageEntity().
 

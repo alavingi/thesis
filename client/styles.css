@@ -30,9 +30,7 @@
 
 
 /* Style to space out Home button. */
-.homeButton {
-  margin-left : 12px!important;
-}
+
 
 
 /* Style to space out Function button. */
@@ -128,22 +126,95 @@
   color : #ff0000;
 }
 
-.header {
-	position: fixed;
-}
+
 
 
 /* Responsive web design */
 
 @media all and (max-width: 640px) {
+	/*
+	.ui-btn-text {
+	    font-size: 8px; 
+	}
+	*/
+	.cssHomeButton {
+		width : 70px !important;
+		height : 30px !important;
+		font-size : 50% !important;
+		
+	}
+	
+	#indexHomeButton .ui-btn-text {
+		font-size : 8px !important;
+	}
+	
+	.cssFunctionButton {
+		width : 80px !important;
+		height : 25px !important;
+		font-size : 6px !important;
+		
+	}
+	
+	#accountListButton,
+	#accountNewButton {
+		width : 45px !important;
+		height : 25px !important;
+		
+		
+	}
+	
+	#accountListButton span.ui-btn-inner,
+	#accountNewButton span.ui-btn-inner,
+	 {
+	    text-overflow: inherit; /* Get rid of the ellipsis */
+	    padding-left: 5px; /* Play with padding to make max use of available button width */
+		font-size: 5px;
+		margin-top : 6px;
+	}
+	
+	
+	
+	.homeButton {
+	  margin-left : 12px!important;
+	  width : 60px;
+	  height : 25px;
+	  font-size : 6px !important;
+	}
+	/*
+	.ui-btn-right {
+		width : 60px;
+		
+		font-size : 8px;
+	}
+	*/
+	.header {
+		position: fixed;
+		font-size : 10px;
+	}
+	/*
+	h1 {
+		font-size : 10px !important;
+	}
+	*/
+	
+	.ui-title {
+		font-size : 80% !important;
+		margin-top : 12px !important;
+	}
+	
+	.headerDate {
+		margin-left : 15%;
+		margin-right : auto;
+	}
 	
 	.headerLogo {
-		width : 40px;
-		height : 40px;  
+		width : 50px;
+		height : 50px;  
 		float:left;
 		display:inline;
 		text-align:right;
-		margin-left:100px;
+		margin-left:80px !important;
+		margin-top : 12px !important;
 	}
 	
 	.listHeader {
@@ -151,12 +222,13 @@
 		font-size : 8px;
 		font-weight : bold;
 		color : blue;
+		text-align : left;
 		
 	}
 	
 	.cssHomeCounts {
 		text-align : center;
-		font-size : 8px;
+		font-size : 10px;
 		font-weight : bold;
 		/* color : blue; */
 	}
@@ -180,7 +252,21 @@
 	}
 }
 
-@media all and (min-width: 700px) {
+@media all and (min-width: 700px) and (max-width: 1040px) {
+	
+	.homeButton {
+	  margin-left : 12px!important;
+	 
+	}
+	
+	.header {
+		position: fixed;
+	}
+	
+	.headerDate {
+		margin-left : 20%;
+		margin-right : auto;
+	}
 	
 	.headerLogo {
 		width : 120px;
@@ -221,6 +307,7 @@
 		font-size : 18px;
 		font-weight : bold;
 		color : blue;
+		text-align : left;
 	}
 	
 	.cssHomeCounts {
@@ -245,7 +332,7 @@
 		float:left; 
 	}
 	.contactGrid .ui-block-b { 
-		width: 40%; 
+		width: 45%; 
 		margin-left : 10px;
 		
 		float:right; 
@@ -255,12 +342,123 @@
 		float:left; 
 	}
 	.leadGrid .ui-block-b { 
-		width: 40%; 
+		width: 45%; 
 		margin-left : 10px;
 		
 		float:right; 
 	}
+	
+	.callListULLead,
+	.callListULContact {
+		font-size : 8px;
+	}
+	
+	.leadPageButton {
+		width : 80px !important;
+	}
 }
+
+@media all and (min-width: 1041px) {
+	
+	.homeButton {
+	  margin-left : 12px!important;
+	}
+	
+	.header {
+		position: fixed;
+	}
+	
+	.headerDate {
+		margin-left : 35%;
+		margin-right : auto;
+	}
+	
+	.headerLogo {
+		width : 120px;
+		height : 120px;  
+		float:left;
+		display:inline;
+		text-align:right;
+		margin-left:100px;
+	}
+	
+	.accountEntry,
+	.opportunityEntry,
+	.callEntry,
+	.meetingEntry {
+		width : 50%;
+		margin-left: auto; 
+		margin-right: auto;
+		text-align : left;
+	}
+	
+	
+	table {
+	        width : 100%;
+	        table-layout : fixed;
+	    }
+
+		/*
+	    td {
+	        width : 300px
+	    }
+		*/
+	select {
+		font-size : 16px;
+		font-weight : bold;
+	}	
+	
+	.listHeader {
+		font-size : 18px;
+		font-weight : bold;
+		color : blue;
+		text-align : left;
+	}
+	
+	.cssHomeCounts {
+		text-align : center;
+		font-size : 18px;
+		font-weight : bold;
+		color : blue;
+	}
+	
+	
+	.cssHomeMenu {
+		display : none;
+	}
+	
+	.cssHomeMenuTablet {
+		top : 200;
+		text-align: center;
+	}
+	
+	.contactGrid .ui-block-a { 
+		width: 50%; 
+		float:left; 
+	}
+	.contactGrid .ui-block-b { 
+		width: 45%; 
+		margin-left : 10px;
+		
+		float:right; 
+	}
+	.leadGrid .ui-block-a { 
+		width: 50%; 
+		float:left; 
+	}
+	.leadGrid .ui-block-b { 
+		width: 45%; 
+		margin-left : 10px;
+		
+		float:right; 
+	}
+	
+	.callListULLead,
+	.callListULContact {
+		font-size : 8px;
+	}
+}
+
 
 /* Style for disabled anchors. */
 

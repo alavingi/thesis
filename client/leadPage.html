@@ -26,6 +26,9 @@
 	if (width <= 640) {
 		deviceType = "phone";
 	}
+	else if (width > 1040) {
+		deviceType = "desktop";
+	}
 	else {
 		deviceType = "tablet";
 	}
@@ -44,7 +47,12 @@
     });
 	function displayDate() {
 		var d = new Date();
-		document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
+		if (deviceType == "phone") {
+			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toDateString();
+		}
+		else {
+			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
+		}
 	}
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
@@ -80,7 +88,7 @@
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
 	-->	
 	<br>
-	<div id="dateAndTimeL" style="text-align:center"></div>  
+	<div id="dateAndTimeL" class="headerDate"></div>  
   </div>
 
   <!-- Page content. -->
@@ -154,19 +162,21 @@
             
       <!-- Buttons. -->
 	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-        <button type="button" data-theme="b" data-icon="plus"
+        <button type="button" data-theme="b" data-icon="plus" data-mini="true" class="leadPageButton"
           onClick="saveEntity('lead');" id="leadSaveButton">Save</button>
-        <button type="button" data-theme="b" data-icon="gear"
+        <button type="button" data-theme="b" data-icon="gear" data-mini="true" class="leadPageButton"
           onClick="scoreLead();" id="leadScoreButton">Score Lead</button>
-        <button type="button" data-theme="b" data-icon="edit"
+      </div>
+	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+        <button type="button" data-theme="b" data-icon="edit" data-mini="true" class="leadPageButton"
           onClick="createOpportunity();" id="createOpportunityButton">Create Opportunity</button>  	
-        <button type="button" data-theme="b" data-icon="minus"
+        <button type="button" data-theme="b" data-icon="minus" data-mini="true" class="leadPageButton"
           onClick="deleteEntity('lead');" id="leadDeleteButton" disabled>Delete</button>
       </div>
       </div> <!--   block a-->
 	  <div class="ui-block-b">
           <ul data-role="listview" data-inset="true"
-            data-autodividers="true" id="callListULLead"></ul>
+            id="callListULLead"></ul>
 	  </div>
       </div> <!--  grid a-->
     </form>

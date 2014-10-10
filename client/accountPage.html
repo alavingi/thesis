@@ -32,6 +32,9 @@
 	if (width <= 640) {
 		deviceType = "phone";
 	}
+	else if (width > 1040) {
+		deviceType = "desktop";
+	}
 	else {
 		deviceType = "tablet";
 	}
@@ -49,7 +52,12 @@
     });
 	function displayDate() {
 		var d = new Date();
-		document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
+		if (deviceType == "phone") {
+			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toDateString();
+		}
+		else {
+			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
+		}
 	}
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2);
@@ -81,8 +89,8 @@
 	
 	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
 	       
-	  <a id="accountListButton" href="javascript:displayListView('account');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Accounts</a>
-	  <a id="accountNewButton" href="javascript:newItem('account');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Account</a>
+	  <a id="accountListButton" class="headerListButton" href="javascript:displayListView('account');"  data-role='button' data-inline="true" data-mini="true" data-theme="b" style="font-size: 8px;">List Accounts</a>
+	  <a id="accountNewButton" class="headerNewButton" href="javascript:newItem('account');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Account</a>
 	 </div>
 	
 	<!-- 
@@ -91,7 +99,7 @@
 	-->
 	
 	<br>
-	<div id="dateAndTimeA" style="text-align:center"></div>  
+	<div id="dateAndTimeA" class="headerDate"></div>  
   </div>
 
   <!-- Page content. -->

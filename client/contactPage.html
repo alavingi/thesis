@@ -26,6 +26,9 @@
 	if (width <= 640) {
 		deviceType = "phone";
 	}
+	else if (width > 1040) {
+		deviceType = "desktop";
+	}
 	else {
 		deviceType = "tablet";
 	}
@@ -45,7 +48,12 @@
     });
 	function displayDate() {
 		var d = new Date();
-		document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
+		if (deviceType == "phone") {
+			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toDateString();
+		}
+		else {
+			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
+		}
 	}
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
@@ -81,7 +89,7 @@
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
 	-->	
 	<br>
-	<div id="dateAndTimeC" style="text-align:center"></div>  
+	<div id="dateAndTimeC" class="headerDate"></div>  
   </div>
 
   <!-- Page content. -->
@@ -175,7 +183,7 @@
       </div> <!--   block a-->
 	  <div class="ui-block-b">
           <ul data-role="listview" data-inset="true"
-            data-autodividers="true" id="callListULContact"></ul>
+             id="callListULContact"></ul>
 	  </div>
       </div> <!--  grid a--> 
     </form>

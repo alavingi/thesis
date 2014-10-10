@@ -29,20 +29,22 @@
     <div data-role="page" id="homePage" >
   	
 	<script type="text/javascript">
-      
+  	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+	if (width <= 640) {
+  		deviceType = "phone";
+  	}
+  	else if (width > 1040) {
+  		deviceType = "desktop";
+  	}
+  	else {
+  		deviceType = "tablet";
+  	} 
+	  alert(width); 
       $(document).on("pageshow", "#homePage", function(e) { 
-	      var deviceType = "";
-		  var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-		  if (width <= 640) {
-			  deviceType = "phone";
-		  }
-		  else {
-			  deviceType = "tablet";
-		  }
-		  alert(width);  
+	  	
 	    displayDate();
 		displayData();
-		if (deviceType == "tablet") {
+		if (deviceType == "tablet" || deviceType == "desktop") {
 			updateList('topLeadsUL', 'lead', deviceType);
 			updateList('upcomingMeetingsUL', 'meeting', deviceType);
 		}
@@ -52,7 +54,13 @@
   	  function displayDate() {
 		  
   		var d = new Date();
-  		document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
+		if (deviceType == "phone") {
+			document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toDateString();
+		}
+		else {
+			document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
+		}
+  		
   	  }
   	  function displayData() {
 		  
@@ -95,13 +103,14 @@
 		
         
 		<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>  
-        <button class="cssHomeButton" data-icon="home"
+        <button class="cssHomeButton" id="indexHomeButton" data-icon="home"
           disabled="disabled">Home</button>
-		<h1>Contact Manager!</h1>
+		<h1 class="heading">Contact Manager!</h1>
+		
         <a href="#aboutPanel" class="cssFunctionButton" data-icon="bars"
           data-theme="b">About</a>
 	  	<br>
-	  	<div id="dateAndTime" style="text-align:center"></div>
+	  	<div id="dateAndTime" class="headerDate"></div>
       </div>
 
       <!-- Page content. -->
@@ -171,7 +180,7 @@
     <!-- ================================================================== -->
     <!-- INFO DIALOG                                                        -->
     <!-- ================================================================== -->
-    <div data-role="dialog" id="infoDialog" data-close-btn="none">
+    <div data-role="dialog" id="infoDialog" data-backbtn="false" data-close-btn="none">
       <div data-role="header">
         <h1 id="infoDialogHeader"></h1>
       </div>
