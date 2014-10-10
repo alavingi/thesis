@@ -11,17 +11,7 @@
   text-align: center; */
 }
 
-.cssHomeTitleHeader {
-    !position : absolute;
-    top : 0;
-    bottom : 0;
-    left : 50%;
-    right : 0;
-  margin : auto;
-  margin-top : 10%;
-  display : block;
-  text-align: center;
-}
+
 
 /* Style for the sections in the about flyover. */
 .cssHomeAboutSection {
@@ -137,6 +127,35 @@
 	    font-size: 8px; 
 	}
 	*/
+	
+	.cssHomeTitleHeader {
+	    !position : absolute;
+	    top : 50;
+	    bottom : 0;
+	    left : 45%;
+	    right : 0;
+		width : 150px;
+		height : 150px;
+	  margin : auto;
+	  margin-top : 10%;
+	  display : block;
+	  text-align: center;
+	}
+	
+	.phoneTextInput,
+	.faxTextInput,
+	.stateTextInput,
+	.zipTextInput {
+		width : 100px;
+	}
+	
+	.phoneLabel,
+	.faxLabel,
+	.stateLabel,
+	.zipLabel {
+		font-size : 10px;
+	}
+	
 	.cssHomeButton {
 		width : 70px !important;
 		height : 30px !important;
@@ -154,31 +173,34 @@
 		font-size : 6px !important;
 		
 	}
-	
+	/*
 	#accountListButton,
 	#accountNewButton {
 		width : 45px !important;
 		height : 25px !important;
 		
 		
+		
 	}
-	
-	#accountListButton span.ui-btn-inner,
-	#accountNewButton span.ui-btn-inner,
-	 {
-	    text-overflow: inherit; /* Get rid of the ellipsis */
-	    padding-left: 5px; /* Play with padding to make max use of available button width */
-		font-size: 5px;
-		margin-top : 6px;
+	*/
+	.headerListButton,
+	.headerNewButton {
+		width : 45px !important;
+		height : 25px !important;
+		line-height: 25px;
+		
+		
+		
 	}
 	
 	
 	
 	.homeButton {
-	  margin-left : 12px!important;
-	  width : 60px;
+	  /* margin-left : 12px!important; */
+	  width : 65px;
 	  height : 25px;
-	  font-size : 6px !important;
+	  line-height: 25px;	  
+	  font-size : 10px !important;
 	}
 	/*
 	.ui-btn-right {
@@ -203,17 +225,17 @@
 	}
 	
 	.headerDate {
-		margin-left : 15%;
+		margin-left : auto;
 		margin-right : auto;
 	}
 	
 	.headerLogo {
-		width : 50px;
+		width : 70px;
 		height : 50px;  
 		float:left;
 		display:inline;
 		text-align:right;
-		margin-left:80px !important;
+		margin-left:70px !important;
 		margin-top : 12px !important;
 	}
 	
@@ -230,14 +252,32 @@
 		text-align : center;
 		font-size : 10px;
 		font-weight : bold;
-		/* color : blue; */
+		color : blue; 
 	}
-	
+	/*
 	.cssHomeMenu {
 		top : 200;
 		text-align: center;
+		font-size :10px !important;
+	}
+	*/
+	.cssHomeMenuContact {
+		top : 200;
+		text-align: center;
+		font-size :10px !important;
 	}
 	
+	.cssHomeMenuAccount {
+		top : 200;
+		text-align: center;
+		font-size :10px !important;
+	}
+	/*
+	#cssHomeMenu div div a span span.ui-btn-text{
+		
+		font-size :10px !important;
+	}
+	*/
 	.cssHomeMenuTablet {
 		display : none;
 	}
@@ -253,6 +293,18 @@
 }
 
 @media all and (min-width: 700px) and (max-width: 1040px) {
+	
+	.cssHomeTitleHeader {
+	    !position : absolute;
+	    top : 0;
+	    bottom : 0;
+	    left : 50%;
+	    right : 0;
+	  margin : auto;
+	  margin-top : 10%;
+	  display : block;
+	  text-align: center;
+	}
 	
 	.homeButton {
 	  margin-left : 12px!important;
@@ -318,7 +370,11 @@
 	}
 	
 	
-	.cssHomeMenu {
+	.cssHomeMenuContact {
+		display : none;
+	}
+	
+	.cssHomeMenuAccount {
 		display : none;
 	}
 	
@@ -359,6 +415,18 @@
 }
 
 @media all and (min-width: 1041px) {
+	
+	.cssHomeTitleHeader {
+	    !position : absolute;
+	    top : 0;
+	    bottom : 0;
+	    left : 50%;
+	    right : 0;
+	  margin : auto;
+	  margin-top : 10%;
+	  display : block;
+	  text-align: center;
+	}
 	
 	.homeButton {
 	  margin-left : 12px!important;
@@ -423,7 +491,11 @@
 	}
 	
 	
-	.cssHomeMenu {
+	.cssHomeMenuContact {
+		display : none;
+	}
+	
+	.cssHomeMenuAccount {
 		display : none;
 	}
 	

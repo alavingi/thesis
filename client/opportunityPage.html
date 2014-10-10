@@ -42,17 +42,24 @@
 	*/
     $(document).delegate("#opportunityPage", "pageshow", function(inEvent) {
       initialPageLoad("opportunity", deviceType);
+  	  function displayDate() {
+  		var d = new Date();
+  		if (deviceType == "phone") {
+  			document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toDateString();
+  		}
+  		else {
+  			document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toString();
+  		}
+  	  }
 	  displayDate();
+	  if (deviceType == "phone") {
+		  $("#opportunityHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+		  $("#opportunityHomeButton").text("Home");
+		  $("#opportunityListButton").text("List");
+		  $("#opportunityNewButton").text("New");	  
+	  }
     });
-	function displayDate() {
-		var d = new Date();
-		if (deviceType == "phone") {
-			document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toDateString();
-		}
-		else {
-			document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toString();
-		}
-	}
+	
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2);
 	}
@@ -73,14 +80,14 @@
   <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
 	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton" data-icon="home"
+    <a href="index.html" class="homeButton"  id="opportunityHomeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Opportunities</h1>
 	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
 	       
-	 <a id="opportunityListButton" href="javascript:displayListView('opportunity');" data-role='button' data-inline="true" data-mini="true"  
+	 <a id="opportunityListButton" class="headerListButton" href="javascript:displayListView('opportunity');" data-role='button' data-inline="true" data-mini="true"  
 	   data-theme="b">List Opportunities</a>
-	  <a id="opportunityNewButton" href="javascript:newItem('opportunity');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Opportunity</a>
+	  <a id="opportunityNewButton" class="headerNewButton" href="javascript:newItem('opportunity');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Opportunity</a>
 	 </div>
 	
 	<!--
@@ -160,10 +167,13 @@
 	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
         <button type="button" data-theme="b" data-icon="plus" data-mini="true"
           onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
-        <button type="button" data-theme="b" data-icon="gear" data-mini="true"
-          onClick="scoreOpportunity();" id="opportunityScoreButton">Score Opportunity</button>	
         <button type="button" data-theme="b" data-icon="minus" data-mini="true"
-          onClick="deleteEntity('opportunity');" id="opportunityDeleteButton" disabled>Delete</button>
+          onClick="deleteEntity('opportunity');" id="opportunityDeleteButton" disabled>Delete</button>  
+       </div>
+	   <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+		<button type="button" data-theme="b" data-icon="gear" data-mini="true"
+          onClick="scoreOpportunity();" id="opportunityScoreButton">Score Opportunity</button>	
+        
 	   </div>	
     </form>
 

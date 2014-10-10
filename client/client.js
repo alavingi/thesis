@@ -260,7 +260,8 @@ function copyToMemory(entityType) {
  * @param entityType The type of list to show.
  */
 function displayListView(entityType) {
-  $.mobile.changePage( entityType +"Page.html", { transition: "none"} );
+    
+  $.mobile.changePage( entityType +"Page.html", { reload : true, transition: "none"} );
   // Flip to list view and ensure menu is closed.
   $("#" + entityType + "Entry").hide("fast");
   $("#" + entityType + "List").show("fast");
@@ -907,6 +908,7 @@ function createOpportunity() {
 // Add an entity
 
 function newItem(entityType) {
+  	
   $.mobile.pushStateEnabled = false;
   // Clear entry form and reset documentId.
   documentId = null;

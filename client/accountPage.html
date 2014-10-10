@@ -47,18 +47,26 @@
 	}
 	*/
     $(document).delegate("#accountPage", "pageshow", function(inEvent) {
+	  // alert("pageshow");	
       initialPageLoad("account", deviceType);
+  	  function displayDate() {
+  		var d = new Date();
+  		if (deviceType == "phone") {
+  			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toDateString();
+  		}
+  		else {
+  			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
+  		}
+  	  }
 	  displayDate();
+	  if (deviceType == "phone") {
+		  $("#accountHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+		  $("#accountHomeButton").text("Home");
+		  $("#accountListButton").text("List");
+		  $("#accountNewButton").text("New");	  
+	  }
     });
-	function displayDate() {
-		var d = new Date();
-		if (deviceType == "phone") {
-			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toDateString();
-		}
-		else {
-			document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
-		}
-	}
+	
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2);
 	}
@@ -83,13 +91,13 @@
     <div class="ui-loader-background"></div>
 	
 	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton" data-icon="home"
+    <a href="index.html" class="homeButton" id="accountHomeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Customer Accounts</h1>
 	
 	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
 	       
-	  <a id="accountListButton" class="headerListButton" href="javascript:displayListView('account');"  data-role='button' data-inline="true" data-mini="true" data-theme="b" style="font-size: 8px;">List Accounts</a>
+	  <a id="accountListButton" class="headerListButton" href="javascript:displayListView('account');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Accounts</a>
 	  <a id="accountNewButton" class="headerNewButton" href="javascript:newItem('account');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Account</a>
 	 </div>
 	
@@ -143,11 +151,11 @@
         data-clear-btn="true">
       
 	  
-      <label for="phone" >Phone</label>
-      <input type="phone" name="phone" id="phone" title="Customer Phone Number"
+      <label for="phone" class="phoneLabel">Phone</label>
+      <input type="phone" name="phone" id="phone" class="phoneTextInput" title="Customer Phone Number"
         data-clear-btn="true">	
-      <label for="fax" >Fax</label>
-      <input type="phone" name="fax" id="fax" title="Customer Fax Number"
+      <label for="fax" class="faxLabel">Fax</label>
+      <input type="phone" name="fax" id="fax" class="faxTextInput" title="Customer Fax Number"
         data-clear-btn="true">	
       
       <label for="accountEMail">eMail</label>
@@ -161,11 +169,11 @@
       <label for="city" >City</label>
       <input type="text" name="city" id="city" title="Customer City" 
         data-clear-btn="true">
-      <label for="state" >State</label>
-      <input type="phone" name="state" id="state" title="Customer State" 
+      <label for="state" class="stateLabel">State</label>
+      <input type="phone" name="state" id="state" class="stateTextInput" title="Customer State" 
         data-clear-btn="true">
-      <label for="zip" >Zip</label>
-      <input type="phone" name="zip" id="zip" title="Customer Zipcode" 
+      <label for="zip" class="zipLabel">Zip</label>
+      <input type="phone" name="zip" id="zip" class="zipTextInput" title="Customer Zipcode" 
         data-clear-btn="true">
       <label for="country" >Country</label>
       <input type="text" name="country" id="country" title="Customer Country"

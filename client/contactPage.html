@@ -43,18 +43,25 @@
     $(document).delegate("#contactPage", "pageshow", function(inEvent) {
 	  
 	  initialPageLoad("contact", deviceType);
+  	  function displayDate() {
+  		var d = new Date();
+  		if (deviceType == "phone") {
+  			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toDateString();
+  		}
+  		else {
+  			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
+  		}
+  	  }
 	  displayDate();
+	  if (deviceType == "phone") {
+		  $("#contactHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+		  $("#contactHomeButton").text("Home");
+		  $("#contactListButton").text("List");
+		  $("#contactNewButton").text("New");	  
+	  }
 	  
     });
-	function displayDate() {
-		var d = new Date();
-		if (deviceType == "phone") {
-			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toDateString();
-		}
-		else {
-			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
-		}
-	}
+	
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
 	}
@@ -75,13 +82,13 @@
   <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
 	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton" data-icon="home"
+    <a href="index.html" id="contactHomeButton" class="homeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Contacts</h1>
 	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
 	       
-	  <a id="contactListButton" href="javascript:displayListView('contact');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Contacts</a>
-	  <a id="contactNewButton" href="javascript:newItem('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Contact</a>
+	  <a id="contactListButton" class="headerListButton" href="javascript:displayListView('contact');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Contacts</a>
+	  <a id="contactNewButton" class="headerNewButton" href="javascript:newItem('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Contact</a>
 	 </div>
 	
 	<!--
@@ -163,11 +170,11 @@
       <label for="city" >City</label>
       <input type="text" name="city" id="city" title="City"
         data-clear-btn="true">
-      <label for="state" >State</label>
-      <input type="phone" name="state" id="state" title="State"
+      <label for="state" class="stateLabel">State</label>
+      <input type="phone" name="state" id="state" class="stateTextInput" title="State"
         data-clear-btn="true">
-	  <label for="zip" >Zip</label>
-      <input type="phone" name="zip" id="zip" title="Zipcode"
+	  <label for="zip" class="zipLabel">Zip</label>
+      <input type="phone" name="zip" id="zip" class="zipTextInput" title="Zipcode"
         data-clear-btn="true">
       <label for="country" >Country</label>
       <input type="text" name="country" id="country" title="Country"

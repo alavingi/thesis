@@ -39,7 +39,7 @@
   	else {
   		deviceType = "tablet";
   	} 
-	  alert(width); 
+	  // alert(width); 
       $(document).on("pageshow", "#homePage", function(e) { 
 	  	
 	    displayDate();
@@ -118,10 +118,12 @@
         <div>
         <img src="img/logo.png" class="cssHomeTitleHeader"></div>
 		<div id="counts" data-theme="e" class="cssHomeCounts"></div><br><br>
-		<div data-role="controlgroup" data-type="horizontal" class="cssHomeMenu">
-		   
+		<div data-role="controlgroup" data-type="horizontal" class="cssHomeMenuContact" id="cssHomeMenuContact" data-mini="true">
+		 
 		       <a href="javascript:displayListView('contact');" data-role='button' data-mini="true">List Contacts</a>
 		       <a href="javascript:newItem('contact');" data-role='button' data-mini="true">New Contact</a>
+		  </div>	
+		  <div data-role="controlgroup" data-type="horizontal" class="cssHomeMenuAccount" id="cssHomeMenuAccount" data-mini="true">   
 		       <a href="javascript:displayListView('account');" data-role='button' data-mini="true">List Accounts</a>
 		       <a href="javascript:newItem('account');" data-role='button' data-mini="true">New Account</a>
 		   

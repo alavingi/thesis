@@ -44,17 +44,24 @@
 	
     $(document).delegate("#meetingPage", "pageshow", function(inEvent) {
       initialPageLoad("meeting", deviceType);
+  	  function displayDate() {
+  		var d = new Date();
+  		if (deviceType == "phone") {
+  			document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toDateString();
+  		}
+  		else {
+  			document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toString();
+  		}
+  	  }
 	  displayDate();
+	  if (deviceType == "phone") {
+		  $("#meetingHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+		  $("#meetingHomeButton").text("Home");
+		  $("#meetingListButton").text("List");
+		  $("#meetingNewButton").text("New");	  
+	  }
     });
-	function displayDate() {
-		var d = new Date();
-		if (deviceType == "phone") {
-			document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toDateString();
-		}
-		else {
-			document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toString();
-		}
-	}
+	
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
 	}
@@ -75,14 +82,14 @@
   <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
 	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton" data-icon="home"
+    <a href="index.html" class="homeButton"  id="meetingHomeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Meetings</h1>
 	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
 	       
-	 <a id="meetingListButton" href="javascript:displayListView('meeting');" data-role='button' data-inline="true" data-mini="true"  
+	 <a id="meetingListButton" class="headerListButton" href="javascript:displayListView('meeting');" data-role='button' data-inline="true" data-mini="true"  
 	   data-theme="b">List Meetings</a>
-	  <a id="meetingNewButton" href="javascript:newItem('meeting');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Meeting</a>
+	  <a id="meetingNewButton" class="headerNewButton" href="javascript:newItem('meeting');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Meeting</a>
 	 </div>
 	
 	<!--

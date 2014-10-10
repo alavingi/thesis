@@ -42,17 +42,24 @@
 	*/
     $(document).delegate("#callPage", "pageshow", function(inEvent) {
       initialPageLoad("call", deviceType);
+  	  function displayDate() {
+  		var d = new Date();
+  		if (deviceType == "phone") {
+  			document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toDateString();
+  		}
+  		else {
+  			document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toString();
+  		}
+   	  }
 	  displayDate();
+	  if (deviceType == "phone") {
+		  $("#callHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+		  $("#callHomeButton").text("Home");
+		  $("#callListButton").text("List");
+		  $("#callNewButton").text("New");	  
+	  }
     });
-	function displayDate() {
-		var d = new Date();
-		if (deviceType == "phone") {
-			document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toDateString();
-		}
-		else {
-			document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toString();
-		}
-	}
+	
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
 	}
@@ -73,14 +80,14 @@
   <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
 	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton" data-icon="home"
+    <a href="index.html" class="homeButton"  id="callHomeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Calls</h1>
 	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
 	       
-	 <a id="callListButton" href="javascript:displayListView('call');" data-role='button' data-inline="true" data-mini="true"  
+	 <a id="callListButton" class="headerListButton" href="javascript:displayListView('call');" data-role='button' data-inline="true" data-mini="true"  
 	   data-theme="b">List Calls</a>
-	  <a id="callNewButton" href="javascript:newItem('call');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Call</a>
+	  <a id="callNewButton" class="headerNewButton" href="javascript:newItem('call');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Call</a>
 	 </div>
 	
 	<!--

@@ -42,18 +42,26 @@
 	*/
     $(document).delegate("#leadPage", "pageshow", function(inEvent) {
       initialPageLoad("lead", deviceType);
+  	  function displayDate() {
+  		var d = new Date();
+  		if (deviceType == "phone") {
+  			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toDateString();
+  		}
+  		else {
+  			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
+  		}
+	  }	
 	  displayDate();
+	  if (deviceType == "phone") {
+		  $("#leadHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+		  $("#leadHomeButton").text("Home");
+		  $("#leadListButton").text("List");
+		  $("#leadNewButton").text("New");	  
+	  }
 	  
     });
-	function displayDate() {
-		var d = new Date();
-		if (deviceType == "phone") {
-			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toDateString();
-		}
-		else {
-			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
-		}
-	}
+	
+	
 	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
 		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
 	}
@@ -74,13 +82,13 @@
   <div data-role="header" data-position="fixed" class="header">
     <div class="ui-loader-background"></div>
 	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton" data-icon="home"
+    <a href="index.html" class="homeButton"  id="leadHomeButton" data-icon="home"
       data-theme="b">Home</a>
     <h1>Leads</h1>
 	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
 	       
-	  <a id="leadListButton" href="javascript:displayListView('lead');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Leads</a>
-	  <a id="leadNewButton" href="javascript:newItem('lead');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Lead</a>
+	  <a id="leadListButton" class="headerListButton" href="javascript:displayListView('lead');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Leads</a>
+	  <a id="leadNewButton" class="headerNewButton" href="javascript:newItem('lead');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Lead</a>
 	 </div>
 	
 	<!--
