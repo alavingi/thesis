@@ -1,206 +1,177 @@
+
 <!DOCTYPE html>
 
 <!-- Code partially based on the pattern given in Frank W. Zammetti's book -->
 <html>
-  <head>
 
+<head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <link rel="stylesheet" href="styles.css">
-
-    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
-    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
-    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
-    
-  </head>
-  <body>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+
+<body>
 
 
-<div data-role="page" id="opportunityPage" data-dom-cache="true">
+    <div data-role="page" id="opportunityPage" data-dom-cache="true">
 
-  <script type="text/javascript">
-    var deviceType = "";
-	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-	if (width <= 640) {
-		deviceType = "phone";
-	}
-	else if (width > 1040) {
-		deviceType = "desktop";
-	}
-	else {
-		deviceType = "tablet";
-	}
-	/*
-	if(window.styleMedia.matchMedium("screen and (max-width: 480px)")){
-	    deviceType = "phone";
-	}
-	else {
-		deviceType = "tablet"
-	}
-	*/
-    $(document).delegate("#opportunityPage", "pageshow", function(inEvent) {
-      initialPageLoad("opportunity", deviceType);
-  	  function displayDate() {
-  		var d = new Date();
-  		if (deviceType == "phone") {
-  			document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toDateString();
-  		}
-  		else {
-  			document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toString();
-  		}
-  	  }
-	  displayDate();
-	  if (deviceType == "phone") {
-		  $("#opportunityHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
-		  $("#opportunityHomeButton").text("Home");
-		  $("#opportunityListButton").text("List");
-		  $("#opportunityNewButton").text("New");	  
-	  }
-    });
-	
-	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
-		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2);
-	}
-  </script>
+        <script type="text/javascript">
+            var deviceType = "";
+            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            if (width <= 640) {
+                deviceType = "phone";
+            } else if (width > 1040) {
+                deviceType = "desktop";
+            } else {
+                deviceType = "tablet";
+            }
+           
+            $(document).delegate("#opportunityPage", "pageshow", function(inEvent) {
+                initialPageLoad("opportunity", deviceType);
 
-  <!-- Menu. -->
-  <div data-role="popup" id="opportunityMenu">
-    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
-      data-theme="b">
-      <li><a href="javascript:displayListView('opportunity');">List View</a></li>
-      <li id="opportunityNewLink">
-        <a href="javascript:newItem('opportunity');">New</a>
-      </li>
-    </ul>
-  </div>
+                function displayDate() {
+                    var d = new Date();
+                    if (deviceType == "phone") {
+                        document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toDateString();
+                    } else {
+                        document.getElementById("dateAndTimeO").innerHTML = "Today is : " + d.toString();
+                    }
+                }
+                displayDate();
+                if (deviceType == "phone") {
+                    $("#opportunityHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+                    $("#opportunityHomeButton").text("Home");
+                    $("#opportunityListButton").text("List");
+                    $("#opportunityNewButton").text("New");
+                }
+            });
 
-  <!-- Header. -->
-  <div data-role="header" data-position="fixed" class="header">
-    <div class="ui-loader-background"></div>
-	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton"  id="opportunityHomeButton" data-icon="home"
-      data-theme="b">Home</a>
-    <h1>Opportunities</h1>
-	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
-	       
-	 <a id="opportunityListButton" class="headerListButton" href="javascript:displayListView('opportunity');" data-role='button' data-inline="true" data-mini="true"  
-	   data-theme="b">List Opportunities</a>
-	  <a id="opportunityNewButton" class="headerNewButton" href="javascript:newItem('opportunity');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Opportunity</a>
-	 </div>
-	
-	<!--
+            function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
+                updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2);
+            }
+        </script>
+
+        <!-- Header. -->
+        <div data-role="header" data-position="fixed" class="header">
+            <div class="ui-loader-background"></div>
+            <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
+            <a href="index.html" class="homeButton" id="opportunityHomeButton" data-icon="home" data-theme="b">Home</a>
+            <h1>Opportunities</h1>
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right">
+
+                <a id="opportunityListButton" class="headerListButton" href="javascript:displayListView('opportunity');" data-role='button' data-inline="true" data-mini="true" data-theme="b">List Opportunities</a>
+                <a id="opportunityNewButton" class="headerNewButton" href="javascript:newItem('opportunity');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Opportunity</a>
+            </div>
+
+            <!--
     <a href="#opportunityMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
-	-->	
-	<br>
-	<div id="dateAndTimeO" class="headerDate"></div>  
-  </div>
+	-->
+            <br>
+            <div id="dateAndTimeO" class="headerDate"></div>
+        </div>
 
-  <!-- Page content. -->
-  <div data-role="content">
+        <!-- Page content. -->
+        <div data-role="content">
 
-    <div class="ui-loader-background"></div>
+            <div class="ui-loader-background"></div>
 
-    <!-- List view. -->
-    <div id="opportunityList">
+            <!-- List view. -->
+            <div id="opportunityList">
 
-      <!-- Search filters. -->
-      <div data-role="collapsible">
-        <h3>Enter Search Criteria</h3>
-        <form name="opportunityFilterForm" id="opportunityFilterForm">
-          <label for="search_by_opportunityname" >Opportunity Name</label>
-		  <input type="text" name="search_by_opportunityname" id="search_by_opportunityname" >
-	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateListLocal('opportunityListUL', 'opportunity', 'opportunity_name', search_by_opportunityname.value);"            
-			  id="opportunitySaveButton">Search</button>
-        </form>
-      </div>
+                <!-- Search filters. -->
+                <div data-role="collapsible">
+                    <h3>Enter Search Criteria</h3>
+                    <form name="opportunityFilterForm" id="opportunityFilterForm">
+                        <label for="search_by_opportunityname">Opportunity Name</label>
+                        <input type="text" name="search_by_opportunityname" id="search_by_opportunityname">
+                        <button type="button" data-theme="b" data-icon="plus" onClick="updateListLocal('opportunityListUL', 'opportunity', 'opportunity_name', search_by_opportunityname.value);" id="opportunitySaveButton">Search</button>
+                    </form>
+                </div>
 
-      <div>&nbsp;</div>
+                <div>&nbsp;</div>
 
-      <!-- List. -->
-      <div>
-        <ul data-role="listview" data-inset="true"
-          data-autodividers="true" id="opportunityListUL"></ul>
-      </div>
+                <!-- List. -->
+                <div>
+                    <ul data-role="listview" data-inset="true" data-autodividers="true" id="opportunityListUL"></ul>
+                </div>
+
+            </div>
+
+            <!-- Entry view. -->
+            <div id="opportunityEntry" class="opportunityEntry" style="display:none;">
+
+                <form name="opportunityEntryForm" id="opportunityEntryForm">
+
+                    <label for="opportunity_name" class="cssRequired">Opportunity Name</label>
+                    <input type="text" name="opportunity_name" id="opportunity_name" title="Name of the Opportunity" data-clear-btn="true">
+
+
+                    <label for="account_name">Customer Account Name</label>
+                    <input type="text" name="account_name" id="account_name" title="Customer Account Name" data-clear-btn="true">
+                    <label for="amount">Opportunity Amount</label>
+                    <input type="number" name="amount" id="amount" title="Opportunity Amount" data-clear-btn="true">
+                    <label for="sales_stage">Sales Stage</label>
+                    <!-- <input type="text" name="sales_stage" id="sales_stage" data-clear-btn="true"> -->
+                    <select name="sales_stage" id="sales_stage" title="Sales Stage">
+                        <option value="Prospect">Prospect</option>
+                        <option value="Qualified">Qualified</option>
+                        <option value="Proposal">Proposal</option>
+                        <option value="Review">Review</option>
+                        <option value="Closed-won">Closed-won</option>
+                        <option value="Closed-lost">Closed-lost</option>
+                    </select>
+
+                    <label for="probability">Probability</label>
+                    <input type="number" name="probability" id="probability" title="Probability of Closing" data-clear-btn="true">
+
+                    <label for="priority">Priority</label>
+                    <input type="text" name="priority" id="priority" title="Opportunity Priority" data-clear-btn="true">
+
+
+                    <!-- Buttons. -->
+                    <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                        <button type="button" data-theme="b" data-icon="plus" data-mini="true" onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
+                        <button type="button" data-theme="b" data-icon="minus" data-mini="true" onClick="deleteEntity('opportunity');" id="opportunityDeleteButton" disabled>Delete</button>
+                    </div>
+                    <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                        <button type="button" data-theme="b" data-icon="gear" data-mini="true" onClick="scoreOpportunity();" id="opportunityScoreButton">Score Opportunity</button>
+
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Footer. -->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <div class="ui-loader-background"></div>
+            <div data-role="navbar" class="cssNavBar">
+                <ul>
+                    <li>
+                        <a href="accountPage.html" class="linkAccountPage" title="Account Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="contactPage.html" class="linkContactPage ui-btn-active ui-state-persist" title="Contact Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="leadPage.html" class="linkLeadPage" title="Lead Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="callPage.html" class="linkCallPage" title="Call Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
     </div>
+</body>
 
-    <!-- Entry view. -->
-    <div id="opportunityEntry" class="opportunityEntry" style="display:none;">
-
-    <form name="opportunityEntryForm" id="opportunityEntryForm">
-	  
-      <label for="opportunity_name" class="cssRequired">Opportunity Name</label>
-      <input type="text" name="opportunity_name" id="opportunity_name" title="Name of the Opportunity"
-        data-clear-btn="true">
-      
-	  
-      <label for="account_name" >Customer Account Name</label>
-      <input type="text" name="account_name" id="account_name" title="Customer Account Name"
-        data-clear-btn="true">	
-      <label for="amount">Opportunity Amount</label>
-      <input type="number" name="amount" id="amount" title="Opportunity Amount" data-clear-btn="true">
-      <label for="sales_stage">Sales Stage</label>
-      <!-- <input type="text" name="sales_stage" id="sales_stage" data-clear-btn="true"> -->
-	  <select name="sales_stage" id="sales_stage" title="Sales Stage">
-	    <option value="Prospect">Prospect</option>
-	    <option value="Qualified">Qualified</option>
-	    <option value="Proposal">Proposal</option>
-	    <option value="Review">Review</option>
-	    <option value="Closed-won">Closed-won</option>
-	    <option value="Closed-lost">Closed-lost</option>
-	  </select>	
-      
-      <label for="probability" >Probability</label>
-      <input type="number" name="probability" id="probability" title="Probability of Closing"
-        data-clear-btn="true">
-		
-      <label for="priority" >Priority</label>
-      <input type="text" name="priority" id="priority" title="Opportunity Priority"
-        data-clear-btn="true">	
-      
-            
-      <!-- Buttons. -->
-	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-        <button type="button" data-theme="b" data-icon="plus" data-mini="true"
-          onClick="saveEntity('opportunity');" id="opportunitySaveButton">Save</button>
-        <button type="button" data-theme="b" data-icon="minus" data-mini="true"
-          onClick="deleteEntity('opportunity');" id="opportunityDeleteButton" disabled>Delete</button>  
-       </div>
-	   <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-		<button type="button" data-theme="b" data-icon="gear" data-mini="true"
-          onClick="scoreOpportunity();" id="opportunityScoreButton">Score Opportunity</button>	
-        
-	   </div>	
-    </form>
-
-    </div>
-
-  </div>
-
-  <!-- Footer. -->
-  <div data-role="footer" data-position="fixed" data-theme="b">
-    <div class="ui-loader-background"></div>
-    <div data-role="navbar" class="cssNavBar">
-      <ul>
-        <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="contactPage.html"
-          class="linkContactPage ui-btn-active ui-state-persist" title="Contact Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="linkLeadPage" title="Lead Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="linkCallPage" title="Call Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-  </body>
 </html>

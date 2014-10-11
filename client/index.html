@@ -1,210 +1,199 @@
+
 <!DOCTYPE html>
 <!-- Code partially based on the pattern given in Frank W. Zammetti's book -->
-
 <html>
-  <head>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+<head>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <link href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="client.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
 
-    <!-- <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css"> -->
-    
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
-	<link rel="stylesheet" href="styles.css">
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-	<script type="text/javascript" src="client.js"></script>
-	<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+    <title></title>
+</head>
 
-    <!-- <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script> -->
-    <!-- Note: main.js must come before JQM to set defaults properly. -->
-    
-    <!-- <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script> -->
-  	
-  </head>
-  <body>
-
-
+<body>
     <!-- ================================================================== -->
     <!-- HOME PAGE                                                          -->
     <!-- ================================================================== -->
-    <div data-role="page" id="homePage" >
-  	
-	<script type="text/javascript">
-  	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-	if (width <= 640) {
-  		deviceType = "phone";
-  	}
-  	else if (width > 1040) {
-  		deviceType = "desktop";
-  	}
-  	else {
-  		deviceType = "tablet";
-  	} 
-	  // alert(width); 
-      $(document).on("pageshow", "#homePage", function(e) { 
-	  	
-	    displayDate();
-		displayData();
-		if (deviceType == "tablet" || deviceType == "desktop") {
-			updateList('topLeadsUL', 'lead', deviceType);
-			updateList('upcomingMeetingsUL', 'meeting', deviceType);
-		}
-		
-      });
-	  
-  	  function displayDate() {
-		  
-  		var d = new Date();
-		if (deviceType == "phone") {
-			document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toDateString();
-		}
-		else {
-			document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
-		}
-  		
-  	  }
-  	  function displayData() {
-		  
-  		var leads = copyToMemory("lead");
-  		var opportunities = copyToMemory("opportunity");
-		
-		document.getElementById("counts").innerHTML="Total no. of \<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads\</a> is " + count.lead
-		 + " Total no. of \<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities\</a> is " + count.opportunity;
-		         
-  	  }
-  	</script>	
-      <!-- About panel. -->
-      <div data-role="panel" data-position="right" data-display="overlay" data-theme="b"
-        id="aboutPanel">
-        <h2>Contact Manager</h2>
-        <br>
-	    <div class="cssHomeAboutSection">Navbar icons from</div>
-	    <a href="http://www.glyphish.com">Glyphish</a><br>
-	   <ul data-role="listview" data-inset="true"  data-theme="b"
-          id="settingsUL">
-	   <li>Settings
-	       <ul data-display="overlay">
-	         <li>Options
-	            <ul>
-	               <!-- <li><a href="index.html">Canary</a></li> -->
-			        <li><button data-icon="alert" data-theme="b"
-			          onClick="$.mobile.changePage('#confirmClear');">Clear Data</button> </li>                      
-	            </ul>
-			</ul>
-	    </li>	  
-        
-       <!--  <button data-icon="edit" data-theme="b"
-          onClick="setGlobalTheme('e')">Change Theme</button> -->
-	  </ul>	   
-      </div>
 
-      <!-- Header. -->
-      <div data-role="header" data-position="fixed" class="header">
-        <div class="ui-loader-background"></div>
-		
-        
-		<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>  
-        <button class="cssHomeButton" id="indexHomeButton" data-icon="home"
-          disabled="disabled">Home</button>
-		<h1 class="heading">Contact Manager!</h1>
-		
-        <a href="#aboutPanel" class="cssFunctionButton" data-icon="bars"
-          data-theme="b">About</a>
-	  	<br>
-	  	<div id="dateAndTime" class="headerDate"></div>
-      </div>
+    <div data-role="page" id="homePage">
+        <script type="text/javascript">
+            <!-- Determine device type -->
+            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            if (width <= 640) {
+                deviceType = "phone";
+            } else if (width > 1040) {
+                deviceType = "desktop";
+            } else {
+                deviceType = "tablet";
+            }
 
-      <!-- Page content. -->
-      <div data-role="content" data-theme="b">
-        <div>
-        <img src="img/logo.png" class="cssHomeTitleHeader"></div>
-		<div id="counts" data-theme="e" class="cssHomeCounts"></div><br><br>
-		<div data-role="controlgroup" data-type="horizontal" class="cssHomeMenuContact" id="cssHomeMenuContact" data-mini="true">
-		 
-		       <a href="javascript:displayListView('contact');" data-role='button' data-mini="true">List Contacts</a>
-		       <a href="javascript:newItem('contact');" data-role='button' data-mini="true">New Contact</a>
-		  </div>	
-		  <div data-role="controlgroup" data-type="horizontal" class="cssHomeMenuAccount" id="cssHomeMenuAccount" data-mini="true">   
-		       <a href="javascript:displayListView('account');" data-role='button' data-mini="true">List Accounts</a>
-		       <a href="javascript:newItem('account');" data-role='button' data-mini="true">New Account</a>
-		   
-		</div>
-		<div class="cssHomeMenuTablet" style="width:80%;margin-left:auto;margin-right:auto;">
-		    <div data-role="controlgroup" data-type="horizontal" style="marging-left:auto;margin-right:auto;">
-		       <a href="javascript:displayListView('contact');" data-role='button'>List Contacts</a>
-		       <a href="javascript:newItem('contact');" data-role='button'>New Contact</a>
-		       <a href="javascript:displayListView('account');" data-role='button'>List Accounts</a>
-		       <a href="javascript:newItem('account');" data-role='button'>New Account</a>
-		    </div>
-			   <br>
-			   <br>
-			   <br>
-			   <br>
-			   <ul data-role="listview" data-inset="true"
-	             id="topLeadsUL"></ul>
-			   <br>
-			   <br>	 
-	           <ul data-role="listview" data-inset="true"
-	             id="upcomingMeetingsUL"></ul>
-		  </div> 
-		
-      </div>
+            $(document).on("pageshow", "#homePage", function(e) {
+                displayDate();
+                displayData();
+                <!-- Display top leads and upcoming meetings only on tablets and desktops -->
+                if (deviceType == "tablet" || deviceType == "desktop") {
+                    updateList('topLeadsUL', 'lead', deviceType);
+                    updateList('upcomingMeetingsUL', 'meeting', deviceType);
+                }
+            });
+            <!-- Display current date and time in header -->    
+            function displayDate() {
+                var d = new Date();
+                if (deviceType == "phone") {
+                    document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toDateString();
+                } else {
+                    document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
+                }
+            }
 
-      <!-- Footer. -->
-      <div data-role="footer" data-position="fixed" data-theme="b">
-        <div class="ui-loader-background"></div>
-        <div data-role="navbar" class="cssNavBar">
-          <ul>
-            <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
-              data-icon="custom" data-prefetch="true"
-              data-iconpos="notext"></a></li>
-            <li><a href="contactPage.html" class="linkContactPage" title="Contact Page"
-              data-icon="custom" data-prefetch="true"
-              data-iconpos="notext"></a></li>
-            <li><a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page"
-              data-icon="custom" data-prefetch="true"
-              data-iconpos="notext"></a></li>
-            <li><a href="leadPage.html" class="linkLeadPage" title="Lead Page"
-              data-icon="custom" data-prefetch="true"
-              data-iconpos="notext"></a></li>
-            <li><a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page"
-              data-icon="custom" data-prefetch="true"
-              data-iconpos="notext"></a></li>
-            <li><a href="callPage.html" class="linkCallPage" title="Call Page"
-              data-icon="custom" data-prefetch="true"
-              data-iconpos="notext"></a></li>  
-          </ul>
+            <!-- Display statistics on home page -->
+            function displayData() {
+                var leads = copyToMemory("lead");
+                var opportunities = copyToMemory("opportunity");
+                document.getElementById("counts").innerHTML = "Total no. of \<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads\<\/a> is " + count.lead + " Total no. of \<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities\<\/a> is " + count.opportunity;
+            }
+        </script>
+        <!-- About panel. -->
+
+        <div data-display="overlay" data-position="right" data-role="panel" data-theme="b" id="aboutPanel">
+            <h2>Contact Manager</h2>
+            <br>
+
+            <div class="cssHomeAboutSection">
+                Navbar icons from
+            </div><a href="http://www.glyphish.com">Glyphish</a>
+            <br>
+
+            <ul data-inset="true" data-role="listview" data-theme="b" id="settingsUL">
+                <li>Settings
+
+                    <ul data-display="overlay">
+                        <li>Options
+
+                            <ul>
+                                <li>
+                                    <button data-icon="alert" data-theme="b" onclick="$.mobile.changePage('#confirmClear');">Clear Data
+                                    </button>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-      </div>
+        <!-- Header. -->
 
+        <div class="header" data-position="fixed" data-role="header">
+            <div class="ui-loader-background"></div><img alt="Logo" border="0" class="headerLogo" src="img/logo.png">
+            <button class="cssHomeButton" data-icon="home" disabled="disabled" id="indexHomeButton">Home</button>
+
+            <h1 class="heading">Contact Manager!</h1><a class="cssFunctionButton" data-icon="bars" data-theme="b" href="#aboutPanel">About</a>
+            <br>
+
+            <div class="headerDate" id="dateAndTime"></div>
+        </div>
+        <!-- Page content. -->
+
+        <div data-role="content" data-theme="b">
+            <div><img class="cssHomeTitleHeader" src="img/logo.png">
+            </div>
+
+            <div class="cssHomeCounts" data-theme="e" id="counts"></div>
+            <br>
+            <br>
+
+            <div class="cssHomeMenuContact" data-mini="true" data-role="controlgroup" data-type="horizontal" id="cssHomeMenuContact">
+                <a data-mini="true" data-role='button' href="javascript:displayListView('contact');">List Contacts</a>
+                <a data-mini="true" data-role='button' href="javascript:newItem('contact');">New Contact</a>
+            </div>
+
+            <div class="cssHomeMenuAccount" data-mini="true" data-role="controlgroup" data-type="horizontal" id="cssHomeMenuAccount">
+                <a data-mini="true" data-role='button' href="javascript:displayListView('account');">List Accounts</a>
+                <a data-mini="true" data-role='button' href="javascript:newItem('account');">New Account</a>
+            </div>
+
+            <div class="cssHomeMenuTablet" style="width:80%;margin-left:auto;margin-right:auto;">
+                <div data-role="controlgroup" data-type="horizontal" style="marging-left:auto;margin-right:auto;">
+                    <a data-role='button' href="javascript:displayListView('contact');">List Contacts</a>
+                    <a data-role='button' href="javascript:newItem('contact');">New Contact</a>
+                    <a data-role='button' href="javascript:displayListView('account');">List Accounts</a>
+                    <a data-role='button' href="javascript:newItem('account');">New Account</a>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+
+                <ul data-inset="true" data-role="listview" id="topLeadsUL">
+                </ul>
+                <br>
+                <br>
+
+                <ul data-inset="true" data-role="listview" id="upcomingMeetingsUL"></ul>
+            </div>
+        </div>
+        <!-- Footer. -->
+
+        <div data-position="fixed" data-role="footer" data-theme="b">
+            <div class="ui-loader-background"></div>
+
+            <div class="cssNavBar" data-role="navbar">
+                <ul>
+                    <li>
+                        <a class="linkAccountPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="accountPage.html" title="Account Page"></a>
+                    </li>
+
+                    <li>
+                        <a class="linkContactPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="contactPage.html" title="Contact Page"></a>
+                    </li>
+
+                    <li>
+                        <a class="linkOpportunityPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="opportunityPage.html" title="Opportunity Page"></a>
+                    </li>
+
+                    <li>
+                        <a class="linkLeadPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="leadPage.html" title="Lead Page"></a>
+                    </li>
+
+                    <li>
+                        <a class="linkMeetingPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="meetingPage.html" title="Meeting Page"></a>
+                    </li>
+
+                    <li>
+                        <a class="linkCallPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="callPage.html" title="Call Page"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
-
-
     <!-- ================================================================== -->
     <!-- INFO DIALOG                                                        -->
     <!-- ================================================================== -->
-    <div data-role="dialog" id="infoDialog" data-backbtn="false" data-close-btn="none">
-      <div data-role="header">
-        <h1 id="infoDialogHeader"></h1>
-      </div>
-      <div data-role="content" id="infoDialogContent"></div>
-      <div data-role="footer" class="cssInfoDialogButtons">
-        <a href="javascript:void(0);" data-rel="back" data-role="button">Ok</a>
-      </div>
+
+    <div data-backbtn="false" data-close-btn="none" data-role="dialog" id="infoDialog">
+        <div data-role="header">
+            <h1 id="infoDialogHeader"></h1>
+        </div>
+
+        <div data-role="content" id="infoDialogContent"></div>
+
+        <div class="cssInfoDialogButtons" data-role="footer">
+            <a data-rel="back" data-role="button" href="javascript:void(0);">Ok</a>
+        </div>
     </div>
-
-
     <!-- ================================================================== -->
     <!-- CONFIRM DIALOG                                                     -->
     <!-- ================================================================== -->
+
     <div data-role="dialog" id="confirmClear">
-      <div data-role="content">
-        <p>Are you sure ?</p>
-        <a href="#" id="confirmClearYes" data-role="button" data-theme="b"
-          data-rel="back">Yes</a>
-        <a href="#" data-role="button" data-theme="c" data-rel="back">No</a>
-      </div>
+        <div data-role="content">
+            <p>Are you sure ?</p><a data-rel="back" data-role="button" data-theme="b" href="#" id="confirmClearYes">Yes</a> <a data-rel="back" data-role="button" data-theme="c" href="#">No</a>
+        </div>
     </div>
+</body>
 
-
-  </body>
 </html>

@@ -2,13 +2,10 @@
 
 /* Style for the title header (horizontally and vertically centered). */
 .cssImageHeader {
-	width: 100px;
-	    height: 100px;
+    width: 100px;
+    height: 100px;
     margin-left : 0;
- /* margin : auto;
-  
-  display : block;
-  text-align: center; */
+
 }
 
 
@@ -122,12 +119,7 @@
 /* Responsive web design */
 
 @media all and (max-width: 640px) {
-	/*
-	.ui-btn-text {
-	    font-size: 8px; 
-	}
-	*/
-	
+
 	.cssHomeTitleHeader {
 	    !position : absolute;
 	    top : 50;
@@ -136,10 +128,10 @@
 	    right : 0;
 		width : 150px;
 		height : 150px;
-	  margin : auto;
-	  margin-top : 10%;
-	  display : block;
-	  text-align: center;
+	    margin : auto;
+	    margin-top : 10%;
+	    display : block;
+	    text-align: center;
 	}
 	
 	.phoneTextInput,
@@ -173,16 +165,7 @@
 		font-size : 6px !important;
 		
 	}
-	/*
-	#accountListButton,
-	#accountNewButton {
-		width : 45px !important;
-		height : 25px !important;
-		
-		
-		
-	}
-	*/
+
 	.headerListButton,
 	.headerNewButton {
 		width : 45px !important;
@@ -192,32 +175,20 @@
 		
 		
 	}
-	
-	
-	
+		
 	.homeButton {
-	  /* margin-left : 12px!important; */
+	  
 	  width : 65px;
 	  height : 25px;
 	  line-height: 25px;	  
 	  font-size : 10px !important;
 	}
-	/*
-	.ui-btn-right {
-		width : 60px;
-		
-		font-size : 8px;
-	}
-	*/
+	
 	.header {
 		position: fixed;
 		font-size : 10px;
 	}
-	/*
-	h1 {
-		font-size : 10px !important;
-	}
-	*/
+
 	
 	.ui-title {
 		font-size : 80% !important;
@@ -254,13 +225,7 @@
 		font-weight : bold;
 		color : blue; 
 	}
-	/*
-	.cssHomeMenu {
-		top : 200;
-		text-align: center;
-		font-size :10px !important;
-	}
-	*/
+
 	.cssHomeMenuContact {
 		top : 200;
 		text-align: center;
@@ -272,12 +237,7 @@
 		text-align: center;
 		font-size :10px !important;
 	}
-	/*
-	#cssHomeMenu div div a span span.ui-btn-text{
-		
-		font-size :10px !important;
-	}
-	*/
+	
 	.cssHomeMenuTablet {
 		display : none;
 	}
@@ -345,11 +305,7 @@
 	        table-layout : fixed;
 	    }
 
-		/*
-	    td {
-	        width : 300px
-	    }
-		*/
+	
 	select {
 		font-size : 16px;
 		font-weight : bold;
@@ -466,11 +422,6 @@
 	        table-layout : fixed;
 	    }
 
-		/*
-	    td {
-	        width : 300px
-	    }
-		*/
 	select {
 		font-size : 16px;
 		font-weight : bold;

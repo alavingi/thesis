@@ -1,223 +1,187 @@
+
 <!DOCTYPE html>
 
 <!-- Code partially based on the pattern given in Frank W. Zammetti's book -->
 <html>
-  <head>
 
+<head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <link rel="stylesheet" href="styles.css">
-
-    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
-    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
-    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
-    
-  </head>
-  <body>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+
+<body>
 
 
-<div data-role="page" id="contactPage" data-dom-cache="true">
+    <div data-role="page" id="contactPage" data-dom-cache="true">
 
-  <script type="text/javascript">
-    var deviceType = "";
-	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-	if (width <= 640) {
-		deviceType = "phone";
-	}
-	else if (width > 1040) {
-		deviceType = "desktop";
-	}
-	else {
-		deviceType = "tablet";
-	}
-	/*
-	if(window.styleMedia.matchMedium("screen and (max-width: 480px)")){
-	    deviceType = "phone";
-	}
-	else {
-		deviceType = "tablet"
-	}
-	*/
-    $(document).delegate("#contactPage", "pageshow", function(inEvent) {
-	  
-	  initialPageLoad("contact", deviceType);
-  	  function displayDate() {
-  		var d = new Date();
-  		if (deviceType == "phone") {
-  			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toDateString();
-  		}
-  		else {
-  			document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
-  		}
-  	  }
-	  displayDate();
-	  if (deviceType == "phone") {
-		  $("#contactHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
-		  $("#contactHomeButton").text("Home");
-		  $("#contactListButton").text("List");
-		  $("#contactNewButton").text("New");	  
-	  }
-	  
-    });
-	
-	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
-		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
-	}
-  </script>
+        <script type="text/javascript">
+            var deviceType = "";
+            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            if (width <= 640) {
+                deviceType = "phone";
+            } else if (width > 1040) {
+                deviceType = "desktop";
+            } else {
+                deviceType = "tablet";
+            }
+           
+            $(document).delegate("#contactPage", "pageshow", function(inEvent) {
 
-  <!-- Menu. -->
-  <div data-role="popup" id="contactMenu">
-    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
-      data-theme="b">
-      <li><a href="javascript:displayListView('contact');">List View</a></li>
-      <li id="contactNewLink">
-        <a href="javascript:newItem('contact');">New</a>
-      </li>
-    </ul>
-  </div>
+                initialPageLoad("contact", deviceType);
 
-  <!-- Header. -->
-  <div data-role="header" data-position="fixed" class="header">
-    <div class="ui-loader-background"></div>
-	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" id="contactHomeButton" class="homeButton" data-icon="home"
-      data-theme="b">Home</a>
-    <h1>Contacts</h1>
-	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
-	       
-	  <a id="contactListButton" class="headerListButton" href="javascript:displayListView('contact');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Contacts</a>
-	  <a id="contactNewButton" class="headerNewButton" href="javascript:newItem('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Contact</a>
-	 </div>
-	
-	<!--
-    <a href="#contactMenu" class="functionButton" data-icon="bars"
-      data-iconpos="notext" data-rel="popup" data-theme="b"></a>
-	-->	
-	<br>
-	<div id="dateAndTimeC" class="headerDate"></div>  
-  </div>
+                function displayDate() {
+                    var d = new Date();
+                    if (deviceType == "phone") {
+                        document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toDateString();
+                    } else {
+                        document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
+                    }
+                }
+                displayDate();
+                if (deviceType == "phone") {
+                    $("#contactHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+                    $("#contactHomeButton").text("Home");
+                    $("#contactListButton").text("List");
+                    $("#contactNewButton").text("New");
+                }
 
-  <!-- Page content. -->
-  <div data-role="content">
+            });
 
-    <div class="ui-loader-background"></div>
+            function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
+                updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
+            }
+        </script>
 
-    <!-- List view. -->
-    <div id="contactList">
+        <!-- Header. -->
+        <div data-role="header" data-position="fixed" class="header">
+            <div class="ui-loader-background"></div>
+            <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
+            <a href="index.html" id="contactHomeButton" class="homeButton" data-icon="home" data-theme="b">Home</a>
+            <h1>Contacts</h1>
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right">
 
-      <!-- Search filters. -->
-      <div data-role="collapsible">
-        <h3>Enter Search Criteria</h3>
-        <form name="contactFilterForm" id="contactFilterForm">
-          <label for="search_by_lastname" >Last Name</label>
-          <input type="text" name="search_by_lastname" id="search_by_lastname" >
-          <label for="search_by_firstname" >First Name</label>
-          <input type="text" name="search_by_firstname" id="search_by_firstname" >
-	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateListLocal('contactListUL', 'contact', 'last_name', search_by_lastname.value, 'first_name', search_by_firstname.value);" 				id="contactSaveButton">Search</button>
-        </form>
-      </div>
+                <a id="contactListButton" class="headerListButton" href="javascript:displayListView('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">List Contacts</a>
+                <a id="contactNewButton" class="headerNewButton" href="javascript:newItem('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Contact</a>
+            </div>
+           <br>
+            <div id="dateAndTimeC" class="headerDate"></div>
+        </div>
 
-      <div>&nbsp;</div>
+        <!-- Page content. -->
+        <div data-role="content">
 
-      <!-- List. -->
-      <div>
-        <ul data-role="listview" data-inset="true"
-          data-autodividers="true" id="contactListUL"></ul>
-      </div>
+            <div class="ui-loader-background"></div>
 
-    </div>
+            <!-- List view. -->
+            <div id="contactList">
 
-    <!-- Entry view. -->
-    <div id="contactEntry" style="display:none;">
-	<div class="ui-grid-a contactGrid">	
-	<div class="ui-block-a">	
-    <form name="contactEntryForm" id="contactEntryForm">
-	
-      <!-- Name. -->
-      <label for="first_name" class="cssRequired">First Name</label>
-      <input type="text" name="first_name" id="first_name" title="Contact First Name"
-        data-clear-btn="true">
-      <label for="last_name" class="cssRequired">Last Name</label>
-      <input type="text" name="last_name" id="last_name" title="Contact Last Name"
-        data-clear-btn="true">
-      <label for="title" >Title</label>
-      <input type="text" name="title" id="title" title="Contact Title"
-        data-clear-btn="true">	
-      <!-- Birthdate. -->
-      <label for="birth_date" >Birth Date</label>
-      <input name="birth_date" id="birth_date" type="date" title="Birth Date MM/DD/YYYY">
-	  
-      <label for="account_name" >Account Name</label>
-      <input type="text" name="account_name" id="account_name" title="Customer Account Name"
-        data-clear-btn="true">
-      <label for="department" >Department</label>
-      <input type="text" name="department" id="department" title="Department"
-        data-clear-btn="true">
-      <label for="phone" >Phone</label>
-      <input type="phone" name="phone" id="phone" title="Contact Phone Number"
-        data-clear-btn="true">	
-      <!-- Web Presence. -->
-      <label for="contactEMail">eMail</label>
-      <input type="email" name="contactEMail" id="contactEMail" title="Contact Email" data-clear-btn="true">
-	  	
-      <!-- Address. -->
-      <label for="street" >Street</label>
-      <input type="text" name="street" id="street" title="Street Address"
-        data-clear-btn="true">
-      <label for="city" >City</label>
-      <input type="text" name="city" id="city" title="City"
-        data-clear-btn="true">
-      <label for="state" class="stateLabel">State</label>
-      <input type="phone" name="state" id="state" class="stateTextInput" title="State"
-        data-clear-btn="true">
-	  <label for="zip" class="zipLabel">Zip</label>
-      <input type="phone" name="zip" id="zip" class="zipTextInput" title="Zipcode"
-        data-clear-btn="true">
-      <label for="country" >Country</label>
-      <input type="text" name="country" id="country" title="Country"
-        data-clear-btn="true">	
-      
-      <!-- Buttons. -->
-	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-        <button type="button" data-theme="b" data-icon="plus"
-          onClick="saveEntity('contact');" id="contactSaveButton">Save</button>
-        <button type="button" data-theme="b" data-icon="minus"
-          onClick="deleteEntity('contact');" id="contactDeleteButton" disabled>Delete</button>
-	  </div>	
-      </div> <!--   block a-->
-	  <div class="ui-block-b">
-          <ul data-role="listview" data-inset="true"
-             id="callListULContact"></ul>
-	  </div>
-      </div> <!--  grid a--> 
-    </form>
+                <!-- Search filters. -->
+                <div data-role="collapsible">
+                    <h3>Enter Search Criteria</h3>
+                    <form name="contactFilterForm" id="contactFilterForm">
+                        <label for="search_by_lastname">Last Name</label>
+                        <input type="text" name="search_by_lastname" id="search_by_lastname">
+                        <label for="search_by_firstname">First Name</label>
+                        <input type="text" name="search_by_firstname" id="search_by_firstname">
+                        <button type="button" data-theme="b" data-icon="plus" onClick="updateListLocal('contactListUL', 'contact', 'last_name', search_by_lastname.value, 'first_name', search_by_firstname.value);" id="contactSaveButton">Search</button>
+                    </form>
+                </div>
+
+                <div>&nbsp;</div>
+
+                <!-- List. -->
+                <div>
+                    <ul data-role="listview" data-inset="true" data-autodividers="true" id="contactListUL"></ul>
+                </div>
+
+            </div>
+
+            <!-- Entry view. -->
+            <div id="contactEntry" style="display:none;">
+                <div class="ui-grid-a contactGrid">
+                    <div class="ui-block-a">
+                        <form name="contactEntryForm" id="contactEntryForm">
+
+                            <!-- Name. -->
+                            <label for="first_name" class="cssRequired">First Name</label>
+                            <input type="text" name="first_name" id="first_name" title="Contact First Name" data-clear-btn="true">
+                            <label for="last_name" class="cssRequired">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" title="Contact Last Name" data-clear-btn="true">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" id="title" title="Contact Title" data-clear-btn="true">
+                            <!-- Birthdate. -->
+                            <label for="birth_date">Birth Date</label>
+                            <input name="birth_date" id="birth_date" type="date" title="Birth Date MM/DD/YYYY">
+
+                            <label for="account_name">Account Name</label>
+                            <input type="text" name="account_name" id="account_name" title="Customer Account Name" data-clear-btn="true">
+                            <label for="department">Department</label>
+                            <input type="text" name="department" id="department" title="Department" data-clear-btn="true">
+                            <label for="phone">Phone</label>
+                            <input type="phone" name="phone" id="phone" title="Contact Phone Number" data-clear-btn="true">
+                            <!-- Web Presence. -->
+                            <label for="contactEMail">eMail</label>
+                            <input type="email" name="contactEMail" id="contactEMail" title="Contact Email" data-clear-btn="true">
+
+                            <!-- Address. -->
+                            <label for="street">Street</label>
+                            <input type="text" name="street" id="street" title="Street Address" data-clear-btn="true">
+                            <label for="city">City</label>
+                            <input type="text" name="city" id="city" title="City" data-clear-btn="true">
+                            <label for="state" class="stateLabel">State</label>
+                            <input type="phone" name="state" id="state" class="stateTextInput" title="State" data-clear-btn="true">
+                            <label for="zip" class="zipLabel">Zip</label>
+                            <input type="phone" name="zip" id="zip" class="zipTextInput" title="Zipcode" data-clear-btn="true">
+                            <label for="country">Country</label>
+                            <input type="text" name="country" id="country" title="Country" data-clear-btn="true">
+
+                            <!-- Buttons. -->
+                            <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                                <button type="button" data-theme="b" data-icon="plus" onClick="saveEntity('contact');" id="contactSaveButton">Save</button>
+                                <button type="button" data-theme="b" data-icon="minus" onClick="deleteEntity('contact');" id="contactDeleteButton" disabled>Delete</button>
+                            </div>
+                    </div>
+                    <!--   block a-->
+                    <div class="ui-block-b">
+                        <ul data-role="listview" data-inset="true" id="callListULContact"></ul>
+                    </div>
+                </div>
+                <!--  grid a-->
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Footer. -->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <div class="ui-loader-background"></div>
+            <div data-role="navbar" class="cssNavBar">
+                <ul>
+                    <li>
+                        <a href="accountPage.html" class="linkAccountPage" title="Account Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="leadPage.html" class="linkLeadPage" title="Lead Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="callPage.html" class="linkCallPage" title="Call Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
     </div>
+</body>
 
-  </div>
-
-  <!-- Footer. -->
-  <div data-role="footer" data-position="fixed" data-theme="b">
-    <div class="ui-loader-background"></div>
-    <div data-role="navbar" class="cssNavBar">
-      <ul>
-        <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="linkLeadPage" title="Lead Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="linkCallPage" title="Call Page"
-          data-icon="custom" data-iconpos="notext"></a></li>  
-      </ul>
-    </div>
-  </div>
-
-</div>
-  </body>
 </html>

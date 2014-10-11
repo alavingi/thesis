@@ -1,214 +1,185 @@
+
 <!DOCTYPE html>
 
 <!-- Code partially based on the pattern given in Frank W. Zammetti's book -->
 <html>
-  <head>
 
+<head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <link rel="stylesheet" href="styles.css">
-
-    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
-    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
-    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
-    
-  </head>
-  <body>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+
+<body>
 
 
-<div data-role="page" id="meetingPage" data-dom-cache="true">
+    <div data-role="page" id="meetingPage" data-dom-cache="true">
 
-  <script type="text/javascript">
-    var deviceType = "";
-    
-	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-	if (width <= 640) {
-		deviceType = "phone";
-	}
-	else if (width > 1040) {
-		deviceType = "desktop";
-	}
-	else {
-		deviceType = "tablet";
-	}
-	/*
-	if(window.styleMedia.matchMedium("screen and (max-width: 480px)")){
-	    deviceType = "phone";
-	}
-	else {
-		deviceType = "tablet"
-	}
-	*/
-	
-    $(document).delegate("#meetingPage", "pageshow", function(inEvent) {
-      initialPageLoad("meeting", deviceType);
-  	  function displayDate() {
-  		var d = new Date();
-  		if (deviceType == "phone") {
-  			document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toDateString();
-  		}
-  		else {
-  			document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toString();
-  		}
-  	  }
-	  displayDate();
-	  if (deviceType == "phone") {
-		  $("#meetingHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
-		  $("#meetingHomeButton").text("Home");
-		  $("#meetingListButton").text("List");
-		  $("#meetingNewButton").text("New");	  
-	  }
-    });
-	
-	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
-		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
-	}
-  </script>
+        <script type="text/javascript">
+            var deviceType = "";
 
-  <!-- Menu. -->
-  <div data-role="popup" id="meetingMenu">
-    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
-      data-theme="b">
-      <li><a href="javascript:displayListView('meeting');">List View</a></li>
-      <li id="meetingNewLink">
-        <a href="javascript:newItem('meeting');">New</a>
-      </li>
-    </ul>
-  </div>
+            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            if (width <= 640) {
+                deviceType = "phone";
+            } else if (width > 1040) {
+                deviceType = "desktop";
+            } else {
+                deviceType = "tablet";
+            }
 
-  <!-- Header. -->
-  <div data-role="header" data-position="fixed" class="header">
-    <div class="ui-loader-background"></div>
-	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton"  id="meetingHomeButton" data-icon="home"
-      data-theme="b">Home</a>
-    <h1>Meetings</h1>
-	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
-	       
-	 <a id="meetingListButton" class="headerListButton" href="javascript:displayListView('meeting');" data-role='button' data-inline="true" data-mini="true"  
-	   data-theme="b">List Meetings</a>
-	  <a id="meetingNewButton" class="headerNewButton" href="javascript:newItem('meeting');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Meeting</a>
-	 </div>
-	
-	<!--
+            $(document).delegate("#meetingPage", "pageshow", function(inEvent) {
+                initialPageLoad("meeting", deviceType);
+
+                function displayDate() {
+                    var d = new Date();
+                    if (deviceType == "phone") {
+                        document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toDateString();
+                    } else {
+                        document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toString();
+                    }
+                }
+                displayDate();
+                if (deviceType == "phone") {
+                    $("#meetingHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+                    $("#meetingHomeButton").text("Home");
+                    $("#meetingListButton").text("List");
+                    $("#meetingNewButton").text("New");
+                }
+            });
+
+            function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
+                updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
+            }
+        </script>
+
+        <!-- Header. -->
+        <div data-role="header" data-position="fixed" class="header">
+            <div class="ui-loader-background"></div>
+            <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
+            <a href="index.html" class="homeButton" id="meetingHomeButton" data-icon="home" data-theme="b">Home</a>
+            <h1>Meetings</h1>
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right">
+
+                <a id="meetingListButton" class="headerListButton" href="javascript:displayListView('meeting');" data-role='button' data-inline="true" data-mini="true" data-theme="b">List Meetings</a>
+                <a id="meetingNewButton" class="headerNewButton" href="javascript:newItem('meeting');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Meeting</a>
+            </div>
+
+            <!--
     <a href="#meetingMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
-	-->	
-	<br>
-	<div id="dateAndTimeM" class="headerDate"></div>  
-  </div>
+	-->
+            <br>
+            <div id="dateAndTimeM" class="headerDate"></div>
+        </div>
 
-  <!-- Page content. -->
-  <div data-role="content">
+        <!-- Page content. -->
+        <div data-role="content">
 
-    <div class="ui-loader-background"></div>
+            <div class="ui-loader-background"></div>
 
-    <!-- List view. -->
-    <div id="meetingList">
+            <!-- List view. -->
+            <div id="meetingList">
 
-      <!-- Search filters. -->
-      <div data-role="collapsible">
-        <h3>Enter Search Criteria</h3>
-        <form name="meetingFilterForm" id="meetingFilterForm">
-          <label for="search_by_subject" class="select">Subject</label>
-          <input type="text" name="search_by_subject" id="search_by_subject" >
-	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateListLocal('meetingListUL', 'meeting', 'subject', search_by_subject.value);" id="meetingSaveButton">Search</button>
-          
-        </form>
-      </div>
+                <!-- Search filters. -->
+                <div data-role="collapsible">
+                    <h3>Enter Search Criteria</h3>
+                    <form name="meetingFilterForm" id="meetingFilterForm">
+                        <label for="search_by_subject" class="select">Subject</label>
+                        <input type="text" name="search_by_subject" id="search_by_subject">
+                        <button type="button" data-theme="b" data-icon="plus" onClick="updateListLocal('meetingListUL', 'meeting', 'subject', search_by_subject.value);" id="meetingSaveButton">Search</button>
 
-      <div>&nbsp;</div>
+                    </form>
+                </div>
 
-      <!-- List. -->
-      <div>
-        <ul data-role="listview" data-inset="true"
-          data-autodividers="true" id="meetingListUL"></ul>
-      </div>
+                <div>&nbsp;</div>
 
-    </div>
+                <!-- List. -->
+                <div>
+                    <ul data-role="listview" data-inset="true" data-autodividers="true" id="meetingListUL"></ul>
+                </div>
 
-    <!-- Entry view. -->
-    <div id="meetingEntry" class="meetingEntry" style="display:none;">
+            </div>
 
-    <form name="meetingEntryForm" id="meetingEntryForm">
-	  
-      <label for="subject" class="cssRequired">Subject</label>
-      <input type="text" name="subject" id="subject" title="Subject of the Meeting"
-        data-clear-btn="true">
-      
-	  
-      <label for="start_date" >Start Date</label>
-      <input type="date" name="start_date" id="start_date" title="Meeting Start Date MM/DD/YYYY"
-        data-clear-btn="true">	
-      <label for="end_date" >End Date</label>
-      <input type="date" name="end_date" id="end_date" title="Meeting End Date MM/DD/YYYY"
-        data-clear-btn="true">	
-      
-      <label for="duration">Duration</label>
-      <input type="number" name="duration" id="duration"  title="Meeting Duration" data-clear-btn="true">
-      <label for="description">Description</label>
-      <input type="text" name="description" id="description" title="Meeting Description" data-clear-btn="true">
-	  	
-      <label for="meeting_status" >Meeting Status</label>
-      <!-- <input type="text" name="meeting_status" id="meeting_status"
+            <!-- Entry view. -->
+            <div id="meetingEntry" class="meetingEntry" style="display:none;">
+
+                <form name="meetingEntryForm" id="meetingEntryForm">
+
+                    <label for="subject" class="cssRequired">Subject</label>
+                    <input type="text" name="subject" id="subject" title="Subject of the Meeting" data-clear-btn="true">
+
+
+                    <label for="start_date">Start Date</label>
+                    <input type="date" name="start_date" id="start_date" title="Meeting Start Date MM/DD/YYYY" data-clear-btn="true">
+                    <label for="end_date">End Date</label>
+                    <input type="date" name="end_date" id="end_date" title="Meeting End Date MM/DD/YYYY" data-clear-btn="true">
+
+                    <label for="duration">Duration</label>
+                    <input type="number" name="duration" id="duration" title="Meeting Duration" data-clear-btn="true">
+                    <label for="description">Description</label>
+                    <input type="text" name="description" id="description" title="Meeting Description" data-clear-btn="true">
+
+                    <label for="meeting_status">Meeting Status</label>
+                    <!-- <input type="text" name="meeting_status" id="meeting_status"
         data-clear-btn="true"> -->
-	  <select name="meeting_status" id="meeting_status" title="Meeting Status">
-	    <option value="Planned">Planned</option>
-	    <option value="Completed">Completed</option>
-	    <option value="Not-held">Not-held</option>
-	  </select>	
-      <label for="related_to" >Related To</label>
-      <!-- <input type="text" name="related_to" id="related_to"
+                    <select name="meeting_status" id="meeting_status" title="Meeting Status">
+                        <option value="Planned">Planned</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Not-held">Not-held</option>
+                    </select>
+                    <label for="related_to">Related To</label>
+                    <!-- <input type="text" name="related_to" id="related_to"
         data-clear-btn="true"> -->
-	  <select name="related_to" id="related_to" title="Related To">
-	    <option value="Lead">Lead</option>
-	    <option value="Contact">Contact</option>
-	  </select>	
-      <label for="first_name">First Name</label>
-      <input type="text" name="first_name" id="first_name" title="First Name"
-        data-clear-btn="true">
-      <label for="last_name">Last Name</label>
-      <input type="text" name="last_name" id="last_name" title="Last Name"
-        data-clear-btn="true">
-      	
-      
-      <!-- Buttons. -->
-	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-        <button type="button" data-theme="b" data-icon="plus"
-          onClick="saveEntity('meeting');" id="meetingSaveButton">Save</button>
-        <button type="button" data-theme="b" data-icon="minus"
-          onClick="deleteEntity('meeting');" id="meetingDeleteButton" disabled>Delete</button>
-	   </div>	
+                    <select name="related_to" id="related_to" title="Related To">
+                        <option value="Lead">Lead</option>
+                        <option value="Contact">Contact</option>
+                    </select>
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name" id="first_name" title="First Name" data-clear-btn="true">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name" id="last_name" title="Last Name" data-clear-btn="true">
 
-    </form>
+
+                    <!-- Buttons. -->
+                    <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                        <button type="button" data-theme="b" data-icon="plus" onClick="saveEntity('meeting');" id="meetingSaveButton">Save</button>
+                        <button type="button" data-theme="b" data-icon="minus" onClick="deleteEntity('meeting');" id="meetingDeleteButton" disabled>Delete</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Footer. -->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <div class="ui-loader-background"></div>
+            <div data-role="navbar" class="cssNavBar">
+                <ul>
+                    <li>
+                        <a href="accountPage.html" class="linkAccountPage" title="Account Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="contactPage.html" class="linkContactPage ui-btn-active ui-state-persist" title="Contact Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="leadPage.html" class="linkLeadPage" title="Lead Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="callPage.html" class="linkCallPage" title="Call Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
     </div>
+</body>
 
-  </div>
-
-  <!-- Footer. -->
-  <div data-role="footer" data-position="fixed" data-theme="b">
-    <div class="ui-loader-background"></div>
-    <div data-role="navbar" class="cssNavBar">
-      <ul>
-        <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="contactPage.html"
-          class="linkContactPage ui-btn-active ui-state-persist" title="Contact Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="leadPage.html" class="linkLeadPage" title="Lead Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="linkCallPage" title="Call Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-  </body>
 </html>

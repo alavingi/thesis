@@ -1,219 +1,190 @@
+
 <!DOCTYPE html>
 
 <!-- Code partially based on the pattern given in Frank W. Zammetti's book -->
 <html>
-  <head>
 
+<head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    <link rel="stylesheet" href="jq/jquery.mobile-1.3.1.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
     <link rel="stylesheet" href="styles.css">
-
-    <script type="text/javascript" src="jq/jquery-1.9.1.min.js"></script>
-    <!-- Note: main.js must come before JQM to set defaults properly. -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="client.js"></script>
-    <script type="text/javascript" src="jq/jquery.mobile-1.3.1.min.js"></script>
-    
-  </head>
-  <body>
+    <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+</head>
+
+<body>
 
 
-<div data-role="page" id="leadPage" data-dom-cache="true">
+    <div data-role="page" id="leadPage" data-dom-cache="true">
 
-  <script type="text/javascript">
-    var deviceType = "";
-	var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-	if (width <= 640) {
-		deviceType = "phone";
-	}
-	else if (width > 1040) {
-		deviceType = "desktop";
-	}
-	else {
-		deviceType = "tablet";
-	}
-	/*
-	if(window.styleMedia.matchMedium("screen and (max-width: 480px)")){
-	    deviceType = "phone";
-	}
-	else {
-		deviceType = "tablet"
-	}
-	*/
-    $(document).delegate("#leadPage", "pageshow", function(inEvent) {
-      initialPageLoad("lead", deviceType);
-  	  function displayDate() {
-  		var d = new Date();
-  		if (deviceType == "phone") {
-  			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toDateString();
-  		}
-  		else {
-  			document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
-  		}
-	  }	
-	  displayDate();
-	  if (deviceType == "phone") {
-		  $("#leadHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
-		  $("#leadHomeButton").text("Home");
-		  $("#leadListButton").text("List");
-		  $("#leadNewButton").text("New");	  
-	  }
-	  
-    });
-	
-	
-	function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
-		updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
-	}
-  </script>
+        <script type="text/javascript">
+            var deviceType = "";
+            var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+            if (width <= 640) {
+                deviceType = "phone";
+            } else if (width > 1040) {
+                deviceType = "desktop";
+            } else {
+                deviceType = "tablet";
+            }
+           
+            $(document).delegate("#leadPage", "pageshow", function(inEvent) {
+                initialPageLoad("lead", deviceType);
 
-  <!-- Menu. -->
-  <div data-role="popup" id="leadMenu">
-    <ul data-role="listview" data-inset="true" class="cssFunctionsMenu"
-      data-theme="b">
-      <li><a href="javascript:displayListView('lead');">List View</a></li>
-      <li id="leadNewLink">
-        <a href="javascript:newItem('lead');">New</a>
-      </li>
-    </ul>
-  </div>
+                function displayDate() {
+                    var d = new Date();
+                    if (deviceType == "phone") {
+                        document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toDateString();
+                    } else {
+                        document.getElementById("dateAndTimeL").innerHTML = "Today is : " + d.toString();
+                    }
+                }
+                displayDate();
+                if (deviceType == "phone") {
+                    $("#leadHomeButton").removeClass('ui-btn-icon-left ui-shadow').trigger('refresh');
+                    $("#leadHomeButton").text("Home");
+                    $("#leadListButton").text("List");
+                    $("#leadNewButton").text("New");
+                }
 
-  <!-- Header. -->
-  <div data-role="header" data-position="fixed" class="header">
-    <div class="ui-loader-background"></div>
-	<img border="0" src="img/logo.png" alt="Logo" class="headerLogo"/>
-    <a href="index.html" class="homeButton"  id="leadHomeButton" data-icon="home"
-      data-theme="b">Home</a>
-    <h1>Leads</h1>
-	 <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right" > 	
-	       
-	  <a id="leadListButton" class="headerListButton" href="javascript:displayListView('lead');"  data-role='button' data-inline="true" data-mini="true" data-theme="b">List Leads</a>
-	  <a id="leadNewButton" class="headerNewButton" href="javascript:newItem('lead');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Lead</a>
-	 </div>
-	
-	<!--
+            });
+
+
+            function updateListLocal(listName, entityType, searchField1, searchValue1, searchField2, searchValue2) {
+                updateList(listName, entityType, deviceType, searchField1, searchValue1, searchField2, searchValue2)
+            }
+        </script>
+
+        <!-- Header. -->
+        <div data-role="header" data-position="fixed" class="header">
+            <div class="ui-loader-background"></div>
+            <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
+            <a href="index.html" class="homeButton" id="leadHomeButton" data-icon="home" data-theme="b">Home</a>
+            <h1>Leads</h1>
+            <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right">
+
+                <a id="leadListButton" class="headerListButton" href="javascript:displayListView('lead');" data-role='button' data-inline="true" data-mini="true" data-theme="b">List Leads</a>
+                <a id="leadNewButton" class="headerNewButton" href="javascript:newItem('lead');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Lead</a>
+            </div>
+
+            <!--
     <a href="#leadMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
-	-->	
-	<br>
-	<div id="dateAndTimeL" class="headerDate"></div>  
-  </div>
+	-->
+            <br>
+            <div id="dateAndTimeL" class="headerDate"></div>
+        </div>
 
-  <!-- Page content. -->
-  <div data-role="content">
+        <!-- Page content. -->
+        <div data-role="content">
 
-    <div class="ui-loader-background"></div>
+            <div class="ui-loader-background"></div>
 
-    <!-- List view. -->
-    <div id="leadList">
+            <!-- List view. -->
+            <div id="leadList">
 
-      <!-- Search filters. -->
-      <div data-role="collapsible">
-        <h3>Enter Search Criteria</h3>
-        <form name="leadFilterForm" id="leadFilterForm">
-          <label for="search_by_company" >Company</label>
-          <input type="text" name="search_by_company" id="search_by_company" >
-	      <button type="button" data-theme="b" data-icon="plus"
-	        onClick="updateListLocal('leadListUL', 'lead', 'company', search_by_company.value);" id="leadSaveButton">Search</button>
-        </form>
-      </div>
+                <!-- Search filters. -->
+                <div data-role="collapsible">
+                    <h3>Enter Search Criteria</h3>
+                    <form name="leadFilterForm" id="leadFilterForm">
+                        <label for="search_by_company">Company</label>
+                        <input type="text" name="search_by_company" id="search_by_company">
+                        <button type="button" data-theme="b" data-icon="plus" onClick="updateListLocal('leadListUL', 'lead', 'company', search_by_company.value);" id="leadSaveButton">Search</button>
+                    </form>
+                </div>
 
-      <div>&nbsp;</div>
+                <div>&nbsp;</div>
 
-      <!-- List. -->
-      <div>
-        <ul data-role="listview" data-inset="true"
-          data-autodividers="true" id="leadListUL"></ul>
-      </div>
+                <!-- List. -->
+                <div>
+                    <ul data-role="listview" data-inset="true" data-autodividers="true" id="leadListUL"></ul>
+                </div>
+
+            </div>
+
+            <!-- Entry view. -->
+            <div id="leadEntry" style="display:none;">
+                <div class="ui-grid-a leadGrid">
+                    <div class="ui-block-a">
+                        <form name="leadEntryForm" id="leadEntryForm">
+
+                            <label for="company" class="cssRequired">Company</label>
+                            <input type="text" name="company" id="company" title="Company" data-clear-btn="true">
+
+
+                            <label for="first_name">First Name</label>
+                            <input type="text" name="first_name" id="first_name" title="Lead First Name" data-clear-btn="true">
+                            <label for="last_name">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" title="Lead Last Name" data-clear-btn="true">
+
+                            <label for="lead_status">Lead Status</label>
+
+                            <select name="lead_status" id="lead_status" title="Lead Status">
+                                <option value="New">New</option>
+                                <option value="In-process">In-process</option>
+                                <option value="Converted">Converted</option>
+                                <option value="Closed">Closed</option>
+                            </select>
+
+                            <label for="industry">Industry</label>
+                            <input type="text" name="industry" id="industry" title="Lead's Industry" data-clear-btn="true">
+
+                            <label for="revenue">Revenue</label>
+                            <input type="number" name="revenue" title="Lead Company Total Revenue" id="revenue" data-clear-btn="true">
+                            <label for="employees">Employees</label>
+                            <input type="number" name="employees" id="employees" title="Lead Company Total Employees" data-clear-btn="true">
+                            <label for="priority">Priority</label>
+                            <input type="text" name="priority" id="priority" title="Lead Priority" data-clear-btn="true">
+
+                            <!-- Buttons. -->
+                            <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                                <button type="button" data-theme="b" data-icon="plus" data-mini="true" class="leadPageButton" onClick="saveEntity('lead');" id="leadSaveButton">Save</button>
+                                <button type="button" data-theme="b" data-icon="gear" data-mini="true" class="leadPageButton" onClick="scoreLead();" id="leadScoreButton">Score Lead</button>
+                            </div>
+                            <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+                                <button type="button" data-theme="b" data-icon="edit" data-mini="true" class="leadPageButton" onClick="createOpportunity();" id="createOpportunityButton">Create Opportunity</button>
+                                <button type="button" data-theme="b" data-icon="minus" data-mini="true" class="leadPageButton" onClick="deleteEntity('lead');" id="leadDeleteButton" disabled>Delete</button>
+                            </div>
+                    </div>
+                    <!--   block a-->
+                    <div class="ui-block-b">
+                        <ul data-role="listview" data-inset="true" id="callListULLead"></ul>
+                    </div>
+                </div>
+                <!--  grid a-->
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Footer. -->
+        <div data-role="footer" data-position="fixed" data-theme="b">
+            <div class="ui-loader-background"></div>
+            <div data-role="navbar" class="cssNavBar">
+                <ul>
+                    <li>
+                        <a href="accountPage.html" class="linkAccountPage" title="Account Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="contactPage.html" class="linkContactPage" "  title="Contact Page " ui-btn-active ui-state-persist" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+
+                    <li>
+                        <a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                    <li>
+                        <a href="callPage.html" class="linkCallPage" title="Call Page" data-icon="custom" data-iconpos="notext"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
     </div>
+</body>
 
-    <!-- Entry view. -->
-    <div id="leadEntry" style="display:none;">
-	<div class="ui-grid-a leadGrid">	
-	<div class="ui-block-a">
-    <form name="leadEntryForm" id="leadEntryForm">
-	  
-      <label for="company" class="cssRequired">Company</label>
-      <input type="text" name="company" id="company" title="Company"
-        data-clear-btn="true">
-      
-	  
-      <label for="first_name" >First Name</label>
-      <input type="text" name="first_name" id="first_name" title="Lead First Name"
-        data-clear-btn="true">	
-      <label for="last_name" >Last Name</label>
-      <input type="text" name="last_name" id="last_name" title="Lead Last Name"
-        data-clear-btn="true">	
-      
-      <label for="lead_status">Lead Status</label>
-      
-	  <select name="lead_status" id="lead_status" title="Lead Status"> 
-	    <option value="New">New</option>
-	    <option value="In-process">In-process</option>
-	    <option value="Converted">Converted</option>
-	    <option value="Closed">Closed</option>
-	  </select> 
-      
-      <label for="industry">Industry</label>
-      <input type="text" name="industry" id="industry"  title="Lead's Industry" data-clear-btn="true">
-	  	
-      <label for="revenue" >Revenue</label>
-      <input type="number" name="revenue" title="Lead Company Total Revenue" id="revenue"
-        data-clear-btn="true">
-      <label for="employees" >Employees</label>
-      <input type="number" name="employees" id="employees" title="Lead Company Total Employees"
-        data-clear-btn="true">
-      <label for="priority" >Priority</label>
-      <input type="text" name="priority" id="priority" title="Lead Priority"
-        data-clear-btn="true">	
-            
-      <!-- Buttons. -->
-	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-        <button type="button" data-theme="b" data-icon="plus" data-mini="true" class="leadPageButton"
-          onClick="saveEntity('lead');" id="leadSaveButton">Save</button>
-        <button type="button" data-theme="b" data-icon="gear" data-mini="true" class="leadPageButton"
-          onClick="scoreLead();" id="leadScoreButton">Score Lead</button>
-      </div>
-	  <div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
-        <button type="button" data-theme="b" data-icon="edit" data-mini="true" class="leadPageButton"
-          onClick="createOpportunity();" id="createOpportunityButton">Create Opportunity</button>  	
-        <button type="button" data-theme="b" data-icon="minus" data-mini="true" class="leadPageButton"
-          onClick="deleteEntity('lead');" id="leadDeleteButton" disabled>Delete</button>
-      </div>
-      </div> <!--   block a-->
-	  <div class="ui-block-b">
-          <ul data-role="listview" data-inset="true"
-            id="callListULLead"></ul>
-	  </div>
-      </div> <!--  grid a-->
-    </form>
-
-    </div>
-
-  </div>
-
-  <!-- Footer. -->
-  <div data-role="footer" data-position="fixed" data-theme="b">
-    <div class="ui-loader-background"></div>
-    <div data-role="navbar" class="cssNavBar">
-      <ul>
-        <li><a href="accountPage.html" class="linkAccountPage" title="Account Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="contactPage.html"
-          class="linkContactPage""  title="Contact Page" ui-btn-active ui-state-persist"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        
-        <li><a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-        <li><a href="callPage.html" class="linkCallPage" title="Call Page"
-          data-icon="custom" data-iconpos="notext"></a></li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-  </body>
 </html>
