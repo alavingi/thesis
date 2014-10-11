@@ -199,5 +199,5 @@ sendResponse = function(input, statusCode, contentType, body) {
 
 // Now define and start the Node.js server.
 var server = http.createServer(initialProcessing);
-server.listen("9999", "127.0.0.1");
-console.log("\nServer started at http://127.0.0.1:9999\n");
+server.listen("9999", "ec2-54-68-187-203.us-west-2.compute.amazonaws.com");
+console.log("\nServer started at http://ec2-54-68-187-203.us-west-2.compute.amazonaws.com:9999\n");

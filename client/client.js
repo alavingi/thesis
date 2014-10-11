@@ -1,8 +1,8 @@
 
 // Code partially based on the pattern given in Frank W. Zammetti's book
 // Server address and port
-// var addressAndPort = "http://ec2-54-187-230-68.us-west-2.compute.amazonaws.com:9999";
-var addressAndPort = "http://localhost:9999"
+var addressAndPort = "http://ec2-54-68-187-203.us-west-2.compute.amazonaws.com:9999";
+// var addressAndPort = "http://localhost:9999"
 
 // documentId is null for inserts as MongoDB will generate it
 
