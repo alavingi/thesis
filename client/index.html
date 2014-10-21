@@ -5,6 +5,7 @@
 
 <head>
     <meta content="width=device-width,initial-scale=1" name="viewport">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <link href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -21,7 +22,14 @@
 
     <div data-role="page" id="homePage">
         <script type="text/javascript">
-            <!-- Determine device type -->
+            window.addEventListener("load",function() {
+	        // Set a timeout...
+	        setTimeout(function(){
+		    // Hide the address bar!
+	            window.scrollTo(0, 1);
+	        }, 0);
+            });
+            var deviceType = "";
             var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
             if (width <= 640) {
                 deviceType = "phone";
@@ -30,31 +38,51 @@
             } else {
                 deviceType = "tablet";
             }
+            /*
+            document.addEventListener("deviceready", onDeviceReady, false);
 
+            function onDeviceReady() {
+                $(document).delegate("#homePage", "pageshow", function() {
+                     displayDate();
+                     displayData();
+                     <!-- Display top leads and upcoming meetings only on tablets and desktops -->
+                     if (deviceType == "tablet" || deviceType == "desktop") {
+                         updateList('topLeadsUL', 'lead', deviceType);
+                         updateList('upcomingMeetingsUL', 'meeting', deviceType);
+                     }
+                });
+            }
+            
+            */
             $(document).on("pageshow", "#homePage", function(e) {
                 displayDate();
-                displayData();
+                
                 <!-- Display top leads and upcoming meetings only on tablets and desktops -->
                 if (deviceType == "tablet" || deviceType == "desktop") {
                     updateList('topLeadsUL', 'lead', deviceType);
                     updateList('upcomingMeetingsUL', 'meeting', deviceType);
                 }
+                displayData();
             });
+            
             <!-- Display current date and time in header -->    
             function displayDate() {
                 var d = new Date();
                 if (deviceType == "phone") {
-                    document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toDateString();
+                    // document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toDateString();
+                    $("#dateAndTime").hide();
+                    $(".heading").hide();
                 } else {
                     document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
+                    
                 }
             }
 
             <!-- Display statistics on home page -->
             function displayData() {
                 var leads = copyToMemory("lead");
-                var opportunities = copyToMemory("opportunity");
-                document.getElementById("counts").innerHTML = "Total no. of \<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads\<\/a> is " + count.lead + " Total no. of \<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities\<\/a> is " + count.opportunity;
+                var opportunities = copyToMemory("opportunity"); 
+                document.getElementById("counts").innerHTML = "Total no. of \<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads\<\/a> is " + leads.length + " Total no. of \<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities\<\/a> is " + opportunities.length;
             }
         </script>
         <!-- About panel. -->
@@ -92,7 +120,7 @@
             <button class="cssHomeButton" data-icon="home" disabled="disabled" id="indexHomeButton">Home</button>
 
             <h1 class="heading">Contact Manager!</h1><a class="cssFunctionButton" data-icon="bars" data-theme="b" href="#aboutPanel">About</a>
-            <br>
+            
 
             <div class="headerDate" id="dateAndTime"></div>
         </div>
@@ -137,34 +165,27 @@
             </div>
         </div>
         <!-- Footer. -->
-
-        <div data-position="fixed" data-role="footer" data-theme="b">
+        <div data-role="footer" data-position="fixed" data-theme="b">
             <div class="ui-loader-background"></div>
-
-            <div class="cssNavBar" data-role="navbar">
+            <div data-role="navbar" class="cssNavBar">
                 <ul>
                     <li>
-                        <a class="linkAccountPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="accountPage.html" title="Account Page"></a>
+                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right">Accounts</a>
                     </li>
-
                     <li>
-                        <a class="linkContactPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="contactPage.html" title="Contact Page"></a>
+                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext">Contacts</a>
                     </li>
-
                     <li>
-                        <a class="linkOpportunityPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="opportunityPage.html" title="Opportunity Page"></a>
+                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext">Opportunities</a>
                     </li>
-
                     <li>
-                        <a class="linkLeadPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="leadPage.html" title="Lead Page"></a>
+                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext">Leads</a>
                     </li>
-
                     <li>
-                        <a class="linkMeetingPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="meetingPage.html" title="Meeting Page"></a>
+                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext">Meetings</a>
                     </li>
-
                     <li>
-                        <a class="linkCallPage" data-icon="custom" data-iconpos="notext" data-prefetch="true" href="callPage.html" title="Call Page"></a>
+                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px" class="linkCallPage ui-btn ui-corner-all" title="Call Page" data-icon="custom" data-iconpos="notext">Calls</a>
                     </li>
                 </ul>
             </div>

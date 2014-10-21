@@ -1,8 +1,8 @@
 
 // Code partially based on the pattern given in Frank W. Zammetti's book
 // Server address and port
-var addressAndPort = "http://ec2-54-68-187-203.us-west-2.compute.amazonaws.com:9999";
-// var addressAndPort = "http://localhost:9999"
+// var addressAndPort = "http://ec2-54-68-187-203.us-west-2.compute.amazonaws.com:9999";
+var addressAndPort = "http://localhost:9999"
 
 // documentId is null for inserts as MongoDB will generate it
 
@@ -54,7 +54,7 @@ $(document).on("mobileinit", function() {
 
     $.mobile.page.prototype.options.addBackBtn = true;
 
-    $.mobile.ajaxEnabled = false;
+    // $.mobile.ajaxEnabled = false;
     // $.mobile.pageLoadErrorMessage = "";
 
 });
@@ -70,7 +70,8 @@ $(document).on("ready", function() {
     ) {
         displayMessage();
     } else {
-        downloadLocalCopy();
+        
+	downloadLocalCopy();
     }
 
     // Add a click handler to the clear confirmation dialog's "yes" button.
@@ -193,6 +194,8 @@ function downloadLocalCopy() {
                         for (var j = 0; j < len; j++) {
                             var entity = data[j];
                             lst.setItem(type + "_" + entity._id, JSON.stringify(entity));
+			    // update counts
+			    count[type]++;
                         }
                     }
 
@@ -293,9 +296,7 @@ function copyToMemory(entityType) {
             // The key is of the form entityType_Id  
             if (itemKey.indexOf(entityType) == 0) {
                 var sObj = lst.getItem(itemKey);
-                items.push(JSON.parse(sObj));
-                // update counts
-                count[entityType] ++
+                items.push(JSON.parse(sObj));                
             }
         }
 
@@ -399,6 +400,10 @@ function saveEntity(entityType) {
                 formAsJSON = formAsJSON.slice(0, formAsJSON.length - 1);
                 formAsJSON = formAsJSON + ",\"__v\":\"0\",\"_id\":\"" + id + "\"}";
                 window.localStorage.setItem(entityType + "_" + id, formAsJSON);
+		// update counts
+		if (method == "post") {
+                    count[entityType]++;
+		}
                 // Update list view
                 updateList(entityType + "ListUL", entityType, deviceType);
                 // Update UI
@@ -658,6 +663,8 @@ function deleteEntity(entityType) {
             .done(function(response) {
                 // Delete from localStorage.
                 window.localStorage.removeItem(entityType + "_" + response);
+		// update counts
+                count[entityType]--;
                 // Update list view
                 updateList(entityType + "ListUL", entityType, deviceType);
                 // Now update the UI as appropriate and we're done.

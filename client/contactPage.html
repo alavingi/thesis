@@ -36,7 +36,9 @@
                 function displayDate() {
                     var d = new Date();
                     if (deviceType == "phone") {
-                        document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toDateString();
+                        // document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toDateString();
+                        $("#dateAndTimeC").hide();
+                        $(".heading").hide();
                     } else {
                         document.getElementById("dateAndTimeC").innerHTML = "Today is : " + d.toString();
                     }
@@ -61,13 +63,13 @@
             <div class="ui-loader-background"></div>
             <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
             <a href="index.html" id="contactHomeButton" class="homeButton" data-icon="home" data-theme="b">Home</a>
-            <h1>Contacts</h1>
+            <h1 class="heading">Contacts</h1>
             <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right">
 
                 <a id="contactListButton" class="headerListButton" href="javascript:displayListView('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">List Contacts</a>
                 <a id="contactNewButton" class="headerNewButton" href="javascript:newItem('contact');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Contact</a>
             </div>
-           <br>
+           
             <div id="dateAndTimeC" class="headerDate"></div>
         </div>
 
@@ -114,7 +116,7 @@
                             <label for="title">Title</label>
                             <input type="text" name="title" id="title" title="Contact Title" data-clear-btn="true">
                             <!-- Birthdate. -->
-                            <label for="birth_date">Birth Date</label>
+                            <label for="birth_date">Birth Date (MM/DD/YYYY)</label>
                             <input name="birth_date" id="birth_date" type="date" title="Birth Date MM/DD/YYYY">
 
                             <label for="account_name">Account Name</label>
@@ -163,19 +165,22 @@
             <div data-role="navbar" class="cssNavBar">
                 <ul>
                     <li>
-                        <a href="accountPage.html" class="linkAccountPage" title="Account Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right">Accounts</a>
                     </li>
                     <li>
-                        <a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext">Contacts</a>
                     </li>
                     <li>
-                        <a href="leadPage.html" class="linkLeadPage" title="Lead Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext">Opportunities</a>
                     </li>
                     <li>
-                        <a href="meetingPage.html" class="linkMeetingPage" title="Meeting Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext">Leads</a>
                     </li>
                     <li>
-                        <a href="callPage.html" class="linkCallPage" title="Call Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext">Meetings</a>
+                    </li>
+                    <li>
+                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px" class="linkCallPage ui-btn ui-corner-all" title="Call Page" data-icon="custom" data-iconpos="notext">Calls</a>
                     </li>
                 </ul>
             </div>

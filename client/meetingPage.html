@@ -36,7 +36,9 @@
                 function displayDate() {
                     var d = new Date();
                     if (deviceType == "phone") {
-                        document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toDateString();
+                        // document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toDateString();
+                        $("#dateAndTimeM").hide();
+                        $(".heading").hide();
                     } else {
                         document.getElementById("dateAndTimeM").innerHTML = "Today is : " + d.toString();
                     }
@@ -60,7 +62,7 @@
             <div class="ui-loader-background"></div>
             <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
             <a href="index.html" class="homeButton" id="meetingHomeButton" data-icon="home" data-theme="b">Home</a>
-            <h1>Meetings</h1>
+            <h1 class="heading">Meetings</h1>
             <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right">
 
                 <a id="meetingListButton" class="headerListButton" href="javascript:displayListView('meeting');" data-role='button' data-inline="true" data-mini="true" data-theme="b">List Meetings</a>
@@ -71,7 +73,7 @@
     <a href="#meetingMenu" class="functionButton" data-icon="bars"
       data-iconpos="notext" data-rel="popup" data-theme="b"></a>
 	-->
-            <br>
+            
             <div id="dateAndTimeM" class="headerDate"></div>
         </div>
 
@@ -112,12 +114,12 @@
                     <input type="text" name="subject" id="subject" title="Subject of the Meeting" data-clear-btn="true">
 
 
-                    <label for="start_date">Start Date</label>
+                    <label for="start_date">Start Date (MM/DD/YYYY)</label>
                     <input type="date" name="start_date" id="start_date" title="Meeting Start Date MM/DD/YYYY" data-clear-btn="true">
-                    <label for="end_date">End Date</label>
+                    <label for="end_date">End Date (MM/DD/YYYY)</label>
                     <input type="date" name="end_date" id="end_date" title="Meeting End Date MM/DD/YYYY" data-clear-btn="true">
 
-                    <label for="duration">Duration</label>
+                    <label for="duration">Duration (HRS)</label>
                     <input type="number" name="duration" id="duration" title="Meeting Duration" data-clear-btn="true">
                     <label for="description">Description</label>
                     <input type="text" name="description" id="description" title="Meeting Description" data-clear-btn="true">
@@ -161,19 +163,22 @@
             <div data-role="navbar" class="cssNavBar">
                 <ul>
                     <li>
-                        <a href="accountPage.html" class="linkAccountPage" title="Account Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right">Accounts</a>
                     </li>
                     <li>
-                        <a href="contactPage.html" class="linkContactPage ui-btn-active ui-state-persist" title="Contact Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext">Contacts</a>
                     </li>
                     <li>
-                        <a href="opportunityPage.html" class="linkOpportunityPage" title="Opportunity Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext">Opportunities</a>
                     </li>
                     <li>
-                        <a href="leadPage.html" class="linkLeadPage" title="Lead Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext">Leads</a>
                     </li>
                     <li>
-                        <a href="callPage.html" class="linkCallPage" title="Call Page" data-icon="custom" data-iconpos="notext"></a>
+                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext">Meetings</a>
+                    </li>
+                    <li>
+                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px" class="linkCallPage ui-btn ui-corner-all" title="Call Page" data-icon="custom" data-iconpos="notext">Calls</a>
                     </li>
                 </ul>
             </div>

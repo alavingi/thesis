@@ -8,17 +8,10 @@
 
 }
 
-
-
 /* Style for the sections in the about flyover. */
 .cssHomeAboutSection {
   padding-top : 20px;
 }
-
-
-/* Style to space out Home button. */
-
-
 
 /* Style to space out Function button. */
 .functionButton {
@@ -47,24 +40,24 @@
 
 /* Style for the icons for each item on the NavBar. */
 .linkAccountPage .ui-icon {
-  background : url(img/112-group.png) center no-repeat;
+  background : url(img/112-group.png) no-repeat;
 }
 .linkContactPage .ui-icon {
-  background : url(img/40-inbox.png) center no-repeat;
+  background : url(img/40-inbox.png) no-repeat;
 }
 .linkOpportunityPage .ui-icon {
-  background : url(img/37-suitcase.png) center no-repeat;
+  background : url(img/37-suitcase.png) no-repeat;
  
 }
 .linkLeadPage .ui-icon {
-  background : url(img/33-cabinet.png) center no-repeat;
+  background : url(img/33-cabinet.png) no-repeat;
 }
 
 .linkMeetingPage .ui-icon {
-  background : url(img/83-calendar.png) center no-repeat;
+  background : url(img/83-calendar.png) no-repeat;
 }
 .linkCallPage .ui-icon {
-  background : url(img/32-iphone.png) center no-repeat;
+  background : url(img/32-iphone.png) no-repeat;
 }
 
 .ui-icon-account:after {
@@ -110,7 +103,8 @@
 
 /* Style for required fields on forms. */
 .cssRequired {
-  color : #ff0000;
+  color : blue;
+  font-weight : bold;
 }
 
 
@@ -201,14 +195,21 @@
 	}
 	
 	.headerLogo {
-		width : 70px;
-		height : 50px;  
+		width : 120px;
+		height : 60px;  
 		float:left;
 		display:inline;
 		text-align:right;
-		margin-left:70px !important;
-		margin-top : 12px !important;
+		margin-left:100px !important;
+		margin-top :8px !important;
 	}
+
+        h1.heading {
+	        display : none !important;
+                height:0px 
+                line-height: 0px;
+                font-size: 0px;
+        }
 	
 	.listHeader {
 		
@@ -221,7 +222,7 @@
 	
 	.cssHomeCounts {
 		text-align : center;
-		font-size : 10px;
+		font-size : 12px;
 		font-weight : bold;
 		color : blue; 
 	}

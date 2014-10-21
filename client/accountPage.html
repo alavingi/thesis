@@ -36,7 +36,9 @@
                 function displayDate() {
                     var d = new Date();
                     if (deviceType == "phone") {
-                        document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toDateString();
+                        // document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toDateString();
+                        $("#dateAndTimeA").hide();
+                        $(".heading").hide();
                     } else {
                         document.getElementById("dateAndTimeA").innerHTML = "Today is : " + d.toString();
                     }
@@ -61,7 +63,7 @@
 
             <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
             <a href="index.html" class="homeButton" id="accountHomeButton" data-icon="home" data-theme="b">Home</a>
-            <h1>Customer Accounts</h1>
+            <h1 class="heading">Customer Accounts</h1>
 
             <div data-role="controlgroup" data-type="horizontal" data-theme="b" class="ui-btn-right">
 
@@ -69,7 +71,7 @@
                 <a id="accountNewButton" class="headerNewButton" href="javascript:newItem('account');" data-role='button' data-inline="true" data-mini="true" data-theme="b">New Account</a>
             </div>
 
-            <br>
+            
             <div id="dateAndTimeA" class="headerDate"></div>
         </div>
 
@@ -155,24 +157,26 @@
             <div data-role="navbar" class="cssNavBar">
                 <ul>
                     <li>
-                        <a href="contactPage.html" class="linkContactPage ui-btn-active ui-state-persist" data-icon="custom" data-iconpos="notext" title="Contact Page"></a>
+                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right">Accounts</a>
                     </li>
                     <li>
-                        <a href="opportunityPage.html" class="linkOpportunityPage" data-icon="custom" data-iconpos="notext" title="Opportunity Page"></a>
+                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext">Contacts</a>
                     </li>
                     <li>
-                        <a href="leadPage.html" class="linkLeadPage" data-icon="custom" data-iconpos="notext" title="Lead Page"></a>
+                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext">Opportunities</a>
                     </li>
                     <li>
-                        <a href="meetingPage.html" class="linkMeetingPage" data-icon="custom" data-iconpos="notext" title="Meeting Page"></a>
+                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext">Leads</a>
                     </li>
                     <li>
-                        <a href="callPage.html" class="linkCallPage" data-icon="custom" data-iconpos="notext" title="Call Page"></a>
+                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext">Meetings</a>
+                    </li>
+                    <li>
+                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px" class="linkCallPage ui-btn ui-corner-all" title="Call Page" data-icon="custom" data-iconpos="notext">Calls</a>
                     </li>
                 </ul>
             </div>
         </div>
-
     </div>
 </body>
 
