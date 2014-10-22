@@ -840,6 +840,20 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
             var item = items[i];
             // If search criterion is not met, do not add to list
             if (searchField1 && searchValue1 &&
+                (item[searchField1].indexOf(searchValue1) <= -1)
+            ) {
+                continue;
+            } else if (searchField1 && searchValue1 && searchField2 && searchValue2 &&
+                ((item[searchField1].indexOf(searchValue1) <= -1) || (item[searchField2].indexOf(searchValue2) <= -1))
+            ) {
+                continue;
+            } else if (searchField1 && searchValue1 && searchField2 && searchValue2 && searchField3 && searchValue3 &&
+                ((item[searchField1].indexOf(searchValue1) <= -1) || (item[searchField2].indexOf(searchValue2) <= -1) || (item[searchField3].indexOf(searchValue3) <= -1))
+            ) {
+                continue;
+            }
+			/*
+            if (searchField1 && searchValue1 &&
                 item[searchField1] != searchValue1
             ) {
                 continue;
@@ -852,7 +866,7 @@ function updateList(listName, entityType, deviceType, searchField1, searchValue1
             ) {
                 continue;
             }
-
+			*/
             // Only display future meetings
             if ((listName == "upcomingMeetingsUL") && (item.start_date < now)) {
                 continue;

@@ -80,9 +80,24 @@
 
             <!-- Display statistics on home page -->
             function displayData() {
+				var newLeads = 0;
+				var largeOpps = 0;
                 var leads = copyToMemory("lead");
                 var opportunities = copyToMemory("opportunity"); 
-                document.getElementById("counts").innerHTML = "Total no. of \<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads\<\/a> is " + leads.length + " Total no. of \<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities\<\/a> is " + opportunities.length;
+				leads.forEach(function(lead){
+					if (lead.lead_status == "New") {
+						newLeads++;
+					}
+				});
+				opportunities.forEach(function(opportunity){
+					if (opportunity.amount > 100000) {
+						largeOpps++;
+					}
+				});
+				
+                document.getElementById("counts").innerHTML = "\<div>\<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads:\<\/a> Total -  " + leads.length + ":     New - " + newLeads + "\</div>\<div>\<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities:\<\/a> Total -  " + opportunities.length + ":     >100,000 - " + largeOpps + "\</div";
+				
+				
             }
         </script>
         <!-- About panel. -->
@@ -132,7 +147,7 @@
 
             <div class="cssHomeCounts" data-theme="e" id="counts"></div>
             <br>
-            <br>
+            
 
             <div class="cssHomeMenuContact" data-mini="true" data-role="controlgroup" data-type="horizontal" id="cssHomeMenuContact">
                 <a data-mini="true" data-role='button' href="javascript:displayListView('contact');">List Contacts</a>

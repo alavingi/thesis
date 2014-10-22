@@ -121,9 +121,9 @@
 	    left : 45%;
 	    right : 0;
 		width : 150px;
-		height : 150px;
+		height : 70px;
 	    margin : auto;
-	    margin-top : 10%;
+	    margin-top : 4%;
 	    display : block;
 	    text-align: center;
 	}
@@ -262,7 +262,7 @@
 	    left : 50%;
 	    right : 0;
 	  margin : auto;
-	  margin-top : 10%;
+	  margin-top : 8%;
 	  display : block;
 	  text-align: center;
 	}
@@ -380,7 +380,7 @@
 	    left : 50%;
 	    right : 0;
 	  margin : auto;
-	  margin-top : 10%;
+	  margin-top : 8%;
 	  display : block;
 	  text-align: center;
 	}
