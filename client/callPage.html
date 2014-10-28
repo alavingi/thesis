@@ -37,6 +37,8 @@
                         // document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toDateString();
                         $("#dateAndTimeCa").hide();
                         $(".heading").hide();
+						$("[data-role=header], [data-role=footer]").fixedtoolbar({ tapToggle: true });
+						// $("[data-role=header], [data-role=footer]").fixedtoolbar({ fullscreen: true });
                     } else {
                         document.getElementById("dateAndTimeCa").innerHTML = "Today is : " + d.toString();
                     }
@@ -56,7 +58,7 @@
         </script>
 
         <!-- Header. -->
-        <div data-role="header" data-position="fixed" class="header">
+        <div data-role="header" data-position="fixed" class="header" data-tap-toggle="false" id="header">
             <div class="ui-loader-background"></div>
             <img border="0" src="img/logo.png" alt="Logo" class="headerLogo" />
             <a href="index.html" class="homeButton" id="callHomeButton" data-icon="home" data-theme="b">Home</a>
@@ -113,12 +115,12 @@
 
 
                     <label for="call_date">Call Date (MM/DD/YYYY)</label>
-                    <input type="date" name="call_date" id="call_date" title="Date Called MM/DD/YYYY" data-clear-btn="true">
+                    <input type="text" name="call_date" id="call_date" title="Date Called MM/DD/YYYY" data-clear-btn="true">
                     <label for="call_time">Call Time (HH:MM)</label>
-                    <input type="time" name="call_time" id="call_time" title="Time Called HH:MM" data-clear-btn="true">
+                    <input type="text" name="call_time" id="call_time" title="Time Called HH:MM" data-clear-btn="true">
 
                     <label for="duration">Duration (MINS)</label>
-                    <input type="number" name="duration" id="duration" title="Call Duration" data-clear-btn="true">
+                    <input type="text" name="duration" id="duration" title="Call Duration" data-clear-btn="true">
                     <label for="description">Description</label>
                     <input type="text" name="description" id="description" title="Call Description" data-clear-btn="true">
 
@@ -154,27 +156,27 @@
         </div>
 
         <!-- Footer. -->
-        <div data-role="footer" data-position="fixed" data-theme="b">
+        <div data-role="footer" data-position="fixed"  data-tap-toggle="false" data-theme="c">
             <div class="ui-loader-background"></div>
             <div data-role="navbar" class="cssNavBar">
                 <ul>
                     <li>
-                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right">Accounts</a>
+                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right" data-theme="b">Accounts</a>
                     </li>
                     <li>
-                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext">Contacts</a>
+                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext" data-theme="b">Contacts</a>
                     </li>
                     <li>
-                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext">Opportunities</a>
+                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext" data-theme="b">Opportunities</a>
                     </li>
                     <li>
-                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext">Leads</a>
+                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext" data-theme="b">Leads</a>
                     </li>
                     <li>
-                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext">Meetings</a>
+                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext" data-theme="b">Meetings</a>
                     </li>
                     <li>
-                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px" class="linkCallPage ui-btn ui-corner-all ui-btn-active ui-state-persist" title="Call Page" data-icon="custom" data-iconpos="notext">Calls</a>
+                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkCallPage ui-btn ui-corner-all ui-btn-active ui-state-persist" title="Call Page" data-icon="custom" data-iconpos="notext" data-theme="b">Calls</a>
                     </li>
                 </ul>
             </div>

@@ -20,7 +20,7 @@
     <!-- HOME PAGE                                                          -->
     <!-- ================================================================== -->
 
-    <div data-role="page" id="homePage">
+    <div data-role="page" id="homePage" data-theme="b">
         <script type="text/javascript">
             window.addEventListener("load",function() {
 	        // Set a timeout...
@@ -72,6 +72,9 @@
                     // document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toDateString();
                     $("#dateAndTime").hide();
                     $(".heading").hide();
+					$("[data-role=header], [data-role=footer]").fixedtoolbar({ tapToggle: true });
+					// $("[data-role=header], [data-role=footer]").fixedtoolbar({ fullscreen: true });
+					
                 } else {
                     document.getElementById("dateAndTime").innerHTML = "Today is : " + d.toString();
                     
@@ -95,7 +98,7 @@
 					}
 				});
 				
-                document.getElementById("counts").innerHTML = "\<div>\<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads:\<\/a> Total -  " + leads.length + ":     New - " + newLeads + "\</div>\<div>\<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities:\<\/a> Total -  " + opportunities.length + ":     >100,000 - " + largeOpps + "\</div";
+                document.getElementById("counts").innerHTML = "\<div>\<a href='javascript:displayListView(\"lead\");' data-role='button'>Leads:\<\/a> Total -  " + leads.length + ":     New - " + newLeads + "\</div>\<div>\<a href='javascript:displayListView(\"opportunity\");' data-role='button'>Opportunities:\<\/a> Total -  " + opportunities.length + ":     >$100,000 - " + largeOpps + "\</div";
 				
 				
             }
@@ -130,7 +133,7 @@
         </div>
         <!-- Header. -->
 
-        <div class="header" data-position="fixed" data-role="header">
+        <div class="header" data-position="fixed" data-role="header" data-tap-toggle="false" id="header">
             <div class="ui-loader-background"></div><img alt="Logo" border="0" class="headerLogo" src="img/logo.png">
             <button class="cssHomeButton" data-icon="home" disabled="disabled" id="indexHomeButton">Home</button>
 
@@ -180,27 +183,27 @@
             </div>
         </div>
         <!-- Footer. -->
-        <div data-role="footer" data-position="fixed" data-theme="b">
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="c">
             <div class="ui-loader-background"></div>
             <div data-role="navbar" class="cssNavBar">
                 <ul>
                     <li>
-                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right">Accounts</a>
+                        <a href="accountPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkAccountPage ui-btn ui-corner-all" title="Account Page" data-icon="custom" data-iconpos="right" data-theme="b">Accounts</a>
                     </li>
                     <li>
-                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext">Contacts</a>
+                        <a href="contactPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkContactPage ui-btn ui-corner-all" title="Contact Page" data-icon="custom" data-iconpos="notext" data-theme="b">Contacts</a>
                     </li>
                     <li>
-                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext">Opportunities</a>
+                        <a href="opportunityPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkOpportunityPage ui-btn ui-corner-all" title="Opportunity Page" data-icon="custom" data-iconpos="notext" data-theme="b">Opportunities</a>
                     </li>
                     <li>
-                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext">Leads</a>
+                        <a href="leadPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkLeadPage ui-btn ui-corner-all" title="Lead Page" data-icon="custom" data-iconpos="notext" data-theme="b">Leads</a>
                     </li>
                     <li>
-                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext">Meetings</a>
+                        <a href="meetingPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkMeetingPage ui-btn ui-corner-all" title="Meeting Page" data-icon="custom" data-iconpos="notext" data-theme="b">Meetings</a>
                     </li>
                     <li>
-                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px" class="linkCallPage ui-btn ui-corner-all" title="Call Page" data-icon="custom" data-iconpos="notext">Calls</a>
+                        <a href="callPage.html" style="margin-left : 5px;margin-right : 5px;margin-top : 5px; margin-bottom : 5px" class="linkCallPage ui-btn ui-corner-all" title="Call Page" data-icon="custom" data-iconpos="notext" data-theme="b">Calls</a>
                     </li>
                 </ul>
             </div>
