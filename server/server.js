@@ -3,6 +3,8 @@
 // Imports
 var http = require("http");
 var data_adapter = require("./data_adapter");
+var oS = require("os");
+var hostName = oS.hostname();
 
 
 // Is incremented with each request
@@ -199,6 +201,5 @@ sendResponse = function(input, statusCode, contentType, body) {
 
 // Now define and start the Node.js server.
 var server = http.createServer(initialProcessing);
-server.listen("9999", "localhost");
-// server.listen("9999", "ec2-54-68-187-203.us-west-2.compute.amazonaws.com");
+server.listen("9999", hostName);
 console.log("\nServer started at http://ec2-54-68-187-203.us-west-2.compute.amazonaws.com:9999\n");
