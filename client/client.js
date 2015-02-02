@@ -1,8 +1,8 @@
 
 // Code partially based on the pattern given in Frank W. Zammetti's book
 // Server address and port
-// var addressAndPort = "http://ec2-54-68-187-203.us-west-2.compute.amazonaws.com:9999";
-var addressAndPort = "http://localhost:9999"
+var addressAndPort = "http://ec2-54-68-187-203.us-west-2.compute.amazonaws.com:9999";
+// var addressAndPort = "http://localhost:9999"
 
 // documentId is null for inserts as MongoDB will generate it
 
@@ -81,48 +81,6 @@ $(document).on("ready", function() {
 
 });
 
-
-// Dynamically changes the theme of all UI elements on all pages,
-// also pages not yet rendered (enhanced) by jQuery Mobile.
-/*
-$.mobile.changeGlobalTheme = function(theme)
-{
-    // These themes will be cleared, add more
-    // swatch letters as needed.
-    var themes = " a b c d e";
-
-    // Updates the theme for all elements that match the
-    // CSS selector with the specified theme class.
-    function setTheme(cssSelector, themeClass, theme)
-    {
-        $(cssSelector)
-            .removeClass(themes.split(" ").join(" " + themeClass + "-"))
-            .addClass(themeClass + "-" + theme)
-            .attr("data-theme", theme);
-    }
-
-    // Add more selectors/theme classes as needed.
-    setTheme(".ui-mobile-viewport", "ui-overlay", theme);
-    setTheme("[data-role='page']", "ui-body", theme);
-    setTheme("[data-role='header']", "ui-bar", theme);
-    setTheme("[data-role='listview'] > li", "ui-bar", theme);
-    setTheme(".ui-btn", "ui-btn-up", theme);
-    setTheme(".ui-btn", "ui-btn-hover", theme);
-};
-
-
-// ----------------------------------------------------------------------------
-// FUNCTIONS
-// ----------------------------------------------------------------------------
-
-
-// Change global theme
-
-function setGlobalTheme(theme) {
-	$.mobile.changeGlobalTheme(theme);
-	$.mobile.changePage(window.location.href, {reloadPage : true, transition : "none"});
-}
-*/
 
 /**
  * Show the dialog when network connectivity is unavailable.
